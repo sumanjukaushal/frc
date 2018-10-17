@@ -1,0 +1,325 @@
+         
+		//Feature 1
+        if(array_key_exists('toilets', $itemData) && ($itemData['toilets']['enable'] == 'enable' || strtolower($itemData['toilets']) == 'y')){
+             $features[] = array('toilets',(string)$itemData['toilets_addnl']);
+        }elseif(array_key_exists('toilets_addnl', $itemData) && trim($itemData['toilets_addnl']) != ""){
+             $features[] = array('toilets',(string)$itemData['toilets_addnl']);
+        }         
+		//Feature 2
+        if(array_key_exists('disableFacility', $itemData) && ($itemData['disableFacility']['enable'] == 'enable' || strtolower($itemData['disableFacility']) == 'y')){
+             $features[] = array('disableFacility',(string)$itemData['disableFacility_addnl']);
+        }elseif(array_key_exists('disableFacility_addnl', $itemData) && trim($itemData['disableFacility_addnl']) != ""){
+             $features[] = array('disableFacility',(string)$itemData['disableFacility_addnl']);
+        }         
+		//Feature 3
+        if(array_key_exists('showers', $itemData) && ($itemData['showers']['enable'] == 'enable' || strtolower($itemData['showers']) == 'y')){
+             $features[] = array('showers',(string)$itemData['showers_addnl']);
+        }elseif(array_key_exists('showers_addnl', $itemData) && trim($itemData['showers_addnl']) != ""){
+             $features[] = array('showers',(string)$itemData['showers_addnl']);
+        }         
+		//Feature 4
+        if(array_key_exists('drinkingWater', $itemData) && ($itemData['drinkingWater']['enable'] == 'enable' || strtolower($itemData['drinkingWater']) == 'y')){
+             $features[] = array('drinkingWater',(string)$itemData['drinkingWater_addnl']);
+        }elseif(array_key_exists('drinkingWater_addnl', $itemData) && trim($itemData['drinkingWater_addnl']) != ""){
+             $features[] = array('drinkingWater',(string)$itemData['drinkingWater_addnl']);
+        }         
+		//Feature 5
+        if(array_key_exists('drinkingWaterNotSuitable', $itemData) && ($itemData['drinkingWaterNotSuitable']['enable'] == 'enable' || strtolower($itemData['drinkingWaterNotSuitable']) == 'y')){
+             $features[] = array('drinkingWaterNotSuitable',(string)$itemData['drinkingWaterNotSuitable_addnl']);
+        }elseif(array_key_exists('drinkingWaterNotSuitable_addnl', $itemData) && trim($itemData['drinkingWaterNotSuitable_addnl']) != ""){
+             $features[] = array('drinkingWaterNotSuitable',(string)$itemData['drinkingWaterNotSuitable_addnl']);
+        }         
+		//Feature 6
+        if(array_key_exists('waterFillingAvailable', $itemData) && ($itemData['waterFillingAvailable']['enable'] == 'enable' || strtolower($itemData['waterFillingAvailable']) == 'y')){
+             $features[] = array('waterFillingAvailable',(string)$itemData['waterFillingAvailable_addnl']);
+        }elseif(array_key_exists('waterFillingAvailable_addnl', $itemData) && trim($itemData['waterFillingAvailable_addnl']) != ""){
+             $features[] = array('waterFillingAvailable',(string)$itemData['waterFillingAvailable_addnl']);
+        }         
+		//Feature 7
+        if(array_key_exists('wasteFacilityAvailable', $itemData) && ($itemData['wasteFacilityAvailable']['enable'] == 'enable' || strtolower($itemData['wasteFacilityAvailable']) == 'y')){
+             $features[] = array('wasteFacilityAvailable',(string)$itemData['wasteFacilityAvailable_addnl']);
+        }elseif(array_key_exists('wasteFacilityAvailable_addnl', $itemData) && trim($itemData['wasteFacilityAvailable_addnl']) != ""){
+             $features[] = array('wasteFacilityAvailable',(string)$itemData['wasteFacilityAvailable_addnl']);
+        }         
+		//Feature 8
+        if(array_key_exists('dumpPointAvailable', $itemData) && ($itemData['dumpPointAvailable']['enable'] == 'enable' || strtolower($itemData['dumpPointAvailable']) == 'y')){
+             $features[] = array('dumpPointAvailable',(string)$itemData['dumpPointAvailable_addnl']);
+        }elseif(array_key_exists('dumpPointAvailable_addnl', $itemData) && trim($itemData['dumpPointAvailable_addnl']) != ""){
+             $features[] = array('dumpPointAvailable',(string)$itemData['dumpPointAvailable_addnl']);
+        }         
+		//Feature 9
+        if(array_key_exists('poweredSites', $itemData) && ($itemData['poweredSites']['enable'] == 'enable' || strtolower($itemData['poweredSites']) == 'y')){
+             $features[] = array('poweredSites',(string)$itemData['poweredSites_addnl']);
+        }elseif(array_key_exists('poweredSites_addnl', $itemData) && trim($itemData['poweredSites_addnl']) != ""){
+             $features[] = array('poweredSites',(string)$itemData['poweredSites_addnl']);
+        }         
+		//Feature 10
+        if(array_key_exists('emergencyPhone', $itemData) && ($itemData['emergencyPhone']['enable'] == 'enable' || strtolower($itemData['emergencyPhone']) == 'y')){
+             $features[] = array('emergencyPhone',(string)$itemData['emergencyPhone_addnl']);
+        }elseif(array_key_exists('emergencyPhone_addnl', $itemData) && trim($itemData['emergencyPhone_addnl']) != ""){
+             $features[] = array('emergencyPhone',(string)$itemData['emergencyPhone_addnl']);
+        }         
+		//Feature 11
+        if(array_key_exists('mobilePhoneReception', $itemData) && ($itemData['mobilePhoneReception']['enable'] == 'enable' || strtolower($itemData['mobilePhoneReception']) == 'y')){
+             $features[] = array('mobilePhoneReception',(string)$itemData['mobilePhoneReception_addnl']);
+        }elseif(array_key_exists('mobilePhoneReception_addnl', $itemData) && trim($itemData['mobilePhoneReception_addnl']) != ""){
+             $features[] = array('mobilePhoneReception',(string)$itemData['mobilePhoneReception_addnl']);
+        }         
+		//Feature 12
+        if(array_key_exists('petsOk', $itemData) && ($itemData['petsOk']['enable'] == 'enable' || strtolower($itemData['petsOk']) == 'y')){
+             $features[] = array('petsOk',(string)$itemData['petsOk_addnl']);
+        }elseif(array_key_exists('petsOk_addnl', $itemData) && trim($itemData['petsOk_addnl']) != ""){
+             $features[] = array('petsOk',(string)$itemData['petsOk_addnl']);
+        }         
+		//Feature 13
+        if(array_key_exists('petsNotOk', $itemData) && ($itemData['petsNotOk']['enable'] == 'enable' || strtolower($itemData['petsNotOk']) == 'y')){
+             $features[] = array('petsNotOk',(string)$itemData['petsNotOk_addnl']);
+        }elseif(array_key_exists('petsNotOk_addnl', $itemData) && trim($itemData['petsNotOk_addnl']) != ""){
+             $features[] = array('petsNotOk',(string)$itemData['petsNotOk_addnl']);
+        }         
+		//Feature 14
+        if(array_key_exists('fourWheelDrive', $itemData) && ($itemData['fourWheelDrive']['enable'] == 'enable' || strtolower($itemData['fourWheelDrive']) == 'y')){
+             $features[] = array('fourWheelDrive',(string)$itemData['fourWheelDrive_addnl']);
+        }elseif(array_key_exists('fourWheelDrive_addnl', $itemData) && trim($itemData['fourWheelDrive_addnl']) != ""){
+             $features[] = array('fourWheelDrive',(string)$itemData['fourWheelDrive_addnl']);
+        }         
+		//Feature 15
+        if(array_key_exists('dryWeatherOnlyAccess', $itemData) && ($itemData['dryWeatherOnlyAccess']['enable'] == 'enable' || strtolower($itemData['dryWeatherOnlyAccess']) == 'y')){
+             $features[] = array('dryWeatherOnlyAccess',(string)$itemData['dryWeatherOnlyAccess_addnl']);
+        }elseif(array_key_exists('dryWeatherOnlyAccess_addnl', $itemData) && trim($itemData['dryWeatherOnlyAccess_addnl']) != ""){
+             $features[] = array('dryWeatherOnlyAccess',(string)$itemData['dryWeatherOnlyAccess_addnl']);
+        }         
+		//Feature 16
+        if(array_key_exists('tentsOnly', $itemData) && ($itemData['tentsOnly']['enable'] == 'enable' || strtolower($itemData['tentsOnly']) == 'y')){
+             $features[] = array('tentsOnly',(string)$itemData['tentsOnly_addnl']);
+        }elseif(array_key_exists('tentsOnly_addnl', $itemData) && trim($itemData['tentsOnly_addnl']) != ""){
+             $features[] = array('tentsOnly',(string)$itemData['tentsOnly_addnl']);
+        }         
+		//Feature 17
+        if(array_key_exists('noTents', $itemData) && ($itemData['noTents']['enable'] == 'enable' || strtolower($itemData['noTents']) == 'y')){
+             $features[] = array('noTents',(string)$itemData['noTents_addnl']);
+        }elseif(array_key_exists('noTents_addnl', $itemData) && trim($itemData['noTents_addnl']) != ""){
+             $features[] = array('noTents',(string)$itemData['noTents_addnl']);
+        }         
+		//Feature 18
+        if(array_key_exists('camperTrailers', $itemData) && ($itemData['camperTrailers']['enable'] == 'enable' || strtolower($itemData['camperTrailers']) == 'y')){
+             $features[] = array('camperTrailers',(string)$itemData['camperTrailers_addnl']);
+        }elseif(array_key_exists('camperTrailers_addnl', $itemData) && trim($itemData['camperTrailers_addnl']) != ""){
+             $features[] = array('camperTrailers',(string)$itemData['camperTrailers_addnl']);
+        }         
+		//Feature 19
+        if(array_key_exists('noCamperTrailers', $itemData) && ($itemData['noCamperTrailers']['enable'] == 'enable' || strtolower($itemData['noCamperTrailers']) == 'y')){
+             $features[] = array('noCamperTrailers',(string)$itemData['noCamperTrailers_addnl']);
+        }elseif(array_key_exists('noCamperTrailers_addnl', $itemData) && trim($itemData['noCamperTrailers_addnl']) != ""){
+             $features[] = array('noCamperTrailers',(string)$itemData['noCamperTrailers_addnl']);
+        }         
+		//Feature 20
+        if(array_key_exists('caravans', $itemData) && ($itemData['caravans']['enable'] == 'enable' || strtolower($itemData['caravans']) == 'y')){
+             $features[] = array('caravans',(string)$itemData['caravans_addnl']);
+        }elseif(array_key_exists('caravans_addnl', $itemData) && trim($itemData['caravans_addnl']) != ""){
+             $features[] = array('caravans',(string)$itemData['caravans_addnl']);
+        }         
+		//Feature 21
+        if(array_key_exists('largeSizeMotohomeAccess', $itemData) && ($itemData['largeSizeMotohomeAccess']['enable'] == 'enable' || strtolower($itemData['largeSizeMotohomeAccess']) == 'y')){
+             $features[] = array('largeSizeMotohomeAccess',(string)$itemData['largeSizeMotohomeAccess_addnl']);
+        }elseif(array_key_exists('largeSizeMotohomeAccess_addnl', $itemData) && trim($itemData['largeSizeMotohomeAccess_addnl']) != ""){
+             $features[] = array('largeSizeMotohomeAccess',(string)$itemData['largeSizeMotohomeAccess_addnl']);
+        }         
+		//Feature 22
+        if(array_key_exists('bigrig', $itemData) && ($itemData['bigrig']['enable'] == 'enable' || strtolower($itemData['bigrig']) == 'y')){
+             $features[] = array('bigrig',(string)$itemData['bigrig_addnl']);
+        }elseif(array_key_exists('bigrig_addnl', $itemData) && trim($itemData['bigrig_addnl']) != ""){
+             $features[] = array('bigrig',(string)$itemData['bigrig_addnl']);
+        }         
+		//Feature 23
+        if(array_key_exists('selfContainedVehicles', $itemData) && ($itemData['selfContainedVehicles']['enable'] == 'enable' || strtolower($itemData['selfContainedVehicles']) == 'y')){
+             $features[] = array('selfContainedVehicles',(string)$itemData['selfContainedVehicles_addnl']);
+        }elseif(array_key_exists('selfContainedVehicles_addnl', $itemData) && trim($itemData['selfContainedVehicles_addnl']) != ""){
+             $features[] = array('selfContainedVehicles',(string)$itemData['selfContainedVehicles_addnl']);
+        }         
+		//Feature 24
+        if(array_key_exists('onSiteAccomodation', $itemData) && ($itemData['onSiteAccomodation']['enable'] == 'enable' || strtolower($itemData['onSiteAccomodation']) == 'y')){
+             $features[] = array('onSiteAccomodation',(string)$itemData['onSiteAccomodation_addnl']);
+        }elseif(array_key_exists('onSiteAccomodation_addnl', $itemData) && trim($itemData['onSiteAccomodation_addnl']) != ""){
+             $features[] = array('onSiteAccomodation',(string)$itemData['onSiteAccomodation_addnl']);
+        }         
+		//Feature 25
+        if(array_key_exists('seasonalRatesApply', $itemData) && ($itemData['seasonalRatesApply']['enable'] == 'enable' || strtolower($itemData['seasonalRatesApply']) == 'y')){
+             $features[] = array('seasonalRatesApply',(string)$itemData['seasonalRatesApply_addnl']);
+        }elseif(array_key_exists('seasonalRatesApply_addnl', $itemData) && trim($itemData['seasonalRatesApply_addnl']) != ""){
+             $features[] = array('seasonalRatesApply',(string)$itemData['seasonalRatesApply_addnl']);
+        }         
+		//Feature 26
+        if(array_key_exists('discount', $itemData) && ($itemData['discount']['enable'] == 'enable' || strtolower($itemData['discount']) == 'y')){
+             $features[] = array('discount',(string)$itemData['discount_addnl']);
+        }elseif(array_key_exists('discount_addnl', $itemData) && trim($itemData['discount_addnl']) != ""){
+             $features[] = array('discount',(string)$itemData['discount_addnl']);
+        }         
+		//Feature 27
+        if(array_key_exists('offer', $itemData) && ($itemData['offer']['enable'] == 'enable' || strtolower($itemData['offer']) == 'y')){
+             $features[] = array('offer',(string)$itemData['offer_addnl']);
+        }elseif(array_key_exists('offer_addnl', $itemData) && trim($itemData['offer_addnl']) != ""){
+             $features[] = array('offer',(string)$itemData['offer_addnl']);
+        }         
+		//Feature 28
+        if(array_key_exists('rvTurnAroundArea', $itemData) && ($itemData['rvTurnAroundArea']['enable'] == 'enable' || strtolower($itemData['rvTurnAroundArea']) == 'y')){
+             $features[] = array('rvTurnAroundArea',(string)$itemData['rvTurnAroundArea_addnl']);
+        }elseif(array_key_exists('rvTurnAroundArea_addnl', $itemData) && trim($itemData['rvTurnAroundArea_addnl']) != ""){
+             $features[] = array('rvTurnAroundArea',(string)$itemData['rvTurnAroundArea_addnl']);
+        }         
+		//Feature 29
+        if(array_key_exists('rvParkingAvailable', $itemData) && ($itemData['rvParkingAvailable']['enable'] == 'enable' || strtolower($itemData['rvParkingAvailable']) == 'y')){
+             $features[] = array('rvParkingAvailable',(string)$itemData['rvParkingAvailable_addnl']);
+        }elseif(array_key_exists('rvParkingAvailable_addnl', $itemData) && trim($itemData['rvParkingAvailable_addnl']) != ""){
+             $features[] = array('rvParkingAvailable',(string)$itemData['rvParkingAvailable_addnl']);
+        }         
+		//Feature 30
+        if(array_key_exists('boatRamp', $itemData) && ($itemData['boatRamp']['enable'] == 'enable' || strtolower($itemData['boatRamp']) == 'y')){
+             $features[] = array('boatRamp',(string)$itemData['boatRamp_addnl']);
+        }elseif(array_key_exists('boatRamp_addnl', $itemData) && trim($itemData['boatRamp_addnl']) != ""){
+             $features[] = array('boatRamp',(string)$itemData['boatRamp_addnl']);
+        }         
+		//Feature 31
+        if(array_key_exists('timeLimitApplies', $itemData) && ($itemData['timeLimitApplies']['enable'] == 'enable' || strtolower($itemData['timeLimitApplies']) == 'y')){
+             $features[] = array('timeLimitApplies',(string)$itemData['timeLimitApplies_addnl']);
+        }elseif(array_key_exists('timeLimitApplies_addnl', $itemData) && trim($itemData['timeLimitApplies_addnl']) != ""){
+             $features[] = array('timeLimitApplies',(string)$itemData['timeLimitApplies_addnl']);
+        }         
+		//Feature 32
+        if(array_key_exists('shadedSites', $itemData) && ($itemData['shadedSites']['enable'] == 'enable' || strtolower($itemData['shadedSites']) == 'y')){
+             $features[] = array('shadedSites',(string)$itemData['shadedSites_addnl']);
+        }elseif(array_key_exists('shadedSites_addnl', $itemData) && trim($itemData['shadedSites_addnl']) != ""){
+             $features[] = array('shadedSites',(string)$itemData['shadedSites_addnl']);
+        }         
+		//Feature 33
+        if(array_key_exists('firePit', $itemData) && ($itemData['firePit']['enable'] == 'enable' || strtolower($itemData['firePit']) == 'y')){
+             $features[] = array('firePit',(string)$itemData['firePit_addnl']);
+        }elseif(array_key_exists('firePit_addnl', $itemData) && trim($itemData['firePit_addnl']) != ""){
+             $features[] = array('firePit',(string)$itemData['firePit_addnl']);
+        }         
+		//Feature 34
+        if(array_key_exists('noFirePit', $itemData) && ($itemData['noFirePit']['enable'] == 'enable' || strtolower($itemData['noFirePit']) == 'y')){
+             $features[] = array('noFirePit',(string)$itemData['noFirePit_addnl']);
+        }elseif(array_key_exists('noFirePit_addnl', $itemData) && trim($itemData['noFirePit_addnl']) != ""){
+             $features[] = array('noFirePit',(string)$itemData['noFirePit_addnl']);
+        }         
+		//Feature 35
+        if(array_key_exists('picnicTable', $itemData) && ($itemData['picnicTable']['enable'] == 'enable' || strtolower($itemData['picnicTable']) == 'y')){
+             $features[] = array('picnicTable',(string)$itemData['picnicTable_addnl']);
+        }elseif(array_key_exists('picnicTable_addnl', $itemData) && trim($itemData['picnicTable_addnl']) != ""){
+             $features[] = array('picnicTable',(string)$itemData['picnicTable_addnl']);
+        }         
+		//Feature 36
+        if(array_key_exists('bbq', $itemData) && ($itemData['bbq']['enable'] == 'enable' || strtolower($itemData['bbq']) == 'y')){
+             $features[] = array('bbq',(string)$itemData['bbq_addnl']);
+        }elseif(array_key_exists('bbq_addnl', $itemData) && trim($itemData['bbq_addnl']) != ""){
+             $features[] = array('bbq',(string)$itemData['bbq_addnl']);
+        }         
+		//Feature 37
+        if(array_key_exists('shelter', $itemData) && ($itemData['shelter']['enable'] == 'enable' || strtolower($itemData['shelter']) == 'y')){
+             $features[] = array('shelter',(string)$itemData['shelter_addnl']);
+        }elseif(array_key_exists('shelter_addnl', $itemData) && trim($itemData['shelter_addnl']) != ""){
+             $features[] = array('shelter',(string)$itemData['shelter_addnl']);
+        }         
+		//Feature 38
+        if(array_key_exists('childrenPlayground', $itemData) && ($itemData['childrenPlayground']['enable'] == 'enable' || strtolower($itemData['childrenPlayground']) == 'y')){
+             $features[] = array('childrenPlayground',(string)$itemData['childrenPlayground_addnl']);
+        }elseif(array_key_exists('childrenPlayground_addnl', $itemData) && trim($itemData['childrenPlayground_addnl']) != ""){
+             $features[] = array('childrenPlayground',(string)$itemData['childrenPlayground_addnl']);
+        }         
+		//Feature 39
+        if(array_key_exists('views', $itemData) && ($itemData['views']['enable'] == 'enable' || strtolower($itemData['views']) == 'y')){
+             $features[] = array('views',(string)$itemData['views_addnl']);
+        }elseif(array_key_exists('views_addnl', $itemData) && trim($itemData['views_addnl']) != ""){
+             $features[] = array('views',(string)$itemData['views_addnl']);
+        }         
+		//Feature 40
+        if(array_key_exists('parkFees', $itemData) && ($itemData['parkFees']['enable'] == 'enable' || strtolower($itemData['parkFees']) == 'y')){
+             $features[] = array('parkFees',(string)$itemData['parkFees_addnl']);
+        }elseif(array_key_exists('parkFees_addnl', $itemData) && trim($itemData['parkFees_addnl']) != ""){
+             $features[] = array('parkFees',(string)$itemData['parkFees_addnl']);
+        }         
+		//Feature 41
+        if(array_key_exists('campKitchen', $itemData) && ($itemData['campKitchen']['enable'] == 'enable' || strtolower($itemData['campKitchen']) == 'y')){
+             $features[] = array('campKitchen',(string)$itemData['campKitchen_addnl']);
+        }elseif(array_key_exists('campKitchen_addnl', $itemData) && trim($itemData['campKitchen_addnl']) != ""){
+             $features[] = array('campKitchen',(string)$itemData['campKitchen_addnl']);
+        }         
+		//Feature 42
+        if(array_key_exists('laundry', $itemData) && ($itemData['laundry']['enable'] == 'enable' || strtolower($itemData['laundry']) == 'y')){
+             $features[] = array('laundry',(string)$itemData['laundry_addnl']);
+        }elseif(array_key_exists('laundry_addnl', $itemData) && trim($itemData['laundry_addnl']) != ""){
+             $features[] = array('laundry',(string)$itemData['laundry_addnl']);
+        }         
+		//Feature 43
+        if(array_key_exists('ensuiteSites', $itemData) && ($itemData['ensuiteSites']['enable'] == 'enable' || strtolower($itemData['ensuiteSites']) == 'y')){
+             $features[] = array('ensuiteSites',(string)$itemData['ensuiteSites_addnl']);
+        }elseif(array_key_exists('ensuiteSites_addnl', $itemData) && trim($itemData['ensuiteSites_addnl']) != ""){
+             $features[] = array('ensuiteSites',(string)$itemData['ensuiteSites_addnl']);
+        }         
+		//Feature 44
+        if(array_key_exists('restaurant', $itemData) && ($itemData['restaurant']['enable'] == 'enable' || strtolower($itemData['restaurant']) == 'y')){
+             $features[] = array('restaurant',(string)$itemData['restaurant_addnl']);
+        }elseif(array_key_exists('restaurant_addnl', $itemData) && trim($itemData['restaurant_addnl']) != ""){
+             $features[] = array('restaurant',(string)$itemData['restaurant_addnl']);
+        }         
+		//Feature 45
+        if(array_key_exists('kiosk', $itemData) && ($itemData['kiosk']['enable'] == 'enable' || strtolower($itemData['kiosk']) == 'y')){
+             $features[] = array('kiosk',(string)$itemData['kiosk_addnl']);
+        }elseif(array_key_exists('kiosk_addnl', $itemData) && trim($itemData['kiosk_addnl']) != ""){
+             $features[] = array('kiosk',(string)$itemData['kiosk_addnl']);
+        }         
+		//Feature 46
+        if(array_key_exists('internetAccess', $itemData) && ($itemData['internetAccess']['enable'] == 'enable' || strtolower($itemData['internetAccess']) == 'y')){
+             $features[] = array('internetAccess',(string)$itemData['internetAccess_addnl']);
+        }elseif(array_key_exists('internetAccess_addnl', $itemData) && trim($itemData['internetAccess_addnl']) != ""){
+             $features[] = array('internetAccess',(string)$itemData['internetAccess_addnl']);
+        }         
+		//Feature 47
+        if(array_key_exists('swimmingPool', $itemData) && ($itemData['swimmingPool']['enable'] == 'enable' || strtolower($itemData['swimmingPool']) == 'y')){
+             $features[] = array('swimmingPool',(string)$itemData['swimmingPool_addnl']);
+        }elseif(array_key_exists('swimmingPool_addnl', $itemData) && trim($itemData['swimmingPool_addnl']) != ""){
+             $features[] = array('swimmingPool',(string)$itemData['swimmingPool_addnl']);
+        }         
+		//Feature 48
+        if(array_key_exists('gamesRoom', $itemData) && ($itemData['gamesRoom']['enable'] == 'enable' || strtolower($itemData['gamesRoom']) == 'y')){
+             $features[] = array('gamesRoom',(string)$itemData['gamesRoom_addnl']);
+        }elseif(array_key_exists('gamesRoom_addnl', $itemData) && trim($itemData['gamesRoom_addnl']) != ""){
+             $features[] = array('gamesRoom',(string)$itemData['gamesRoom_addnl']);
+        }         
+		//Feature 49
+        if(array_key_exists('generatorsPermitted', $itemData) && ($itemData['generatorsPermitted']['enable'] == 'enable' || strtolower($itemData['generatorsPermitted']) == 'y')){
+             $features[] = array('generatorsPermitted',(string)$itemData['generatorsPermitted_addnl']);
+        }elseif(array_key_exists('generatorsPermitted_addnl', $itemData) && trim($itemData['generatorsPermitted_addnl']) != ""){
+             $features[] = array('generatorsPermitted',(string)$itemData['generatorsPermitted_addnl']);
+        }         
+		//Feature 50
+        if(array_key_exists('generatorsNotPermitted', $itemData) && ($itemData['generatorsNotPermitted']['enable'] == 'enable' || strtolower($itemData['generatorsNotPermitted']) == 'y')){
+             $features[] = array('generatorsNotPermitted',(string)$itemData['generatorsNotPermitted_addnl']);
+        }elseif(array_key_exists('generatorsNotPermitted_addnl', $itemData) && trim($itemData['generatorsNotPermitted_addnl']) != ""){
+             $features[] = array('generatorsNotPermitted',(string)$itemData['generatorsNotPermitted_addnl']);
+        }         
+		//Feature 51
+        if(array_key_exists('showGrounds', $itemData) && ($itemData['showGrounds']['enable'] == 'enable' || strtolower($itemData['showGrounds']) == 'y')){
+             $features[] = array('showGrounds',(string)$itemData['showGrounds_addnl']);
+        }elseif(array_key_exists('showGrounds_addnl', $itemData) && trim($itemData['showGrounds_addnl']) != ""){
+             $features[] = array('showGrounds',(string)$itemData['showGrounds_addnl']);
+        }         
+		//Feature 52
+        if(array_key_exists('nationalParknForestry', $itemData) && ($itemData['nationalParknForestry']['enable'] == 'enable' || strtolower($itemData['nationalParknForestry']) == 'y')){
+             $features[] = array('nationalParknForestry',(string)$itemData['nationalParknForestry_addnl']);
+        }elseif(array_key_exists('nationalParknForestry_addnl', $itemData) && trim($itemData['nationalParknForestry_addnl']) != ""){
+             $features[] = array('nationalParknForestry',(string)$itemData['nationalParknForestry_addnl']);
+        }         
+		//Feature 53
+        if(array_key_exists('pubs', $itemData) && ($itemData['pubs']['enable'] == 'enable' || strtolower($itemData['pubs']) == 'y')){
+             $features[] = array('pubs',(string)$itemData['pubs_addnl']);
+        }elseif(array_key_exists('pubs_addnl', $itemData) && trim($itemData['pubs_addnl']) != ""){
+             $features[] = array('pubs',(string)$itemData['pubs_addnl']);
+        }         
+		//Feature 54
+        if(array_key_exists('sharedWithTrucks', $itemData) && ($itemData['sharedWithTrucks']['enable'] == 'enable' || strtolower($itemData['sharedWithTrucks']) == 'y')){
+             $features[] = array('sharedWithTrucks',(string)$itemData['sharedWithTrucks_addnl']);
+        }elseif(array_key_exists('sharedWithTrucks_addnl', $itemData) && trim($itemData['sharedWithTrucks_addnl']) != ""){
+             $features[] = array('sharedWithTrucks',(string)$itemData['sharedWithTrucks_addnl']);
+        }

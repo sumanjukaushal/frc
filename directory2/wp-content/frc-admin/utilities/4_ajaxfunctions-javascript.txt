@@ -1,0 +1,325 @@
+        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("toilets") &&
+    ( dataRaw[key].optionsDir['toilets']['enable'] == "enable" || dataRaw[key].optionsDir['toilets'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/toilets.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Toilets Available'}" alt = "{__ 'Toilets Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("disableFacility") &&
+    ( dataRaw[key].optionsDir['disableFacility']['enable'] == "enable" || dataRaw[key].optionsDir['disableFacility'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/disableFacility.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Disabled Facility'}" alt = "{__ 'Disabled Facility'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("showers") &&
+    ( dataRaw[key].optionsDir['showers']['enable'] == "enable" || dataRaw[key].optionsDir['showers'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/showers.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Showers Available'}" alt = "{__ 'Showers Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("drinkingWater") &&
+    ( dataRaw[key].optionsDir['drinkingWater']['enable'] == "enable" || dataRaw[key].optionsDir['drinkingWater'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/drinkingWater.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Drinking Water Available'}" alt = "{__ 'Drinking Water Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("drinkingWaterNotSuitable") &&
+    ( dataRaw[key].optionsDir['drinkingWaterNotSuitable']['enable'] == "enable" || dataRaw[key].optionsDir['drinkingWaterNotSuitable'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/drinkingWaterNotSuitable.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Water Not Suitable For Drinking'}" alt = "{__ 'Water Not Suitable For Drinking'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("waterFillingAvailable") &&
+    ( dataRaw[key].optionsDir['waterFillingAvailable']['enable'] == "enable" || dataRaw[key].optionsDir['waterFillingAvailable'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/waterFillingAvailable.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Water Filling Available'}" alt = "{__ 'Water Filling Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("wasteFacilityAvailable") &&
+    ( dataRaw[key].optionsDir['wasteFacilityAvailable']['enable'] == "enable" || dataRaw[key].optionsDir['wasteFacilityAvailable'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/wasteFacilityAvailable.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Rubbish Bins Available'}" alt = "{__ 'Rubbish Bins Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("dumpPointAvailable") &&
+    ( dataRaw[key].optionsDir['dumpPointAvailable']['enable'] == "enable" || dataRaw[key].optionsDir['dumpPointAvailable'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/dumpPointAvailable.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Dump Point Available'}" alt = "{__ 'Dump Point Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("poweredSites") &&
+    ( dataRaw[key].optionsDir['poweredSites']['enable'] == "enable" || dataRaw[key].optionsDir['poweredSites'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/poweredSites.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Power Available'}" alt = "{__ 'Power Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("emergencyPhone") &&
+    ( dataRaw[key].optionsDir['emergencyPhone']['enable'] == "enable" || dataRaw[key].optionsDir['emergencyPhone'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/emergencyPhone.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Emergency Phone'}" alt = "{__ 'Emergency Phone'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("mobilePhoneReception") &&
+    ( dataRaw[key].optionsDir['mobilePhoneReception']['enable'] == "enable" || dataRaw[key].optionsDir['mobilePhoneReception'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/mobilePhoneReception.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Mobile Phone Reception'}" alt = "{__ 'Mobile Phone Reception'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("petsOk") &&
+    ( dataRaw[key].optionsDir['petsOk']['enable'] == "enable" || dataRaw[key].optionsDir['petsOk'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/petsOk.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Pets Permitted'}" alt = "{__ 'Pets Permitted'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("petsNotOk") &&
+    ( dataRaw[key].optionsDir['petsNotOk']['enable'] == "enable" || dataRaw[key].optionsDir['petsNotOk'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/petsNotOk.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'No Pets Permitted'}" alt = "{__ 'No Pets Permitted'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("fourWheelDrive") &&
+    ( dataRaw[key].optionsDir['fourWheelDrive']['enable'] == "enable" || dataRaw[key].optionsDir['fourWheelDrive'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/fourWheelDrive.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ '4WD Drive Access Only'}" alt = "{__ '4WD Drive Access Only'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("dryWeatherOnlyAccess") &&
+    ( dataRaw[key].optionsDir['dryWeatherOnlyAccess']['enable'] == "enable" || dataRaw[key].optionsDir['dryWeatherOnlyAccess'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/dryWeatherOnlyAccess.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Dry Weather Access'}" alt = "{__ 'Dry Weather Access'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("tentsOnly") &&
+    ( dataRaw[key].optionsDir['tentsOnly']['enable'] == "enable" || dataRaw[key].optionsDir['tentsOnly'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/tentsOnly.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Suitable for Tents'}" alt = "{__ 'Suitable for Tents'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("noTents") &&
+    ( dataRaw[key].optionsDir['noTents']['enable'] == "enable" || dataRaw[key].optionsDir['noTents'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/noTents.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Not Suitable for Tents'}" alt = "{__ 'Not Suitable for Tents'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("camperTrailers") &&
+    ( dataRaw[key].optionsDir['camperTrailers']['enable'] == "enable" || dataRaw[key].optionsDir['camperTrailers'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/camperTrailers.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Camper Trailers'}" alt = "{__ 'Camper Trailers'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("noCamperTrailers") &&
+    ( dataRaw[key].optionsDir['noCamperTrailers']['enable'] == "enable" || dataRaw[key].optionsDir['noCamperTrailers'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/noCamperTrailers.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'No Camper Trailers'}" alt = "{__ 'No Camper Trailers'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("caravans") &&
+    ( dataRaw[key].optionsDir['caravans']['enable'] == "enable" || dataRaw[key].optionsDir['caravans'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/caravans.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Caravans'}" alt = "{__ 'Caravans'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("largeSizeMotohomeAccess") &&
+    ( dataRaw[key].optionsDir['largeSizeMotohomeAccess']['enable'] == "enable" || dataRaw[key].optionsDir['largeSizeMotohomeAccess'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/largeSizeMotohomeAccess.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Campervans  & Motorhomes'}" alt = "{__ 'Campervans  & Motorhomes'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("bigrig") &&
+    ( dataRaw[key].optionsDir['bigrig']['enable'] == "enable" || dataRaw[key].optionsDir['bigrig'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/bigrig.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Big Rig Access'}" alt = "{__ 'Big Rig Access'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("selfContainedVehicles") &&
+    ( dataRaw[key].optionsDir['selfContainedVehicles']['enable'] == "enable" || dataRaw[key].optionsDir['selfContainedVehicles'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/selfContainedVehicles.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Fully Self Contained Vehicles Only'}" alt = "{__ 'Fully Self Contained Vehicles Only'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("onSiteAccomodation") &&
+    ( dataRaw[key].optionsDir['onSiteAccomodation']['enable'] == "enable" || dataRaw[key].optionsDir['onSiteAccomodation'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/onSiteAccomodation.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'On Site Accommodation'}" alt = "{__ 'On Site Accommodation'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("seasonalRatesApply") &&
+    ( dataRaw[key].optionsDir['seasonalRatesApply']['enable'] == "enable" || dataRaw[key].optionsDir['seasonalRatesApply'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/seasonalRatesApply.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Seasonal Rates Apply'}" alt = "{__ 'Seasonal Rates Apply'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("discount") &&
+    ( dataRaw[key].optionsDir['discount']['enable'] == "enable" || dataRaw[key].optionsDir['discount'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/discount.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Discounts Apply'}" alt = "{__ 'Discounts Apply'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("offer") &&
+    ( dataRaw[key].optionsDir['offer']['enable'] == "enable" || dataRaw[key].optionsDir['offer'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/offer.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Offers Apply'}" alt = "{__ 'Offers Apply'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("rvTurnAroundArea") &&
+    ( dataRaw[key].optionsDir['rvTurnAroundArea']['enable'] == "enable" || dataRaw[key].optionsDir['rvTurnAroundArea'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/rvTurnAroundArea.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'RV Turn Around Area'}" alt = "{__ 'RV Turn Around Area'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("rvParkingAvailable") &&
+    ( dataRaw[key].optionsDir['rvParkingAvailable']['enable'] == "enable" || dataRaw[key].optionsDir['rvParkingAvailable'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/rvParkingAvailable.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'RV Parking Available'}" alt = "{__ 'RV Parking Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("boatRamp") &&
+    ( dataRaw[key].optionsDir['boatRamp']['enable'] == "enable" || dataRaw[key].optionsDir['boatRamp'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/boatRamp.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Boat Ramp Nearby'}" alt = "{__ 'Boat Ramp Nearby'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("timeLimitApplies") &&
+    ( dataRaw[key].optionsDir['timeLimitApplies']['enable'] == "enable" || dataRaw[key].optionsDir['timeLimitApplies'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/timeLimitApplies.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Time Limits Apply'}" alt = "{__ 'Time Limits Apply'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("shadedSites") &&
+    ( dataRaw[key].optionsDir['shadedSites']['enable'] == "enable" || dataRaw[key].optionsDir['shadedSites'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/shadedSites.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Some Shade Available'}" alt = "{__ 'Some Shade Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("firePit") &&
+    ( dataRaw[key].optionsDir['firePit']['enable'] == "enable" || dataRaw[key].optionsDir['firePit'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/firePit.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Fires Permitted'}" alt = "{__ 'Fires Permitted'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("noFirePit") &&
+    ( dataRaw[key].optionsDir['noFirePit']['enable'] == "enable" || dataRaw[key].optionsDir['noFirePit'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/noFirePit.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'No Fires Permitted'}" alt = "{__ 'No Fires Permitted'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("picnicTable") &&
+    ( dataRaw[key].optionsDir['picnicTable']['enable'] == "enable" || dataRaw[key].optionsDir['picnicTable'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/picnicTable.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Picnic Table Available'}" alt = "{__ 'Picnic Table Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("bbq") &&
+    ( dataRaw[key].optionsDir['bbq']['enable'] == "enable" || dataRaw[key].optionsDir['bbq'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/bbq.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'BBQ Available'}" alt = "{__ 'BBQ Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("shelter") &&
+    ( dataRaw[key].optionsDir['shelter']['enable'] == "enable" || dataRaw[key].optionsDir['shelter'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/shelter.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Shelter Available'}" alt = "{__ 'Shelter Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("childrenPlayground") &&
+    ( dataRaw[key].optionsDir['childrenPlayground']['enable'] == "enable" || dataRaw[key].optionsDir['childrenPlayground'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/childrenPlayground.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Childrens Playground Available'}" alt = "{__ 'Childrens Playground Available'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("views") &&
+    ( dataRaw[key].optionsDir['views']['enable'] == "enable" || dataRaw[key].optionsDir['views'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/views.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Nice Views From Location'}" alt = "{__ 'Nice Views From Location'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("parkFees") &&
+    ( dataRaw[key].optionsDir['parkFees']['enable'] == "enable" || dataRaw[key].optionsDir['parkFees'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/parkFees.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'National Park Fees'}" alt = "{__ 'National Park Fees'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("campKitchen") &&
+    ( dataRaw[key].optionsDir['campKitchen']['enable'] == "enable" || dataRaw[key].optionsDir['campKitchen'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/campKitchen.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Camp Kitchen'}" alt = "{__ 'Camp Kitchen'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("laundry") &&
+    ( dataRaw[key].optionsDir['laundry']['enable'] == "enable" || dataRaw[key].optionsDir['laundry'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/laundry.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Laundry'}" alt = "{__ 'Laundry'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("ensuiteSites") &&
+    ( dataRaw[key].optionsDir['ensuiteSites']['enable'] == "enable" || dataRaw[key].optionsDir['ensuiteSites'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/ensuiteSites.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Ensuite Sites'}" alt = "{__ 'Ensuite Sites'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("restaurant") &&
+    ( dataRaw[key].optionsDir['restaurant']['enable'] == "enable" || dataRaw[key].optionsDir['restaurant'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/restaurant.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Restaurant'}" alt = "{__ 'Restaurant'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("kiosk") &&
+    ( dataRaw[key].optionsDir['kiosk']['enable'] == "enable" || dataRaw[key].optionsDir['kiosk'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/kiosk.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Kiosk'}" alt = "{__ 'Kiosk'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("internetAccess") &&
+    ( dataRaw[key].optionsDir['internetAccess']['enable'] == "enable" || dataRaw[key].optionsDir['internetAccess'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/internetAccess.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Internet Access'}" alt = "{__ 'Internet Access'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("swimmingPool") &&
+    ( dataRaw[key].optionsDir['swimmingPool']['enable'] == "enable" || dataRaw[key].optionsDir['swimmingPool'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/swimmingPool.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Swimming'}" alt = "{__ 'Swimming'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("gamesRoom") &&
+    ( dataRaw[key].optionsDir['gamesRoom']['enable'] == "enable" || dataRaw[key].optionsDir['gamesRoom'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/gamesRoom.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Games Room'}" alt = "{__ 'Games Room'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("generatorsPermitted") &&
+    ( dataRaw[key].optionsDir['generatorsPermitted']['enable'] == "enable" || dataRaw[key].optionsDir['generatorsPermitted'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/generatorsPermitted.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Generators Permitted'}" alt = "{__ 'Generators Permitted'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("generatorsNotPermitted") &&
+    ( dataRaw[key].optionsDir['generatorsNotPermitted']['enable'] == "enable" || dataRaw[key].optionsDir['generatorsNotPermitted'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/generatorsNotPermitted.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Generattors Not Permitted'}" alt = "{__ 'Generattors Not Permitted'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("showGrounds") &&
+    ( dataRaw[key].optionsDir['showGrounds']['enable'] == "enable" || dataRaw[key].optionsDir['showGrounds'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/showGrounds.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Show Grounds'}" alt = "{__ 'Show Grounds'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("nationalParknForestry") &&
+    ( dataRaw[key].optionsDir['nationalParknForestry']['enable'] == "enable" || dataRaw[key].optionsDir['nationalParknForestry'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/nationalParknForestry.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'National Parks and Forestry'}" alt = "{__ 'National Parks and Forestry'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("pubs") &&
+    ( dataRaw[key].optionsDir['pubs']['enable'] == "enable" || dataRaw[key].optionsDir['pubs'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/pubs.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Pubs'}" alt = "{__ 'Pubs'}" />';
+		}        
+
+	if( dataRaw[key].optionsDir.hasOwnProperty("sharedWithTrucks") &&
+    ( dataRaw[key].optionsDir['sharedWithTrucks']['enable'] == "enable" || dataRaw[key].optionsDir['sharedWithTrucks'] == 'Y')){
+        {var $imageSrc = "$url/uploads/sites/3/2014/04/facility_icons/30x30/jpg/sharedWithTrucks.png";}
+        imagesContent = imagesContent + '<img width="30" height="30" src="{$imageSrc}" title = "{__ 'Shared With Trucks'}" alt = "{__ 'Shared With Trucks'}" />';
+		}

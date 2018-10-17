@@ -1,0 +1,838 @@
+<style>
+.typeahead .active > a,
+.typeahead .active > a:hover {
+color: white;
+background-color: Green;
+background-image: none;
+}
+</style>
+{*include $element->common('header')*}
+
+{* VARIABLES *}
+<?php /*echo "<pre>";print_r($el);echo "</pre>";*/?>
+{var $type = $el->option('type') != "" ? $el->option('type') : 1}
+<?php
+	$allowedCategories = array(
+			     "Free Camps" => "free-camps",
+			     "Rest Areas" => "rest-areas",
+			     "Campgrounds" => "campgrounds",
+			     "Caravan Parks" => "caravan-parks",
+			     "House Sitting" => "house-sitting",
+			     "Help Out" => "help-out",
+			     "Dump Points" => "dump-points",
+			     //New
+				 "Accommodation" => 'accommodation',
+				 "Camping Accessories" => 'camping-accessories',
+				 "Entertainment" => "entertainment",
+				 "Food & Wine" => "food-wine",
+				 "Fuel" => "fuel",
+				 "Groceries" => 'groceries',
+				 "Markets" => 'markets',
+				 "Medical" => "medical",
+				 "Personal Health" => "personal-health",
+				 "Repairs" => "rv-sales-repairs",
+				 "Services" => "services",
+				 "Information Centre" => "information-centre",
+				 "IGA Stores" => "iga-stores",
+			     /*"Park Overs" => "park-overs",
+			     "Groceries/Shopping" => "groceries-shopping",
+			     "Markets" => "markets",
+			     "Medical" => "medical",
+			     "Repairs" => "repairs",
+			     "Things To Do" => "things-to-do",
+			     "Camping Supplies" => "camping-supplies",
+			     "Food & Wine" => "food-wine",
+			     "Personal Health" => "personal-health",
+			     "Services" => "services",
+			     "Fuel" => "fuel",*/
+			    );
+  
+  //code for selected Locations
+  $allowedLocations = array(
+			     "Australian Capital Territory" => 'act',
+			     "New South Wales" => 'nsw',
+			     "Victoria" => 'vic',
+			     "South Australia" => 'sa',
+			     "Western Australia" => 'wa',
+			     "Northern Territory" => 'nt',
+			     "Queensland" => 'qld',
+			     "Tasmania" => 'tas'
+			    );
+	//echo "<pre>";echo $type;echo "</pre>";
+	//returning 1
+?>
+
+{var $selectedKey = isset($_REQUEST['s']) && $_REQUEST['s'] != "" ? $_REQUEST['s'] : ''}
+{var $selectedCat = isset($_REQUEST['category']) && $_REQUEST['category'] != "" ? $_REQUEST['category'] : ''}
+{var $selectedLoc = isset($_REQUEST['location']) && $_REQUEST['location'] != "" ? $_REQUEST['location'] : ''}
+{var $selectedRad = isset($_REQUEST['rad']) && $_REQUEST['rad'] != "" ? $_REQUEST['rad'] : ''}
+
+{var $selectedLocationAddress = isset($_REQUEST['location-address']) && $_REQUEST['location-address'] != "" ? $_REQUEST['location-address'] : ''}
+{var $selectedLat = isset($_REQUEST['lat']) && $_REQUEST['lat'] != "" ? $_REQUEST['lat'] : ''}
+{var $selectedLon = isset($_REQUEST['lon']) && $_REQUEST['lon'] != "" ? $_REQUEST['lon'] : ''}
+
+{* set default values only if page IS NOT SEARCH RESULT *}
+{if defined('AIT_ADVANCED_SEARCH_ENABLED') and !isset($_REQUEST['a'])}
+	{var $advancedSearchOptions = aitOptions()->getOptionsByType('ait-advanced-search')}
+	{var $advancedSearchOptions = $advancedSearchOptions['general']}
+	{if $advancedSearchOptions['useDefaults']}
+		{var $selectedLocationAddress = $selectedLocationAddress != "" ? $selectedLocationAddress : $advancedSearchOptions['defaultLocation']['address']}
+		{var $selectedRad = $selectedRad != "" ? $selectedRad : $advancedSearchOptions['defaultRadius']}
+		{var $selectedLat = $advancedSearchOptions['defaultLocation']['latitude']}
+		{var $selectedLon = $advancedSearchOptions['defaultLocation']['longitude']}
+	{/if}
+{/if}
+
+{capture $searchKeyword}
+	{if $type == 2}
+	<span class="searchinput-wrap"><input type="text" name="s" id="searchinput-text" placeholder="{__ 'Search keyword'}" class="searchinput" value="{$selectedKey}"></span>
+	{else}
+	<span class="searchinput-wrap"><input type="text" name="s" id="searchinput-text" placeholder="{__ 'Search keyword'}" class="searchinput" value="{$selectedKey}"></span>
+	{/if}
+{/capture}
+
+{capture $searchCategory}
+	{var $categories = get_categories(array('taxonomy' => 'ait-items', 'hide_empty' => 0, 'parent' => 0))}
+	<?php /*echo "afd"; echo "<pre>"; print_r($categories);echo "</pre>";*/?>
+	{if isset($categories) && count($categories) > 0}
+		{var $optionSelectedClass = $selectedCat != '' ? 'option-selected' : ''}
+
+		<div class="category-search-wrap {$optionSelectedClass}" data-position="first">
+			{if $type == 3}
+				<span class="category-icon"><i class="fa fa-folder-open"></i></span>
+			{/if}
+			<span class="category-clear"><i class="fa fa-times"></i></span>
+
+			{if $type == 3}
+			<select name="category" class="category-search default-disabled" style="display: none;">
+			{else}
+			<select data-placeholder="{__ 'Category32'}" name="category" class="category-search default-disabled" style="display: none; width:50px;" multiple='multiple'>
+			{/if}
+			<option label="-"></option>
+			{!= recursiveCategory($categories, $selectedCat, 'ait-items', "")}
+			</select>
+		</div>
+	{/if}
+{/capture}
+
+{capture $searchLocation}
+	{if defined('AIT_ADVANCED_SEARCH_ENABLED')}
+		<div class="location-search-wrap advanced-search" data-position="last">
+			{if $type == 3}
+				<span class="location-icon"><i class="fa fa-map-marker"></i></span>
+				<span class="location-clear"><i class="fa fa-times"></i></span>
+				<div class="advanced-search-location">
+					<input name="location-address" class="location-search" type="text" id=location-address placeholder="{__ 'Location66'}" value="{stripslashes($selectedLocationAddress)}">
+				</div>
+			{else}
+				<input name="location-address" class="location-search searchinput" type="text" id=location-address placeholder="{__ 'Location69'}" value="{stripslashes($selectedLocationAddress)}">
+				{if $type == 1}
+					<i class="fa fa-map-marker"></i>
+				{/if}
+			{/if}
+		</div>
+	{else}
+		{var $locations = get_categories(array('taxonomy' => 'ait-locations', 'hide_empty' => 0, 'parent' => 0))}
+		<?php /*echo "afd"; echo "<pre>"; print_r($locations);echo "</pre>";*/?>
+		{if isset($locations) && count($locations) > 0}
+			{var $optionSelectedClass = $selectedLoc != '' ? 'option-selected' : ''}
+
+			<div class="location-search-wrap {$optionSelectedClass}" data-position="last">
+				{if $type == 3}
+					<span class="location-icon"><i class="fa fa-map-marker"></i></span>
+				{/if}
+				<span class="location-clear"><i class="fa fa-times"></i></span>
+
+				{if $type == 3}
+				<select name="location" class="location-search default-disabled" style="display: none;">
+				{else}
+				<select data-placeholder="{__ 'Location'}" name="location" class="location-search default-disabled" style="display: none;">
+				{/if}
+				<option label="-"></option>
+				{!= recursiveCategory($locations, $selectedLoc, 'ait-locations', "")}
+				</select>
+			</div>
+		{/if}
+	{/if}
+{/capture}
+{* VARIABLES *}
+
+<div id="{$htmlId}-main" class="{$htmlClass}-main">
+
+{if $el->option('type') == 3}
+	{if ($el->hasOption(title) and $el->option->title)}
+
+		<div n:class="elm-mainheader, $el->hasOption(headAlign) ? $el->option->headAlign">
+			{if $el->option->title}
+				<h2 class="elm-maintitle">{!$el->option->title}</h2>
+			{/if}
+		</div>
+
+	{/if}
+{/if}
+<?php /*echo "<pre>";print_r($categories);echo "</pre>";*/?>
+<div id="{$htmlId}" class="{$htmlClass}">
+
+	<div id="{$htmlId}-container" n:class='search-form-container, "search-type-{$type}"'>
+		<form action="{$searchUrl}" method="get" class="main-search-form" style='display:none;'>
+
+			<div class="elm-wrapper">
+				<div class="inputs-container">
+					<div class="search-shadow"></div>
+					<div class="search-content">
+					 	{if $type == 2}
+
+				 			{var $sentence = '<span class="label">'.$el->option('sentence').'</span>'}
+					 		{var $sentence = '<span class="label">'.$el->option('sentence').'</span>'}
+							{var $sentence = str_replace('{', '</span>{', $sentence)}
+							{var $sentence = str_replace('}', '}<span class="label">', $sentence)}
+
+					 		{if strpos($sentence, '{search-keyword}') !== false}
+					 			{var $sentence = str_replace('{search-keyword}', $searchKeyword, $sentence)}
+					 		{else}
+					 			<input type="hidden" name="s" value="">
+					 		{/if}
+
+					 		{var $sentence = str_replace('{search-category}', $searchCategory, $sentence)}
+					 		{var $sentence = str_replace('{search-location}', $searchLocation, $sentence)}
+
+					 		{var $sentence = str_replace('{search-radius}', $searchRadius, $sentence)}
+
+					 		{!$sentence}
+
+					 	{elseif $type == 3}
+
+					 		<div class="search-inputs-wrap">
+					 			{if $el->option('enableKeywordSearch')}
+					 				{!$searchKeyword}
+					 			{else}
+									<input type="hidden" name="s" value="">
+								{/if}
+
+					 			<!--<div class="searchsubmit-wrapper">-->
+					 				<div class="submit-main-button">
+										<div class="searchsubmit2">{__ 'Search'}</div>
+										<input type="submit" value="{__ 'Search188'}" class="searchsubmit">
+									</div>
+								<!--</div>-->
+					 		</div>
+
+					 		{if $el->option('type') == 3}
+						 		{if ($el->hasOption(description) and $el->option->description)}
+									{if $el->option->description}
+										<p class="elm-maindesc">{!$el->option->description}</p>
+									{/if}
+								{/if}
+							{/if}
+
+					 		<div class="search-inputs-buttons-wrap">
+
+					 			{if $el->option('enableCategorySearch')}
+					 				{!$searchCategory}
+					 			{/if}
+
+					 			{if $el->option('enableLocationSearch')}
+									{!$searchLocation}
+								{/if}
+
+								{if $el->option('enableRadiusSearch')}
+									{!$searchRadius}
+								{/if}
+
+					 		</div>
+
+					 	{else}
+					 		<div class="search-inputs-wrap">
+								{if $el->option('enableKeywordSearch')}
+									{!$searchKeyword}
+								{else}
+									<input type="hidden" name="s" value="">
+								{/if}
+
+								{if $el->option('enableCategorySearch')}
+									{!$searchCategory}
+								{/if}
+
+								{if $el->option('enableLocationSearch')}
+									{!$searchLocation}
+								{/if}
+							</div>
+
+							{if $el->option('enableRadiusSearch')}
+								{!$searchRadius}
+							{/if}
+
+						{/if}
+
+						<input type="hidden" name="a" value="true"> <!-- Advanced search -->
+						<!-- <input type="hidden" name="lang" value="{AitLangs::getCurrentLanguageCode()}"> --> <!-- Advanced search -->
+
+						{if $selectedKey}
+						<div class="searchinput search-input-width-hack" style="position: fixed; z-index: 99999; visibility: hidden" data-defaulttext="{__ 'Search keyword'}">{$selectedKey}</div>
+						{else}
+						<div class="searchinput search-input-width-hack" style="position: fixed; z-index: 99999; visibility: hidden" data-defaulttext="{__ 'Search keyword'}">{__ 'Search keyword'}</div>
+						{/if}
+					</div>
+					{if $type != 3}
+					<div class="searchsubmit-wrapper">
+						<div class="submit-main-button">
+							<div class="searchsubmit2">{__ 'Search'}</div>
+							<input type="submit" value="{__ 'Search251'}" class="searchsubmit">
+						</div>
+					</div>
+					{/if}
+
+				</div>
+			</div>
+		</form>
+<?php
+	$contentURL = content_url();
+	$themeURL = $contentURL."/themes/directory2/";
+	function search_bar_scripts(){
+		//https://developer.wordpress.org/reference/functions/wp_register_script/
+		//https://developer.wordpress.org/reference/functions/wp_enqueue_script/
+		//https://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts
+		wp_enqueue_style('sb_css_1', get_stylesheet_directory_uri().'/ait-theme/elements/header-map/design/css/search-form.css', array(), '0.01', null, null);
+		wp_enqueue_style('sb_css_2', get_stylesheet_directory_uri().'/ait-theme/elements/header-map/design/css/bootstrap-3.3.2.min.css', array(), '3.3.2', null, null); //options are moving far away
+		
+		//wp_enqueue_script('sb_js_1', get_stylesheet_directory_uri().'/ait-theme/elements/search-form/jquery-2.1.3.min.js', array(),'2.1.3', true);
+		wp_enqueue_script('sb_js_2', get_stylesheet_directory_uri().'/ait-theme/elements/header-map/design/js/jquery.blockUI.js', array('jquery'),'0.1', true);
+		wp_enqueue_script('sb_js_3', get_stylesheet_directory_uri().'/ait-theme/elements/header-map/design/js/handlebars-v4.0.11.js', array('jquery'),'4.0.11', true);
+		wp_enqueue_script('sb_js_4', get_stylesheet_directory_uri().'/ait-theme/elements/header-map/design/js/typeahead.bundle-v0.11.1.js', array('jquery'),'0.11.1', true);
+		wp_enqueue_script('sb_js_5', get_stylesheet_directory_uri().'/ait-theme/elements/header-map/design/js/bootstrap-3.3.2.min.js', array(),'3.3.2', true);
+		wp_enqueue_style('sb_css_3', get_stylesheet_directory_uri().'/ait-theme/elements/header-map/design/css/bootstrap-multiselect.css', array(), '4.9.2', null, null);
+		wp_enqueue_script('sb_js_6', get_stylesheet_directory_uri().'/ait-theme/elements/header-map/design/js/bootstrap-multiselect.js', array(),'4.7.2', true);
+		wp_enqueue_script('sb_js_7', get_stylesheet_directory_uri().'/ait-theme/elements/header-map/design/js/jquery-ui.js', array(),'1.12.1', true);
+		
+		wp_enqueue_script('sb_js_8', get_stylesheet_directory_uri().'/ait-theme/elements/search-form/design/js/location-suggestion.js', array('jquery'),'0.1', true);
+		wp_localize_script( 'sb_js_8', 'LocAjax', array(
+															'prefurl' => admin_url("admin-ajax.php"),
+															'ajaxnonce' => wp_create_nonce('ajax-nonce'),
+															'locSuggestion' => wp_create_nonce('loc-sugg')
+															) );
+		
+		wp_enqueue_script('sb_js_9', get_stylesheet_directory_uri().'/ait-theme/elements/search-form/design/js/manage-filter.js', array('jquery'),'0.1', true);
+		wp_localize_script( 'sb_js_9', 'FilterJS', array(
+															'prefurl' => admin_url("admin-ajax.php"),
+															'nonce' => wp_create_nonce('FRCLoadFilter'),
+															'loadingNounce' => wp_create_nonce('save-filter'),
+														) );
+	}
+	search_bar_scripts();
+?>
+<?php
+	$allowedCampCategories = array(
+			     "Free Camps" => "free-camps", //free
+			     "Rest Areas" => "rest-areas", //free
+			     "Campgrounds" => "campgrounds", //3rd Tab
+			     "Caravan Parks" => "caravan-parks", //7th Tab
+			     "House Sitting" => "house-sitting", //4th Tab
+			     "Help Out" => "help-out", //6th Tab
+			     "Dump Points" => "dump-points" //free
+				 /*"Park Overs" => "park-overs",*/ // 5th Tab
+			    );
+	$businessCat = array(
+                                'camping-accessories', //5
+                                'food-wine',           //8
+                                'information-centre',  //2088
+                                'entertainment',       //7    
+                                'fuel',                //210
+                                'groceries',           //10
+                                'markets',             //106
+                                'medical',             //15
+                                'personal-health',     //17
+                                'repairs',             //4
+                                'services',            //107
+                                'accommodation',       //2096
+                                //'auto-rv-caravan',
+                                //'iga-stores',
+                                //'things-to-do',
+                                //'united-fuels',
+                                //'puma',
+                            );//'free-range-camping'			
+	$allowedBusinessCategories = array(
+				 "Accommodation" => 'accommodation', //2096
+				 "Camping Accessories" => 'camping-accessories', //5
+				 "Entertainment" => "entertainment", //7    
+				 "Food & Wine" => "food-wine", //--???---
+				 //"Fuel" => "fuel", //210
+				 "Groceries" => 'groceries', //10
+				 "Markets" => 'markets',  //106
+				 "Medical" => "medical", //15
+				 "Personal Health" => "personal-health", //17
+				 "Repairs" => "rv-sales-repairs", //4
+				 "Services" => "services", //107
+				 "Information Centre" => "information-centre", //2088
+				 //"IGA Stores" => "iga-stores", //--???---
+				 
+			     /*
+			     "Things To Do" => "things-to-do",
+			     "Camping Supplies" => "camping-supplies",
+				 can you please remove Fuel from the list.  And also IGA Stores as they are now under groceries
+			     */
+			    );
+  
+  //code for selected Locations
+  $allowedLocations = array(
+			     "Australian Capital Territory" => 'act',
+			     "New South Wales" => 'nsw',
+			     "Victoria" => 'vic',
+			     "South Australia" => 'sa',
+			     "Western Australia" => 'wa',
+			     "Northern Territory" => 'nt',
+			     "Queensland" => 'qld',
+			     "Tasmania" => 'tas'
+			    );
+				
+	
+	//Start Campsites category block
+	$newCategories = array();
+	foreach($allowedCampCategories as $allowedCategoryKey => $allowedCategorySlug){
+		foreach($categories as $sngCategory){
+			if( (trim($sngCategory->slug) == $allowedCategorySlug) || ($sngCategory->name == $allowedCategoryKey) ){
+				$newCategories[] = $sngCategory;
+				break;
+			}
+		}
+	}
+	
+	$campCatStr = "<optgroup label='Campsites'>";
+	foreach($newCategories as $cat) $campCatStr.="<option value='{$cat->term_id}'>{$cat->name}</option>";
+	$campCatStr.= "</optgroup>";
+	//End Campsites category block
+	
+	//Start Business category block
+	$businessCategories = array();
+	foreach($allowedBusinessCategories as $allowedCategoryKey => $allowedCategorySlug){
+		foreach($categories as $sngCategory){
+			if( (trim($sngCategory->slug) == $allowedCategorySlug) || ($sngCategory->name == $allowedCategoryKey) ){
+				$businessCategories[] = $sngCategory;
+				break;
+			}
+		}
+	}
+	
+	//echo "<pre>";print_r($categories);echo "</pre>";
+	//echo "<pre>";print_r($allowedBusinessCategories);echo "</pre>";
+	
+	$campCatStr .= "<optgroup label='Business'>";
+	foreach($businessCategories as $cat) $campCatStr.="<option value='{$cat->term_id}'>{$cat->name}</option>";
+	$campCatStr.= "</optgroup>";
+	//End Business category block
+	$categories = $newCategories;
+	
+	
+	$newLocations = array();
+    foreach($locations as $sngLocation){
+		if(
+			in_array(trim($sngLocation->slug),$allowedLocations) ||
+			array_key_exists($sngLocation->name, $allowedLocations)
+		){
+			$newLocations[] = $sngLocation;
+		}
+    }
+    $locations = $newLocations;
+	//wp_enqueue_script('suggestion_script', get_stylesheet_directory_uri().'/ait-theme/elements/search-form/location_suggestion.js', array(),'1.0.0', true);
+	//wp_localize_script('suggestion_script', 'suggest_obj', array('ajax_url', 'admin-ajax.php'));
+	//https://twitter.github.io/typeahead.js/examples/
+	//https://github.com/bassjobsen/Bootstrap-3-Typeahead
+?>
+		<div  id="directory-search" style="max-height:120px;">
+			<table style='width:100%;padding-left:10px;'>
+				<tr>
+					<td>
+						<form action="{$homeUrl}" id="dir-custom-search-form" method="get" class="dir-searchform" style="<?php echo $style;?>">
+						<div class="elm-wrapper">
+				<div class="inputs-container">
+					<div class="search-shadow" style="display: none;"></div>
+							<div style="width:100%; margin:0 auto 0 auto;" class="form_top">
+								<div style="padding:0 0;">
+									<div class="form-f-row">
+										<div class="form-search">Search By</div>
+										<div class="trd_box"><select class="location_top" id="all_locations" style="width:90%; margin:0 2% 0 0;" name='location[]' multiple="multiple"></select></div>
+								  
+										<div class="or_box"><strong style="color:#fff;">Or</strong></div>
+										<div class="fst_box" id="prefetch"><input type="text" class="typeahead"  name="s" style="width:100%; margin:0 2% 0 0; padding-left:10px; height:41px; background-color:#fff; border-radius:5px;" id="dir-custom-searchinput-text" placeholder="Town/Location" class="dir-searchinput search_top"{ifset $isDirSearch} value="{$site->searchQuery}"{/ifset} {if (!isset($_REQUEST['readonly']))}{/if}></div>
+										<div class="snd_box">
+										<select class="radius_top" id="all_radiuses" style="width:100%; margin:0 2% 0 0;" name='rad' ></select>
+										<input type="hidden" name="lat" value="{$selectedLat}" id="latitude-search" class="latitude-search" disabled>
+										<input type="hidden" name="lon" value="{$selectedLon}" id="longitude-search" class="longitude-search" disabled>
+										<input type="hidden" name="frc_lat" id="frc_lat">
+										<input type="hidden" name="frc_lon" id="frc_lon">
+										<input type="hidden" name="runits" value="{$el->option('radiusUnits')}" disabled>
+										<input type="hidden" name="a" value="true" id='adv_search' disabled>
+										 <!--select id="all_radiuses" name='radius'></select-->
+										 
+										</div>
+									</div>
+									<div class="form-s-row">
+									  <div style="border-left:1px solid #fff; height:120px; margin:0 0;">&nbsp;</div>
+									</div>
+								
+									<div class="form-t-row">
+										<div class="form-pre">Filters</div>
+										
+										<div class="forth_box"><select id="all_categories" class="categories_top" style="width:100%; margin:0 2% 0 0;" name='category[]' multiple="multiple"><?php echo $campCatStr;?></select></div>
+										
+										<div class="fifh_box"><select id='all_features' class="features_top" style="width:100%; margin:0 2% 0 0;" name='features[]' multiple="multiple"></select></div>
+										<div class="clear"></div>
+										<div style="line-height:5px; height:5px;"></div>
+										<div class="savefilt"><input name="btnPreference" value="Save Filters" id="btnPreference" class="btn btn-n btn-warning flatten btn-block" type="button" style="padding:4px; background:rgba(0, 0, 0, 0) linear-gradient(#ffd040, #bc8e02) repeat scroll 0 0;"></div>
+										<div class="clrflt"><input name="btnClearFilters" value="Clear Filters" id="btnClearFilters" class="btn btn-n btn-warning flatten btn-block" type="reset" style="padding:4px; background:rgba(0, 0, 0, 0) linear-gradient(#ffd040, #bc8e02) repeat scroll 0 0;"></div>
+										<div class="loadbtn"><a href = '#-1' style= 'text-decoration:none;'><input 
+										id='load_preference' style = 'text-decoration:none;padding:4px; background:rgba(0, 0, 0, 0) linear-gradient(#ffd040, #bc8e02) repeat scroll 0 0;' name="btnGo" value="Load Saved Filters" class="btn btn-n btn-warning flatten btn-block" 
+										type="button"></a></div>
+									</div>
+									
+									<div class="form-s-row"><div style="border-left:1px solid #fff; height:120px; margin:0 0;">&nbsp;</div></div>
+									
+									<div class="form-fifh-row">
+										<div class="gobtn"><input name="btnGo" id='btnGo' value="GO" id="btnUpdate" class="btn btn-success flatten btn-block" type="button"></div>
+									</div>
+								</div>
+								<!-- next row rasa --> 
+							</div>
+							</div></div>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+</div>
+
+{includePart "ait-theme/elements/search-form/javascript"}
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		var radiuses = [
+							{ value: "Radius", label: "Radius" },
+							{ value: "20", label: " 20 KM" },
+							{ value: "50", label: " 50 KM" },
+							{ value: "100", label: " 100 KM" },
+							{ value: "150", label: " 150 KM" },
+							{ value: "200", label: " 200 KM" },
+							{ value: "300", label: " 300 KM" },
+							{ value: "500", label: " 500 KM" }
+						];
+				
+		for(var i=0; i < radiuses.length; i++){
+			radiusVal = radiuses[i].label.replace(/&amp;/g, "&");
+			radiusVal = radiusVal.replace(/&nbsp;/g, " ").replace(/&#039;/g, "'");
+			key = radiuses[i].value;
+			jQuery('#all_radiuses').append(jQuery('<option>', { value : key,text: radiusVal}));
+		}
+		jQuery('#all_radiuses').multiselect({
+							  disableIfEmpty: true,
+							  maxHeight: 200,
+							  buttonWidth: '100%',
+							  numberDisplayed: 1,
+							  nonSelectedText: 'Radius'
+							 });
+		<?php
+			$catStr = "var categories = [";
+			$catDataStr = "[";
+			$catElem = array();
+			foreach($newCategories as $cat){
+				$catElem[] = "\n\t\t\t\t{ value: {$cat->term_id}, label: \"{$cat->name}\" }";
+			}
+			echo $catStr.=implode(",", $catElem)."\n\t\t\t\t];\n";
+			$catDataStr.=implode(",", $catElem)."\n\t\t\t\t]\n";
+			
+			$catBusinessDataStr = "[";
+			$catElem = array();
+			foreach($businessCategories as $cat){
+				$catElem[] = "\n\t\t\t\t{ value: {$cat->term_id}, label: \"{$cat->name}\" }";
+			}
+			$catBusinessDataStr.=implode(",", $catElem)."\n\t\t\t\t]\n";
+		?>
+		for(var i=0; i < categories.length; i++){
+			catVal = categories[i].label.replace(/&amp;/g, "&");
+			catVal = catVal.replace(/&nbsp;/g, " ").replace(/&#039;/g, "'");
+			key = categories[i].value;
+			//jQuery('#all_categories').append(jQuery('<option>', { value : key,text: catVal}));
+		}
+		jQuery('#all_categories').multiselect({
+							      buttonWidth: '95%',
+							      disableIfEmpty: true,
+							      maxHeight: 200,
+							      numberDisplayed: 1,
+							      nonSelectedText: 'All Categories'
+							      //includeSelectAllOption: true,
+							      //selectAllText: 'Check all!',
+							      });
+		var data = {
+			"sectors": [
+			  {
+				"subsectors": [
+				  {
+					"title": "Campsites",
+					"industries": <?php echo $catDataStr; ?>
+				  },
+				  {
+					"title": "Business",
+					"industries": <?php echo $catBusinessDataStr;?>
+				  }
+				]
+			  }
+			]
+		}
+		jQuery.each(data.sectors, function (i, sector) {
+			jQuery.each(sector.subsectors, function (i, subsector) {
+				var optgroup = '';var optgroup = jQuery('<optgroup>');optgroup.attr('label',subsector.title);
+				jQuery.each(subsector.industries, function (i, industry) {
+					var option = jQuery("<option></option>");option.val(industry.value);option.text(industry.label);optgroup.append(option);
+				});
+				/*jQuery("#all_categories").append(optgroup);*/ //rasu
+			});
+		});
+		jQuery("#all_categories").prop('disabled', false);
+		//jQuery("#all_categories").multiselect('refresh');
+		function updateCategories(categories){
+			var categories = [
+								
+								{"sports":[
+									{ value: 9, label: "Free Camps" }
+								]},
+									
+								{"cricket":	[
+										{ value: 7, label: "Entertainment" }
+									]}
+							];
+			
+			jQuery('#sub_category').empty();
+			jQuery.each(categories, function (index) {
+				var optgroup = '';
+			   //var optgroup = jQuery('<optgroup>');
+			   //optgroup.attr('label',categories[index].name);
+				console.log("fasdfs"+index);
+				var frcChilds = jQuery.parseJSON(categories[index].children);
+				jQuery.each(frcChilds, function (i) {
+					console.log("childers");
+				   var option = jQuery("<option></option>");
+				   console.log(i+categories[index].children[i]);
+				   option.val(i);
+				   option.text(categories[index].children[i]);
+   
+				   optgroup.append(option);
+				});
+				jQuery("#all_categories").append(optgroup);
+   
+			});
+   
+			jQuery("#sub_category").multiselect('refresh'); //refresh the select here
+	   }
+		var temp = '';
+		//updateCategories(temp);
+		<?php
+			$locStr = "\t\tvar locations = [";
+			$loc1Str = "\t\t\t\tvar frc_item_locs = [];";
+			$locElem = $loc1Elem = array();
+			foreach($newLocations as $loc){
+				$locElem[] = "\n\t\t\t\t{ value: {$loc->term_id}, label: \"{$loc->name}\" }";
+				$loc1Elem[] = "\n\t\t\t\tfrc_item_locs[$loc->term_id] = \"{$loc->name}\";";
+			}
+			echo $locStr.=implode(",", $locElem)."\n\t\t\t\t];\n";
+			echo $loc1Str.=implode(" ", $loc1Elem)."\n\t\t\t\t;\n";
+		?>
+		for(var i=0; i < locations.length; i++){
+			locVal = locations[i].label.replace(/&amp;/g, "&");
+			locVal = locVal.replace(/&nbsp;/g, " ").replace(/&#039;/g, "'");
+			key = locations[i].value;
+			jQuery('#all_locations').append(jQuery('<option>', { value : key,text: locVal}));
+		}
+		jQuery('#all_locations').multiselect({
+								  buttonWidth: '95%',
+								  disableIfEmpty: true,
+								  maxHeight: 200,
+								  numberDisplayed: 1,
+								  nonSelectedText: 'All Locations'
+								  //includeSelectAllOption: true,
+								  //selectAllText: 'Check all!',
+								  });
+		<?php
+			$features = get_option( 'ait_item_extension_administrator_options', false);
+			$feaStr = "var features = [";
+			$featureElem = array();
+			if($features){
+				foreach($features as $sngFeature){
+					if($sngFeature['type'] == 'onoff'){
+						$featureElem[] = "\n\t\t\t\t{ value: \"{$sngFeature['uid']}\", label: \"{$sngFeature['label']['en_US']}\" }";
+					}
+				}
+				echo $feaStr.=implode(",", $featureElem)."\n\t\t\t\t];\n";
+			}
+		?>
+		for(var i=0; i < features.length; i++){
+			feaVal = features[i].label.replace(/&amp;/g, "&");
+			feaVal = feaVal.replace(/&nbsp;/g, " ").replace(/&#039;/g, "'");
+			key = features[i].value;
+			jQuery('#all_features').append(jQuery('<option>', { value : key,text: feaVal}));
+		}
+		jQuery('#all_features').multiselect({
+								  buttonWidth: '95%',
+								  disableIfEmpty: true,
+								  maxHeight: 200,
+								  numberDisplayed: 1,
+								  nonSelectedText: 'All Features',
+								  includeSelectAllOption: true,
+								  selectAllText: 'Check all!',
+								  });
+		
+	});
+	
+	jQuery(document).ready(function() {
+		jQuery('#dir-custom-search-form').on('reset', function() {
+			jQuery('#dir-custom-searchinput-text').val("");
+			
+			jQuery('#all_radiuses option:selected').each(function() {
+				jQuery(this).prop('selected', false);
+			});    
+			jQuery('#all_radiuses').multiselect('refresh');
+			
+			jQuery('#all_categories option:selected').each(function() {
+				jQuery(this).prop('selected', false);
+			});    
+			jQuery('#all_categories').multiselect('refresh');
+			
+			jQuery('#all_locations option:selected').each(function() {
+				jQuery(this).prop('selected', false);
+			});
+			jQuery('#all_locations').multiselect('refresh');
+			
+			jQuery('#all_features option:selected').each(function() {
+				jQuery(this).prop('selected', false);
+			});
+			jQuery('#all_features').multiselect('refresh');
+		});
+	});
+	
+	jQuery("#all_radiuses").change(function() {
+		var radius = jQuery('#all_radiuses').val();
+		if(radius != 'Radius'){
+			jQuery("#latitude-search").prop('disabled', false);
+			jQuery("#longitude-search").prop('disabled', false);
+			jQuery("#runits").prop('disabled', false);
+			jQuery("#adv_search").prop('disabled', false);
+		}else{
+			jQuery("#latitude-search").prop('disabled', true);
+			jQuery("#longitude-search").prop('disabled', true);
+			jQuery("#runits").prop('disabled', true);
+			jQuery("#adv_search").prop('disabled', true);
+		}
+	});
+<?php
+	$catJS = $sJS = $radJS = $locJS = $featJS = $catStr = $locStr = $featureStr = $sStr = "";
+	
+	if(isset($_REQUEST['category'])){
+		$catStr = implode(",", $_REQUEST['category']);
+	}
+	
+	if(isset($_REQUEST['location'])){
+		$locStr = implode(",", $_REQUEST['location']);
+	}
+	
+	if(isset($_REQUEST['features'])){
+		$featureStr = implode(",", $_REQUEST['features']);
+	}
+	
+	if(isset($_REQUEST['s']) && !empty($_REQUEST['s'])){
+		$sStr = trim($_REQUEST['s']);
+		$sJS =<<<REQ_JS
+			jQuery('#dir-custom-searchinput-text').val("$sStr");
+REQ_JS;
+	}
+	
+	if(isset($_REQUEST['frc_loc']) && !empty($_REQUEST['frc_loc'])){
+		$locStr = trim($_REQUEST['frc_loc']);
+		$sJS =<<<REQ_LOC
+			jQuery('#dir-custom-searchinput-text').val("$locStr");
+REQ_LOC;
+	}
+	
+	if(isset($_REQUEST['rad']) && !empty($_REQUEST['rad'])){
+		$radStr = trim($_REQUEST['rad']);
+		if($radStr != 'Radius')
+		$radJS =<<<REQ_JS
+			jQuery('#all_radiuses').multiselect('select',$radStr);
+REQ_JS;
+	}
+	
+	if(!empty($catStr)){
+		$catJS =<<<REQ_JS
+			var categories = "$catStr";
+			catArr = categories.split(',');
+			jQuery('#all_categories').val(catArr);
+			jQuery("#all_categories").multiselect("refresh");
+REQ_JS;
+	}
+	if(!empty($locStr)){
+		$locJS =<<<REQ_JS
+			var locations = "$locStr";
+			locArr = locations.split(',');
+			jQuery('#all_locations').val(locArr);
+			jQuery("#all_locations").multiselect("refresh");
+REQ_JS;
+	}
+	if(!empty($featureStr)){
+		$featJS =<<<REQ_JS
+			var features = "$featureStr";
+			feaArr = features.split(',');
+			jQuery('#all_features').val(feaArr);
+			jQuery("#all_features").multiselect("refresh");
+REQ_JS;
+	}
+	echo $reqJS =<<<REQ_JS
+	jQuery(document).ready(function() {
+		/* start of cat js */
+		$catJS
+		/* start of input box */
+		$sJS
+		/* start of radius sJS */
+		$radJS
+		/* start of cat locJS */
+		$locJS
+		/* start of cat featJS */
+		$featJS
+	});
+REQ_JS;
+?>
+jQuery("#all_categories").prop('disabled', false);
+jQuery("#all_categories").multiselect('refresh');
+</script>
+
+<div id="preference_dialog" title="&nbsp; Save Filters" style="display: none;z-index: 1;">
+  <p style="margin-left: 10px;">Your search preferences have been saved.<br/> To access them on your next visit press the 'Load Saved Filters' button.</p>
+</div>
+<div id="search_dialog" title="&nbsp; Directory Search" style="display: none;">
+  <p style="margin-left: 10px;" id="error_message">Please login to load search items!</p>
+</div>
+<style>
+/*
+tt-dataset tt-dataset-locations
+tt-suggestion tt-selectable
+*/
+#prefetch .tt-dropdown-menu {
+  max-height: 250px;
+  overflow-y: auto;
+  background-color:lightgrey;
+}
+ #prefetch .twitter-typehead {
+  max-height: 250px;
+  overflow-y: auto;
+}
+.tt-dataset, .tt-dataset-locations {
+  max-height: 250px;
+  width:150px;
+  overflow-y: auto;
+  background-color:lightgrey;
+}
+.row_hover:hover{
+ color:blue;
+ background-color:yellow;
+}
+.typeahead  {
+background-color: Green;color: #333333;
+}
+</style>

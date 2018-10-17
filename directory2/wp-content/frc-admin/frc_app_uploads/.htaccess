@@ -1,0 +1,6 @@
+AuthType Basic
+AuthName "restricted area"
+AuthUserFile /home/frcconz/public_html/directory/wp-content/frc-admin/frc_offline_db_versions/.htpasswd
+require valid-user
+ErrorDocument 401 default
+

@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "restricted area"
+AuthUserFile /home/freerang/public_html/directory/wp-content/frc_offline_db_versions/.htpasswd
+require valid-user
