@@ -443,7 +443,33 @@ echo $preSelectJS = <<< PRE_JS
     }
   }
    jQuery(document).ready(function() {
-    preselect();
+       preselect();
+       jQuery('#wl_login_input_submit').click(function(){
+        var login = jQuery('#wl_login_input_username').val();
+        var password = jQuery('#wl_login_input_password').val();
+        var loginForm = jQuery('#wl_login_input_password').closest("form");
+        //alert(loginForm.attr('action'));alert(loginForm.get(0).tagName);
+        if(login.trim() == ""){
+          alert("Please input username!");
+          jQuery( "#wl_login_input_username" ).focus();
+          jQuery(loginForm).submit(function(event){event.preventDefault();return false;});
+        }else if(password.trim() == ""){
+          alert("Please input password!");
+          jQuery( "#wl_login_input_password" ).focus();
+          jQuery(loginForm).submit(function(event){event.preventDefault();return false;});
+        }
+        if( password.trim() != "" && login.trim() != ""){
+          jQuery(loginForm).unbind('submit').submit();
+          jQuery(loginForm).submit();
+          jQuery.blockUI({ message: "Please wait while we log you in.<br/><img src='https://www.freerangecamping.com.au/directory/wp-content/themes/directory/design/img/loading2.gif'/>" });
+        }
+        
+        return true;
+       });
+       
+       jQuery('a.vc_single_image-wrapper, a.vc_box_border_grey').click(function() {
+         jQuery.blockUI({ message: "Please wait while we taking you to the search page.<br/><img src='https://www.freerangecamping.com.au/directory/wp-content/themes/directory/design/img/loading2.gif'/>" });
+       });
     });
  </script>
 PRE_JS;
