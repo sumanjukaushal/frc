@@ -113,7 +113,7 @@ class Directory_Widget extends WP_Widget {
 						<?php
 						
 						$currency = (isset($aitThemeOptions->members->paypalCurrencyCode)) ? $aitThemeOptions->members->paypalCurrencyCode : 'USD';
-						for ($i=1; $i <= 5; $i++) {
+						for ($i=1; $i <= 7; $i++) {
 							$roleEnable = 'role'.$i.'Enable';
 							$roleName = 'role'.$i.'Name';
 							$rolePrice = 'role'.$i.'Price';

@@ -40,6 +40,7 @@ function sitemap_posts($atts){
 	}
 
 	$query = array(
+		'ep_integrate' => true, //elastic search
 		'showposts' => (int)$number,
 		'post_type'=>'post',
 	);

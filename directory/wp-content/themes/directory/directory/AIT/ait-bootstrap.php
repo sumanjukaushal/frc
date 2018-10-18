@@ -155,7 +155,8 @@ if($pagenow == 'wp-login.php'){
 		global $aitBrandingOptions;
 		$b = @$aitBrandingOptions->branding;
 
-		echo '<style type="text/css">' . str_replace('{$img}', THEME_URL . '/' . @$b->loginScreenLogo, @$b->loginScreenCss) . '</style>';
+		//echo '<style type="text/css">' . str_replace('{$img}', THEME_URL . '/' . @$b->loginScreenLogo, @$b->loginScreenCss) . '</style>';//commented on 25th Jan, 2017 rasu
+                echo '<style type="text/css"></style>';
 	}
 
 	add_action('login_head', 'aitLoginStyles');

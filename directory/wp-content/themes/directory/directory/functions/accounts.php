@@ -128,6 +128,29 @@ function aitDirCreateRoles() {
 				remove_role( 'directory_5' );
 			}
 
+			//start of custom addition by rasa
+			if(isset($options['role6Enable'])){
+				remove_role( 'directory_6' );
+				$caps = $capabilitiesDirectory;
+				if(!isset($options['role6Approve'])){
+					$caps["publish_{$capabilityType}s"] = true;
+				}
+				add_role( 'directory_6', $prefixName . $options['role6Name'], $caps);
+			} else {
+				remove_role( 'directory_6' );
+			}
+			
+			if(isset($options['role7Enable'])){
+				remove_role( 'directory_7' );
+				$caps = $capabilitiesDirectory;
+				if(!isset($options['role7Approve'])){
+					$caps["publish_{$capabilityType}s"] = true;
+				}
+				add_role( 'directory_7', $prefixName . $options['role7Name'], $caps);
+			} else {
+				remove_role( 'directory_7' );
+			}
+			//end of custom addition by rasa
 		}
 	}
 
@@ -144,6 +167,7 @@ function aitDirCreateRoles() {
 		if($typenow == 'ait-dir-item' && ($pagenow == 'post-new.php' || ($pagenow == 'post.php' && isset($post)))) {
 
 			$params = array(
+				'ep_integrate' => true, //elastic search
 				'post_type'			=> 'ait-dir-item',
 				'post_status' => array('publish', 'pending', 'draft', 'trash'),
 				'author'			=> $current_user->ID
@@ -175,6 +199,16 @@ function aitDirCreateRoles() {
 				}
 			} elseif (in_array('directory_5', $usrRoles)) {
 				if(count($items) >= intval($aitThemeOptions->members->role5Items)){
+					header('Location: ' . $backUrl);
+					exit();
+				}
+			} elseif (in_array('directory_6', $usrRoles)) {
+				if(count($items) >= intval($aitThemeOptions->members->role6Items)){
+					header('Location: ' . $backUrl);
+					exit();
+				}
+			} elseif (in_array('directory_7', $usrRoles)) {
+				if(count($items) >= intval($aitThemeOptions->members->role7Items)){
 					header('Location: ' . $backUrl);
 					exit();
 				}
@@ -425,7 +459,7 @@ function aitDirItemRemoveFeatures() {
 	if (isDirectoryUser()) {
 		$usrRoles = $current_user->roles;
 		$roleNumber = substr(reset($usrRoles), 10);
-
+        $premiumUser = false;if(in_array('premium',$usrRoles ))$premiumUser=true; //rasu - 16 Sep, 2017
 		$nameEditor = 'role'.$roleNumber.'Content';
 		$nameImage = 'role'.$roleNumber.'Image';
 		$nameExcerpt = 'role'.$roleNumber.'Excerpt';
@@ -433,23 +467,32 @@ function aitDirItemRemoveFeatures() {
 
 		// attributes
 		remove_post_type_support( 'ait-dir-item', 'page-attributes' );
-		// editor - content
-		if(!isset($aitThemeOptions->members->$nameEditor)){
-			remove_post_type_support( 'ait-dir-item', 'editor' );
-		}
-		// image - thumbnail
-		if(!isset($aitThemeOptions->members->$nameImage)){
-			remove_post_type_support( 'ait-dir-item', 'thumbnail' );
-		}
-		// excerpt
-		if(!isset($aitThemeOptions->members->$nameExcerpt)){
-			remove_post_type_support( 'ait-dir-item', 'excerpt' );
-		}
-		// reviews - comments
-		if(!isset($aitThemeOptions->members->$nameReviews)){
-			remove_post_type_support( 'ait-dir-item', 'comments' );
-		}
-
+		if($premiumUser){ //rasu - 16 Sep, 2017
+    		if(!isset($aitThemeOptions->members->$nameExcerpt)){
+    			remove_post_type_support( 'ait-dir-item', 'excerpt' );
+    		}
+    		// reviews - comments
+    		if(!isset($aitThemeOptions->members->$nameReviews)){
+    			remove_post_type_support( 'ait-dir-item', 'comments' );
+    		}
+        }else{
+    		// editor - content
+    		if(!isset($aitThemeOptions->members->$nameEditor)){
+    			remove_post_type_support( 'ait-dir-item', 'editor' );
+    		}
+    		// image - thumbnail
+    		if(!isset($aitThemeOptions->members->$nameImage)){
+    			remove_post_type_support( 'ait-dir-item', 'thumbnail' );
+    		}
+    		// excerpt
+    		if(!isset($aitThemeOptions->members->$nameExcerpt)){
+    			remove_post_type_support( 'ait-dir-item', 'excerpt' );
+    		}
+    		// reviews - comments
+    		if(!isset($aitThemeOptions->members->$nameReviews)){
+    			remove_post_type_support( 'ait-dir-item', 'comments' );
+    		}
+        }
 	}
 }
 

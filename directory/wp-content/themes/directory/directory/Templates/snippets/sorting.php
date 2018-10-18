@@ -1,3 +1,7 @@
+<div style="margin-bottom:40px;">
+	<h3>My Bookmarks</h3>
+    <?php global $wpb; echo $wpb->bookmarks();?>
+	</div>
 {ifset $themeOptions->directory->showSortingControl}
 
 <div class="dir-sorting clearfix">

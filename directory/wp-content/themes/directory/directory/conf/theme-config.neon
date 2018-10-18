@@ -103,6 +103,10 @@ generalOptions:
 							label: Account type 4
 						directory_5:
 							label: Account type 5
+						directory_6:
+							label: Account type 6
+						directory_7:
+							label: Account type 7
 				claimAdminEmail:
 					label: "Send email to admin when someone claims the listing"
 					type: checkbox
@@ -1179,6 +1183,265 @@ generalOptions:
 							label: 'Allow'
 							checked: true
 				role5Reviews:
+					label: Comments
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				"Account type 6": section-title
+				role6Enable:
+					label: Active
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role6Approve:
+					label: "Admin must approve item before showing on frontend"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role6Name:
+					label: Name
+					type: text
+					default: Directory Extra
+				role6Price:
+					label: "Price (0 for free)"
+					type: text
+					default: 50
+				role6Items:
+					label: Max inserted items
+					type: text
+					default: 50
+				role6Time:
+					label: "Account expiration limit in days (0 for unlimited). Used for free and single paypal payments."
+					type: text
+					default: 0
+				role6Period:
+					label: "Billing period. Used for paypal recurring payments."
+					type: select
+					default:
+						Year:
+							label: Year
+							checked: true
+						Month:
+							label: Month
+						Week:
+							label: Week
+						Day: 
+							label: Day
+				"Account type 6 Capabilities": section-title
+				role6Content:
+					label: "Content (editor)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6Image:
+					label: Image
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6Address:
+					label: Address
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6Streetview:
+					label: Streetview
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6Telephone:
+					label: Telephone
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6Email:
+					label: Email
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6SendEmail:
+					label: Contact owner button
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6Web:
+					label: Web
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6Hours:
+					label: Opening hours
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6AlternativeContent:
+					label: Alternative content
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6Excerpt:
+					label: Excerpt
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role6Reviews:
+					label: Comments
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+							
+				"Account type 7": section-title
+				role7Enable:
+					label: Active
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role7Approve:
+					label: "Admin must approve item before showing on frontend"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role7Name:
+					label: Name
+					type: text
+					default: Directory Extra
+				role7Price:
+					label: "Price (0 for free)"
+					type: text
+					default: 50
+				role7Items:
+					label: Max inserted items
+					type: text
+					default: 50
+				role7Time:
+					label: "Account expiration limit in days (0 for unlimited). Used for free and single paypal payments."
+					type: text
+					default: 0
+				role7Period:
+					label: "Billing period. Used for paypal recurring payments."
+					type: select
+					default:
+						Year:
+							label: Year
+							checked: true
+						Month:
+							label: Month
+						Week:
+							label: Week
+						Day: 
+							label: Day
+				"Account type 7 Capabilities": section-title
+				role7Content:
+					label: "Content (editor)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7Image:
+					label: Image
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7Address:
+					label: Address
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7Streetview:
+					label: Streetview
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7Telephone:
+					label: Telephone
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7Email:
+					label: Email
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7SendEmail:
+					label: Contact owner button
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7Web:
+					label: Web
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7Hours:
+					label: Opening hours
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7AlternativeContent:
+					label: Alternative content
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7Excerpt:
+					label: Excerpt
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role7Reviews:
 					label: Comments
 					type: checkbox
 					default:

@@ -171,11 +171,19 @@ jQuery(document).ready(function($) {
 
 	// find address functionality
 	var findAddress = $('<a id="find-address-button" href="#" class="button">Find address on map</a>');
-	findAddress.insertAfter('#ait-_ait-dir-item-address');
+	findAddress.insertAfter('#ait-_ait-dir-item-wlm_zip');	//rasu
 	findAddress.after('<span id="find-address-info-status" style="margin-left: 20px;"></span>');
 	findAddress.click(function (event) {
 		event.preventDefault();
 		var addr = $('#ait-_ait-dir-item-address').val();
+		var addrArr = [addr];
+		addrArr.push($('#ait-_ait-dir-item-wlm_city').val());	//rasu
+		addrArr.push($('#ait-_ait-dir-item-wlm_state').val());
+		addrArr.push($('#ait-_ait-dir-item-wlm_zip').val());
+		var filterAddrArr = $.map( addrArr, function( arrStr ) {
+			return ((arrStr && arrStr.length > 0) ? arrStr : null);
+		});
+		addr = filterAddrArr.join(", "); //rasu
 		if ( !addr || !addr.length ) return;
 		map.gmap3({
 			getlatlng:{

@@ -22083,6 +22083,7 @@ class NStrings
 
 	static function catchPregError($pattern)
 	{
+	    return;
 		if (NDebugger::catchError($e)) {
 			throw new NRegexpException($e->getMessage() . " in pattern: $pattern");
 

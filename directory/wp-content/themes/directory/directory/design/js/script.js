@@ -73,6 +73,8 @@ function ContactOwnerBox() {
 						from: form.find('.cowner-email').val(),
 						to: email,
 						subject: form.find('.cowner-subject').val(),
+                        item_title: form.find('.cowner-item-title').val(),
+                        item_link: form.find('.cowner-item-link').val(),
 						message: form.find('.cowner-message').val()
 					}, function(data, textStatus, xhr) {
 						if(data == "success"){

@@ -20,7 +20,7 @@ function directory_register( $atts ) {
 				<?php
 				global $aitThemeOptions;
 				$currency = (isset($aitThemeOptions->members->paypalCurrencyCode)) ? $aitThemeOptions->members->paypalCurrencyCode : 'USD';
-				for ($i=1; $i <= 5; $i++) {
+				for ($i=1; $i <= 7; $i++) {//rasu
 					$roleEnable = 'role'.$i.'Enable';
 					$roleName = 'role'.$i.'Name';
 					$rolePrice = 'role'.$i.'Price';
@@ -44,7 +44,10 @@ function directory_register( $atts ) {
 					}
 					$free = (trim($aitThemeOptions->members->$rolePrice) == '0') ? true : false;
 					if(isset($aitThemeOptions->members->$roleEnable)){
-						echo '<option value="directory_'.$i.'"'; if($free) { echo ' class="free"'; } echo '>'.$aitThemeOptions->members->$roleName;
+						echo '<option value="directory_'.$i.'"'; 
+						if($free) { echo ' class="free"'; } 
+						echo '>'.$aitThemeOptions->members->$roleName;
+
 						if(!$free) {
 							if (isset($aitThemeOptions->members->paypalPaymentType) && ($aitThemeOptions->members->paypalPaymentType == 'recurring')) {
 								echo ' - '.trim($aitThemeOptions->members->$rolePrice).' '.$currency.' '.__('per','ait').' '.$rolePeriod;

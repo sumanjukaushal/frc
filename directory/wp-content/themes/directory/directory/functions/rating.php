@@ -129,6 +129,29 @@ function aitRatingCustomInit() {
 		}
 	}
 
+	//----------------------rasa----------------------
+	$dirRole6 = get_role('directory_6');
+	if(isset($dirRole6)){
+		foreach ($capabilitiesDirRating as $key => $value) {
+			if( isset($aitThemeOptions->rating->disallowDirectoryUsers) ){
+				$dirRole6->add_cap($key);
+			}else{
+				$dirRole6->remove_cap($key);
+			}
+		}
+	}
+	$dirRole7 = get_role('directory_7');
+	if(isset($dirRole7)){
+		foreach ($capabilitiesDirRating as $key => $value) {
+			if( isset($aitThemeOptions->rating->disallowDirectoryUsers) ){
+				$dirRole7->add_cap($key);
+			}else{
+				$dirRole7->remove_cap($key);
+			}
+		}
+	}
+	//----------------------rasa----------------------
+
 }
 
 function aitRatingRemoveAddButton() {
@@ -462,6 +485,7 @@ function getAitRatingElement($postId, $success = false) {
 	if(isset($aitThemeOptions->rating->enableRating)){
 
 		$args = array(
+			//'ep_integrate' => true, //elastic search - creating issues with elastic search parameter because synch is not getting completed and I noticed this on 12th Jul
 			'post_type' => 'ait-rating',
 			'post_status' => 'publish',
 			'nopaging' => true,
@@ -569,6 +593,7 @@ function aitCalculateMeanForPost($postId) {
 	$max = (isset($GLOBALS['aitThemeOptions']->rating->starsCount)) ? intval($GLOBALS['aitThemeOptions']->rating->starsCount) : 5;
 	// get all ratings for this post
 	$args = array(
+		'ep_integrate' => true, //elastic search
 		'post_type' => 'ait-rating',
 		'post_status' => 'publish',
 		'nopaging' => true,

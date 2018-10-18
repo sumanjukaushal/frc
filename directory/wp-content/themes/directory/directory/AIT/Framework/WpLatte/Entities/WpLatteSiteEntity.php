@@ -390,6 +390,7 @@ class WpLatteSiteEntity extends WpLatteBaseEntity
 		$options = WpLatteFunctions::dash2camel($what) . 'Options'; // convention over configuration
 
 		return WpLatte::createPostEntity(new WP_Query(array(
+				'ep_integrate' => true, //elastic search
 				'tax_query' => $tax,
 				'post_type' => 'ait-' . $what,
 				'post_status' => 'publish',

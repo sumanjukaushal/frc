@@ -9,13 +9,14 @@ $latteParams['type'] = (isset($_GET['dir-search']) && $_GET['dir-search'] == "ye
 if($latteParams['type']){
 	$latteParams['isDirSearch'] = true;
 	// show all items on map
-	if(isset($aitThemeOptions->search->searchShowMap)){
+	if(isset($aitThemeOptions->search->searchShowMap) && true){
 		$radius = array();
 		if(isset($_GET['geo'])){
 			$radius[] = $_GET['geo-radius'];
 			$radius[] = $_GET['geo-lat'];
 			$radius[] = $_GET['geo-lng'];
 		}
+		
 		$latteParams['items'] = getItems(intval($_GET['categories']),intval($_GET['locations']),$GLOBALS['wp_query']->query_vars['s'],$radius);
 	}
 

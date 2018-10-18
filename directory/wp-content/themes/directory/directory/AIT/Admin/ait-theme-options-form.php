@@ -211,7 +211,7 @@ function aitRenderThemeOptionsForm($optionKey, $key, $page)
 	<?php
 	// get_option('date_format');
 	?>
-	jQuery('.datepicker').datepicker({ dateFormat: "yy-mm-dd" });
+	jQuery('.datepicker').datepicker({ dateFormat: "d M yy" });
 
 	});
 </script>

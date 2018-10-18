@@ -162,7 +162,7 @@ function saveMetaAction($meta,$postId) {
 function aitDirItemChangeColumns($cols) {
 
 	global $aitThemeOptions, $current_user;
-	if( isset($aitThemeOptions->members->easyAdminEnable) && isset( $current_user->roles ) && is_array( $current_user->roles ) && ( in_array('directory_1', $current_user->roles) || in_array('directory_2', $current_user->roles) || in_array('directory_3', $current_user->roles) || in_array('directory_4', $current_user->roles) || in_array('directory_5', $current_user->roles) ) ) {
+	if( isset($aitThemeOptions->members->easyAdminEnable) && isset( $current_user->roles ) && is_array( $current_user->roles ) && ( in_array('directory_1', $current_user->roles) || in_array('directory_2', $current_user->roles) || in_array('directory_3', $current_user->roles) || in_array('directory_4', $current_user->roles) || in_array('directory_5', $current_user->roles) || in_array('directory_6', $current_user->roles) || in_array('directory_7', $current_user->roles) ) ) {
 		// easy admin columns
 		$cols = array(
 			'title'			=> __( 'Title', 'ait'),

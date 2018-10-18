@@ -39,7 +39,8 @@ if($latteParams['type']){
 	$latteParams['posts'] = $posts;
 
 } else {
-	
+    defined('AIT_FRAMEWORK_DIR') or define('AIT_FRAMEWORK_DIR', '/home/freerang/public_html/directory/wp-content/themes/directory/AIT/Framework');
+	require_once AIT_FRAMEWORK_DIR . '/WpLatte/WpLatte.php';
 	$latteParams['posts'] = WpLatte::createPostEntity($GLOBALS['wp_query']->posts);
 
 	// if this is "Blog" page get the right template

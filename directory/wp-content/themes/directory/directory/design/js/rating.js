@@ -1,6 +1,10 @@
 jQuery(document).ready(function($) {
 
 	var themeUrl = $('body').data('themeurl');
+        /*if(themeUrl === undefined || themeUrl == ""){
+          var themeUrl = 'https://www.freerangecamping.com.au/directory/wp-content/themes/directory';
+        }*/
+
 	var postId = $('#ait-rating-system').data('post-id');
 	var star = $('#ait-rating-system .rating-send-form .star');
 	var sendForm = $('#ait-rating-system button.send-rating');

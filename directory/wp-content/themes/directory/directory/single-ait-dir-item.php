@@ -78,7 +78,15 @@ if($GLOBALS['wp_query']->post->post_status != 'publish'){
 		$search = '';
 		$radiusKm = ($aitThemeOptions->directory->showDistanceInDetail) ? $aitThemeOptions->directory->showDistanceInDetail : 1000 ;
 		// center and radius
-		$radius = array($radiusKm,$latteParams['options']['gpsLatitude'],$latteParams['options']['gpsLongitude']);
+		if( 
+		    is_array($latteParams['options']) && 
+		    array_key_exists('gpsLatitude',$latteParams['options']) && 
+		    array_key_exists('gpsLongitude',$latteParams['options'])
+		){
+			$radius = array($radiusKm, $latteParams['options']['gpsLatitude'], $latteParams['options']['gpsLongitude']);
+		}else{
+			$radius = array($radiusKm, '', '');
+		}
 
 		$items = getItems($categoryID,$location,$search,$radius);
 
@@ -110,6 +118,8 @@ $latteParams['isDirSingle'] = true;
 $latteParams['sidebarType'] = 'item';
 
 $latteParams['rating'] = get_post_meta( $latteParams['post']->id, 'rating', true );
+
+
 
 // claim listing
 $user = new WP_User(intval($GLOBALS['wp_query']->post->post_author));

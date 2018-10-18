@@ -66,6 +66,12 @@ define('WPALCHEMY_VIEW_START_OPENED', 'opened');
 define('WPALCHEMY_VIEW_START_CLOSED', 'closed');
 
 define('WPALCHEMY_VIEW_ALWAYS_OPENED', 'always_opened');
+//--------------------------------------------------------------
+include_once("DirectoryAttributes.php");        //rasa
+//global $dir_show;
+$dir_show = array();
+$currentDirectory = $directory_type = "";
+//--------------------------------------------------------------
 
 class WPAlchemy_MetaBox
 {
@@ -592,7 +598,269 @@ class WPAlchemy_MetaBox
 			{
 				add_meta_box($this->id . '_metabox', $this->title, array($this, '_setup'), $type, $this->context, $this->priority);
 			}
-
+                        //----------------------------------------------------
+                        //RASA: here I need to add hack for saving information to wishlist
+    if(true){//$_SERVER['REMOTE_ADDR'] == '171.78.106.201'
+        //echo "<pre>";print_r($_REQUEST['tax_input']['ait-dir-item-category']);
+        $categories = get_terms('ait-dir-item-category', array(
+            'hide_empty'	=> false,
+            'orderby'	=> 'name'
+        ));
+        $catArr = array();
+        foreach($categories as $catObj){
+            if(is_array($_REQUEST['tax_input']['ait-dir-item-category']) && in_array($catObj->term_id,$_REQUEST['tax_input']['ait-dir-item-category'])){
+               $catArr[] =  $catObj->name;
+            }
+        }
+        $catStr = str_replace("&amp;","&",implode(", ",$catArr));
+        //echo "</pre>";die;
+    }
+    $wishlistPlugin = 'wishlist-member/wpm.php';//'WishList Member™'
+    if(is_plugin_active($wishlistPlugin)){
+        global $current_user;
+        $currentUserID = null;
+        $postID == 0;
+        if(isset($_REQUEST['post_ID']) && !empty($_REQUEST['post_ID'])){
+            $postID = $_REQUEST['post_ID'];
+            $currentUserID = get_post_field( 'post_author', $_REQUEST['post_ID'] );
+        }
+        if(empty($currentUserID)){
+            $currentUserID = $current_user->ID;
+        }
+        $levels = WLMAPI::GetUserLevels($currentUserID);
+        $userRolesArr = $current_user->roles;
+        $user_info = get_userdata($currentUserID);
+        
+        $businessRole = "business";
+        $plusRole = "plus";
+        foreach($levels as $userLevel){
+            if(
+               false !== strpos(strtolower($userLevel),$businessRole) ||
+               false !== strpos(strtolower($userLevel),$plusRole) ){
+                //echo "<pre>";print_r($levels);echo "</pre>";
+                //echo "<pre>";print_r($user_info->roles);echo "</pre>";
+                //echo "<pre>";print_r($userRolesArr);echo "</pre>";
+                $allowed2UpdateWishlistProfile = true;
+            }
+        }
+        //-----
+    //<<<<<<<<<<<< Code block for updating user's wishlist profile >>>>>>>>>>>>>>>>>>
+    $wlmObj = new WishListMember();
+    $wlmUserAddress = $wlmObj->Get_UserMeta($currentUserID,'wpm_useraddress');
+    //print_r($wlmUserAddress);die;
+    //address fields                
+    if(isset($_REQUEST['_ait-dir-item'])){
+        $wpmUserAddressArr = array();
+        
+        $wpmUserAddressArr['address1'] = "";
+        if(!empty($_REQUEST['_ait-dir-item']['address']))
+            $wpmUserAddressArr['address1'] = $_REQUEST['_ait-dir-item']['address'];
+            
+        $wpmUserAddressArr['city'] = "";
+        if(!empty($_REQUEST['_ait-dir-item']['wlm_city']))
+            $wpmUserAddressArr['city'] = $_REQUEST['_ait-dir-item']['wlm_city'];
+            
+        $wpmUserAddressArr['state'] = "";    
+        if(!empty($_REQUEST['_ait-dir-item']['wlm_state']))
+            $wpmUserAddressArr['state'] = $_REQUEST['_ait-dir-item']['wlm_state'];
+            
+        $wpmUserAddressArr['zip'] = ""; 
+        if(!empty($_REQUEST['_ait-dir-item']['wlm_zip']))
+            $wpmUserAddressArr['zip'] = $_REQUEST['_ait-dir-item']['wlm_zip'];
+            
+        if($_SERVER['REMOTE_ADDR'] == '122.173.17.232'){
+            echo "<pre>";print_r($_REQUEST);die;
+        }
+        if( isset($_REQUEST['_ait-dir-item']['directoryType']) && ($_REQUEST['_ait-dir-item']['directoryType'] == 'directory_2')){
+            //SAVE PROFILE FOR ONLY BUSINESS LISTING
+            $separator = "|!";
+            //if(!empty($_REQUEST['_ait-dir-item']['wlm_state']) || !empty($_REQUEST['_ait-dir-item']['wlm_zip'])){
+            if( ($_REQUEST['original_publish'] == 'Submit for Review') ||
+                ($_REQUEST['original_publish'] == 'Publish') || 
+                ($_REQUEST['Publish'] == 'Publish') ||
+                ($_REQUEST['Publish'] == 'Submit for Review') ||
+                ($_REQUEST['original_publish'] == 'Update')
+                ){
+                if($allowed2UpdateWishlistProfile && ($_REQUEST['_ait-dir-item']['directoryType'] == 'directory_2')){
+                    // || $_REQUEST['_ait-dir-item']['directoryType'] == 'directory_7'
+                    //get custom fields
+                    //assumption: if no item id is present; assume we have only one business list
+                   
+                    $customLatitude = $wlmObj->Get_UserMeta($currentUserID, 'custom_gpsLatitude');
+                    $customLongitude = $wlmObj->Get_UserMeta($currentUserID, 'custom_gpsLongitude');
+                    $customCategories = $wlmObj->Get_UserMeta($currentUserID, 'custom_categories');
+                    $customBusiness = $wlmObj->Get_UserMeta($currentUserID, 'custom_post_title');
+                    $customItemIds = $wlmObj->Get_UserMeta($currentUserID, 'custom_item_ids');
+                    
+                    $_REQUEST['_ait-dir-item']['categories'] = $catStr;
+                    $_REQUEST['_ait-dir-item']['item_ids'] = $postID;
+                    //echo $customItemIds;
+                    if(!empty($customItemIds)){
+                        $itemIDs = explode($separator,$customItemIds);
+                    }else{
+                        $itemIDs = array();
+                    }
+                    
+                    $custom_fields_form = $wlmObj->GetCustomRegFields();
+                    $fieldRequired = 'business name';
+                    $reqFieldName = "";
+                    foreach($custom_fields_form as $fieldName => $fieldHtml){
+                        if(strpos(strtolower("--".$fieldHtml),$fieldRequired)){
+                            $reqFieldName = $fieldName;
+                        }
+                    }
+                    
+                    if(count($itemIDs) == 0){
+                        //saving address fields                        
+                        //Save 1: saving address fields
+                        $wlmObj->Update_UserMeta($currentUserID, 'wpm_useraddress', $wpmUserAddressArr);
+                        
+                        //Save 2: saving business title
+                        if(!empty($reqFieldName) && !empty($_REQUEST['post_title'])){  
+                            $postTitle = $_REQUEST['post_title'];
+                            $wlmObj->Update_UserMeta($currentUserID, 'custom_' . $reqFieldName, $postTitle);                                        
+                        }
+                        
+                        //Save 3: saving other custom fields                             
+                        $requiredFields = array('gpsLatitude','gpsLongitude', 'categories','item_ids');
+                        foreach($requiredFields as $reqFieldName){
+                            $fieldValue = $_REQUEST['_ait-dir-item'][$reqFieldName];
+                            if(isset($_REQUEST['_ait-dir-item'][$reqFieldName])){
+                                $wlmObj->Update_UserMeta($currentUserID, 'custom_' . $reqFieldName, $fieldValue);
+                            }
+                        }                      
+                    }else{
+                        
+                        if(in_array($postID, $itemIDs)){
+                            if($_SERVER['REMOTE_ADDR'] == '122.173.17.232'){
+                                echo "<pre>";print_r($itemIDs);die;
+                            }
+                            //if user is editing the existing list
+                            //echo $postID;print_r($itemIDs);
+                            
+                            foreach($itemIDs as $key => $itemID){
+                                if($itemID == $postID)break;
+                            }
+                            
+                            //----------------------- latitude 1 --------------------
+                            $customLatitudeArr = explode($separator,$customLatitude);
+                            if(array_key_exists($key,$customLatitudeArr)){
+                                $customLatitudeArr[$key] = $_REQUEST['_ait-dir-item']['gpsLatitude'];
+                                $customLatitude = implode($separator, $customLatitudeArr);
+                                $wlmObj->Update_UserMeta($currentUserID, 'custom_' . 'gpsLatitude', $customLatitude);
+                            }
+                            
+                            //----------------------- longitude 2 --------------------
+                            $customLongitudeArr = explode($separator,$customLongitude);
+                            if(array_key_exists($key,$customLongitudeArr)){
+                                $customLongitudeArr[$key] = $_REQUEST['_ait-dir-item']['gpsLongitude'];
+                                $customLongitude = implode($separator, $customLongitudeArr);
+                                $wlmObj->Update_UserMeta($currentUserID, 'custom_' . 'gpsLongitude', $customLongitude);
+                            }
+                            
+                            //----------------------- categories 3 --------------------
+                            $customCategoriesArr = explode($separator,$customCategories);
+                            if(array_key_exists($key,$customCategoriesArr)){
+                                $customCategoriesArr[$key] = $catStr;
+                                $customCategories = implode($separator, $customCategoriesArr);
+                                $wlmObj->Update_UserMeta($currentUserID, 'custom_' . 'categories', $customCategories);
+                            }
+                            
+                            //----------------------- business 4 --------------------
+                            $customBusinessArr = explode($separator,$customBusiness);
+                            if(array_key_exists($key,$customBusinessArr)){
+                                $customBusinessArr[$key] = $_REQUEST['post_title'];
+                                $customBusiness = implode($separator, $customBusinessArr);
+                                $wlmObj->Update_UserMeta($currentUserID, 'custom_' . 'post_title', $customBusiness);
+                            }
+                            
+                            //----------------------- Item Ids 5 --------------------
+                            /* we don't need to update custom ids in the case of edit*/
+                            
+                            //Saving address fields
+                            //$wlmUserAddress, we are getting data from already stored information in database
+                            //$wpmUserAddressArr; we are storing in this array values submitted form item form
+                            $customAddress1Arr = explode($separator, $wlmUserAddress['address1']);
+                            if(array_key_exists($key, $customAddress1Arr)){
+                                $customAddress1Arr[$key] = $wpmUserAddressArr['address1'];
+                                $wpmUserAddressArr['address1'] = implode($separator, $customAddress1Arr);
+                            }
+                            
+                            $customCityArr = explode($separator, $wlmUserAddress['city']);
+                            if(array_key_exists($key, $customCityArr)){
+                                $customCityArr[$key] = $wpmUserAddressArr['city'];;
+                                $wpmUserAddressArr['city'] = implode($separator, $customCityArr);
+                            }
+                            
+                            $customStateArr = explode($separator, $wlmUserAddress['state']);
+                            if(array_key_exists($key, $customStateArr)){
+                                $customStateArr[$key] = $wpmUserAddressArr['state'];
+                                $wpmUserAddressArr['state'] = implode($separator, $customStateArr);
+                            }
+                            
+                            $customZipArr = explode($separator, $wlmUserAddress['zip']);
+                            if(array_key_exists($key, $customZipArr)){
+                                $customZipArr[$key] = $wpmUserAddressArr['zip'];
+                                $wpmUserAddressArr['zip'] = implode($separator, $customZipArr);
+                            }                            
+                            //print_r($wpmUserAddressArr);die;                          
+                            $wlmObj->Update_UserMeta($currentUserID, 'wpm_useraddress', $wpmUserAddressArr);
+                        }else{
+                            //if user is add new list                            
+                            //Step 1: saving address for new list
+                            //echo "<pre>";
+                            //$wlmUserAddress = $wlmObj->Get_UserMeta($currentUserID,'wpm_useraddress');
+                            //print_r($wpmUserAddressArr);
+                            //print_r($wlmUseraAddress);
+                            $wpmUserAddressArr['address1'] = $wlmUserAddress['address1'].$separator.$wpmUserAddressArr['address1'];
+                            $wpmUserAddressArr['city'] =  $wlmUserAddress['city'].$separator.$wpmUserAddressArr['city'];
+                            $wpmUserAddressArr['state'] =  $wlmUserAddress['state'].$separator.$wpmUserAddressArr['state'];
+                            $wpmUserAddressArr['zip'] =  $wlmUserAddress['zip'].$separator.$wpmUserAddressArr['zip'];
+                            //print_r($wpmUserAddressArr);die;
+                            if($_SERVER['REMOTE_ADDR'] == '122.173.17.232'){
+                                echo "<pre>";print_r($wpmUserAddressArr);die;
+                            }
+                            $wlmObj->Update_UserMeta($currentUserID, 'wpm_useraddress', $wpmUserAddressArr);
+                            
+                            //Step 2: saving business title                           
+                            if(!empty($reqFieldName) && !empty($_REQUEST['post_title'])){
+                                $fieldRequired = 'business name';
+                                $reqFieldName = "";
+                                foreach($custom_fields_form as $fieldName => $fieldHtml){
+                                    if(strpos(strtolower("--".$fieldHtml),$fieldRequired)){
+                                        $reqFieldName = $fieldName;
+                                    }
+                                }
+                                $postTitle = $customBusiness.$separator.$_REQUEST['post_title'];
+                                $wlmObj->Update_UserMeta($currentUserID, 'custom_' . $reqFieldName, $postTitle);                                        
+                            }
+                            //Save 3: saving other custom fields                             
+                            $requiredFields = array('gpsLatitude','gpsLongitude', 'categories','item_ids');
+                            foreach($requiredFields as $reqFieldName){
+                                $fieldValue = $_REQUEST['_ait-dir-item'][$reqFieldName];
+                                if(isset($_REQUEST['_ait-dir-item'][$reqFieldName])){
+                                    if($reqFieldName == 'gpsLatitude')$fieldValue = $customLatitude.$separator.$fieldValue;
+                                    if($reqFieldName == 'gpsLongitude')$fieldValue = $customLongitude.$separator.$fieldValue;
+                                    if($reqFieldName == 'categories')$fieldValue = $customCategories.$separator.$fieldValue;
+                                    if($reqFieldName == 'item_ids')$fieldValue = $customItemIds.$separator.$fieldValue;
+                                    $wlmObj->Update_UserMeta($currentUserID, 'custom_' . $reqFieldName, $fieldValue);
+                                }
+                            }    
+                        }
+                    }
+                    $wlmObj->Update_UserMeta($currentUserID, 'wpm_useraddress', $wpmUserAddressArr);
+                }else{
+                   // die("------------");
+                }
+            }
+            //}
+        }
+        
+    }
+    //<<<<<<<<<<<< Code block for updating user's wishlist profile >>>>>>>>>>>>>>>>>>
+                        //-----    
+                        }
+                        //----------------------------------------------------
 			add_action('save_post', array($this,'_save'));
 
 			$this->save_filter = create_function('$data, $postId', 'return str_replace("\r\n", "\n", $data);');
@@ -867,10 +1135,308 @@ class WPAlchemy_MetaBox
 		$this->in_template = FALSE;
 	}
 
-
-
-	function generate($config, $post, $metabox, $id, $meta)
-	{
+        function subtract_array($configArr,$lessDirectory_1){ //start of custom code by rasa
+            $tempArray = array();
+            //echo "<pre>";print_r($configArr);echo "</pre>";
+            foreach($configArr as $key => $value){
+                //echo "<br/>".$key;
+                if(!in_array($key,$lessDirectory_1)){
+                    $tempArray[$key] = $value;
+                }
+            }
+            return $tempArray;
+        }
+        
+        function subtract_by_value_arr($configArr,$lessDirectory_1){
+            $tempArray = array();           
+            
+            foreach($configArr as $key => $value){
+                if(in_array($value,$lessDirectory_1)){
+                    ;
+                }else{
+                    $tempArray[] = $value;
+                }
+            }
+            //echo "<pre>";print_r($configArr);echo "</pre>";
+            //echo "<pre>";print_r($lessDirectory_1);echo "</pre>";
+            //echo "<pre>";print_r($tempArray);echo "</pre>";
+            //die;
+            return $tempArray;
+        }
+        
+	function add_arrays($arrays = array()){
+		$allValues = array();
+		foreach($arrays as $sngArr){
+			foreach($sngArr as $value){
+				if(!in_array($value,$allValues))
+				$allValues[] = $value;                    
+			}
+		}
+		sort($allValues,SORT_STRING);
+		return $allValues;
+	}//end of custom code by rasa
+	
+	function array_insert_after( array $array, $key, $newKey, array $new ) {
+		$keys = array_keys( $array );
+		$index = array_search( $key, $keys );
+		$pos = false === $index ? count( $array ) : $index + 1;
+		return array_merge( array_slice( $array, 0, $pos ), array($newKey => $new), array_slice( $array, $pos ) );
+	}
+	function generate($config, $post, $metabox, $id, $meta){
+		if(!array_key_exists('address', $config)){
+			$addressArr = array('label' => 'Address', 'type' => 'textarea');
+			$config = $this->array_insert_after($config, 'wlm_zip','address', $addressArr);
+		} //added on 5th July, 2018
+		if(!array_key_exists('telephone', $config)){
+			$telArr = array('label' => 'Telephone', 'type' => 'text');
+			$config = $this->array_insert_after($config, 'address', 'telephone', $telArr);
+		} //added on 5th July, 2018
+		if(!array_key_exists('email', $config)){
+			$emailArr = array('label' => 'Email', 'type' => 'text');
+			$config = $this->array_insert_after($config, 'telephone','email', $emailArr);
+		} //added on 5th July, 2018
+		
+		//echo "<pre>";print_r($config);echo "</pre>";
+            $ipAddress = $_SERVER['REMOTE_ADDR'];
+            if('122.173.24.26' == $ipAddress){
+                global $wpdb;
+                echo $wpdb->last_query;
+            }
+            //rasa
+            global $current_user,$directory_type;
+            global $globalDirArr, $dir1Arr, $dir2Arr, $dir3Arr, $dir4Arr, $dir5Arr, $dir6Arr, $dir7Arr,$dir_show;
+            get_currentuserinfo();
+            //echo "<pre>";print_r($config);echo "</pre>";
+            //http://illuminatikarate.com/blog/wishlist-member-how-to-determine-if-user-has-pay-per-post-access-to-content/
+            //$all_plugins = get_plugins();
+            //echo "<pre>";print_r($all_plugins);echo "</pre>";           
+            $userRolesArr = $current_user->roles;
+            $lessDirectory = array();
+            //-------------------------------
+            ob_start();
+        ?>
+        <style>
+                /** Start: to style navigation tab **/
+                .nav {
+                    margin-bottom: 18px;
+                    margin-left: 0;
+                    list-style: none;
+                }
+                .nav > li > a {display: block;}                
+                .nav-tabs{*zoom: 1;}
+                .nav-tabs:before,.nav-tabs:after {
+                    display: table;
+                    content: "";
+                }
+                .nav-tabs:after {clear: both;}
+                .nav-tabs > li {float: left;}
+                .nav-tabs > li > a {
+                    padding-right: 12px;
+                    padding-left: 12px;
+                    margin-right: 2px;
+                    line-height: 14px;
+                }
+                .nav-tabs {border-bottom: 1px solid #ddd;}
+                .nav-tabs > li {margin-bottom: -1px;}
+                .nav-tabs > li > a {
+                  padding-top: 8px;
+                  padding-bottom: 8px;
+                  line-height: 18px;
+                  border: 1px solid transparent;
+                  -webkit-border-radius: 4px 4px 0 0;
+                         -moz-border-radius: 4px 4px 0 0;
+                                  border-radius: 4px 4px 0 0;
+                }
+                .nav-tabs > li > a:hover {border-color: #eeeeee #eeeeee #dddddd;}
+                .nav-tabs > .active > a,
+                .nav-tabs > .active > a:hover {
+                  color: #555555;
+                  cursor: default;
+                  background-color: #ffffff;
+                  border: 1px solid #ddd;
+                  border-bottom-color: transparent;
+                }                
+                li {line-height: 18px;}                
+                .tab-content.active{display: block;}                
+                .tab-content.hide{display: none;}                
+                /** End: to style navigation tab **/
+	    </style>
+        <?php
+            $tabCSS = ob_get_clean();
+            echo $tabCSS;
+            
+            //echo "<pre>";print_r($userRolesArr);echo "</pre>";              
+            //---------------------------------------------------------------
+            if(in_array('directory_1',$userRolesArr)){/*echo 'rasa directory_1';*/$lessDirectory = $dir1Arr;}            
+            if(in_array('directory_2',$userRolesArr)){/*echo 'rasa directory_2';*/$lessDirectory = $dir2Arr;}            
+            if(in_array('directory_3',$userRolesArr)){/*echo 'rasa directory_3';*/$lessDirectory = $dir3Arr;}            
+            if(in_array('directory_4',$userRolesArr)){/*echo 'rasa directory_4';*/$lessDirectory = $dir4Arr;}            
+            if(in_array('directory_5',$userRolesArr)){/*echo 'rasa directory_5';*/$lessDirectory = $dir5Arr;}            
+            if(in_array('directory_6',$userRolesArr)){/*echo 'rasa directory_6';*/$lessDirectory = $dir6Arr;}
+            if(in_array('directory_7',$userRolesArr)){/*echo 'rasa directory_7';*/$lessDirectory = $dir7Arr;}
+            
+            //Additional Levels
+            //--------------------------Beging Level attribute code-------------------------------------
+            $levelDirecotories = array();
+            $wishlistPlugin = 'wishlist-member/wpm.php';//'WishList Member™'
+            if(is_plugin_active($wishlistPlugin)){
+                $levels = WLMAPI::GetUserLevels($current_user->ID);               
+                /*
+                    *Free Listings                                      [User: free_listing_user; directory_1]
+                    *============================================================================================
+                    "Free Membership", "Low Cost Camps"                 [User: business_listing; directory_2]
+                    *============================================================================================
+                    "Low Cost Camps"                                    [User:low_cost_camps; directory_3]
+                    *============================================================================================
+                    ".... - by default"                                 [User:house_sitting; directory_4]
+                    After joining "low cost camps"
+                    "Free Membership", "Low Cost Camps"                 [User:house_sitting; directory_4]
+                    After joining "Help Outs"
+                    "Free Membership", "Park Overs", "Help Outs"        [User:house_sitting; directory_4]
+                    *============================================================================================
+                    "Free Membership", "Low Cost Camps", "Help Outs"    [User:park_overs; directory_5]
+                    *============================================================================================
+                    "Free Membership", "Help Outs"                      [User:help_outs; directory_6]
+                    *============================================================================================
+                    ".... - by default"                                 [User:dollar_25plus; directory_7]
+                    *============================================================================================
+                    $allowed_levels = WLMAPI::GetPostLevels($levels);
+                */
+                
+                $levelAttributes = array();
+                //--------------------------------------------
+                $dir1_show = array();
+                if( in_array('Free Listings', $levels) || in_array('directory_1',$userRolesArr) ){
+                    $levelDirecotories[] = 'directory_1';
+                    $levelAttributes = $dir1Arr;
+                    $dir1_show = $this->subtract_by_value_arr($globalDirArr,$dir1Arr);
+                }
+                
+                //--------------------------------------------
+                $dir2_show = array();
+                if( in_array('Businesses Listings', $levels) || in_array('directory_2',$userRolesArr) ){
+                    $levelDirecotories[] = 'directory_2';
+                    //echo "<pre>";print_r($levelDirecotories);echo "</pre>";
+                    //echo "<pre>";print_r($dir2Arr);echo "</pre>";
+                    foreach($dir2Arr as $key => $field){
+                        if(!in_array($field, $levelAttributes)){
+                            array_push ( $levelAttributes, $field );
+                        }
+                    }
+                    //echo "<pre>";print_r($levelAttributes);echo "</pre>";
+                    $dir2_show = $this->subtract_by_value_arr($globalDirArr,$dir2Arr);
+                }
+                
+                //--------------------------------------------
+                $dir3_show = array();
+                if( in_array('Low Cost Camps', $levels) || in_array('directory_3',$userRolesArr)){
+                    $levelDirecotories[] = 'directory_3';
+                    foreach($dir3Arr as $key => $field){
+                        if(!in_array($field, $levelAttributes)){
+                            array_push ( $levelAttributes, $field );
+                        }
+                    }
+                    $dir3_show = $this->subtract_by_value_arr($globalDirArr,$dir3Arr);
+                    //echo "Low Cost Camps present";
+                }else{
+                    //echo "Low Cost Camps absent";
+                }
+                
+                //--------------------------------------------
+                $dir4_show = array();               
+                if( in_array('House Sitting', $levels) || in_array('directory_4',$userRolesArr)){
+                    $levelDirecotories[] = 'directory_4';
+                    foreach($dir4Arr as $key => $field){
+                        if(!in_array($field, $levelAttributes)){
+                            array_push ( $levelAttributes, $field );
+                        }
+                    }
+                    $dir4_show = $this->subtract_by_value_arr($globalDirArr,$dir4Arr);                   
+                }
+                
+                //--------------------------------------------
+                $dir5_show = array();
+                if( in_array('Park Overs', $levels) || in_array('directory_5',$userRolesArr) ){
+                    $levelDirecotories[] = 'directory_5';                    
+                    foreach($dir5Arr as $key => $field){
+                        if(!in_array($field, $levelAttributes)){
+                            array_push ( $levelAttributes, $field );
+                        }
+                    }
+                    $dir5_show = $this->subtract_by_value_arr($globalDirArr,$dir5Arr);
+                }
+                
+                //--------------------------------------------
+                $dir6_show = array();
+                if( in_array('Help Outs', $levels) || in_array('directory_6',$userRolesArr) ){
+                    $levelDirecotories[] = 'directory_6';
+                    foreach($dir6Arr as $key => $field){
+                        if(!in_array($field, $levelAttributes)){
+                            array_push ( $levelAttributes, $field );
+                        }
+                    }
+                    $dir6_show = $this->subtract_by_value_arr($globalDirArr,$dir6Arr);
+                }
+                
+                //--------------------------------------------
+                $dir7_show = array();
+                if( in_array('$25+ Camps/Caravan Parks', $levels) ||
+                   in_array('Caravan Parks', $levels) ||
+                   in_array('directory_7',$userRolesArr) ||
+                   in_array('$25 +', $levels) ||
+                   in_array('$25+', $levels)
+                   ){
+                    $levelDirecotories[] = 'directory_7';
+                    foreach($dir7Arr as $key => $field){
+                        if(!in_array($field, $levelAttributes)){
+                            array_push ( $levelAttributes, $field );
+                        }
+                    }
+                    $dir7_show = $this->subtract_by_value_arr($globalDirArr,$dir7Arr);
+                }
+                
+                //--------- code for testing attribute ---------------
+                $ipAddress = $_SERVER['REMOTE_ADDR'];
+                if(true){//$ipAddress == '171.78.80.14'
+                    $dir_show = $this->add_arrays(array($dir1_show , $dir2_show , $dir3_show , $dir4_show , $dir5_show , $dir6_show , $dir7_show));
+                    //$dir_show = array_unique(array_merge($dir1_show , $dir2_show , $dir3_show , $dir4_show , $dir5_show , $dir6_show , $dir7_show));
+                    if(in_array('administrator',$userRolesArr)){
+                        $lessDirectory = array();
+                    }else{
+                        $lessDirectory = $this->subtract_by_value_arr($globalDirArr,$dir_show);
+                    }
+                    //Note: in $lessDirectory we will get all fields which we don't need and so we will subtract those
+                    //from config array
+                    // echo "<pre>";print_r($dir_show);echo "</pre>";
+                    //House Sitting ::directory_3(done), directory_4[property_type]:OK,directory_6:OK
+                    
+                }                
+            }
+            //echo "<pre>levelDirecotories";print_r($levelDirecotories);echo "</pre>";
+            //echo "<br/>globalDirArr:".count($globalDirArr);
+            //echo "<br/>dir2Arr:".count($dir2Arr);
+            //echo "<br/>dir1_show:".count($dir1_show);
+            //echo "<br/>dir2_show:".count($dir2_show);
+            //echo "<br/>dir3_show:".count($dir3_show);
+            //echo "<br/>dir4_show:".count($dir4_show);
+            //echo "<br/>dir5_show:".count($dir5_show);
+            //echo "<br/>dir6_show:".count($dir6_show);
+            //echo "<br/>dir7_show:".count($dir7_show);
+            //echo "<br/>lessDirectory:".count($lessDirectory);
+            //echo "<pre>lessDirectory";print_r($lessDirectory);echo "</pre>";
+            //--------------------------End Level attribute code-------------------------------------
+            
+            $config = $this->subtract_array($config, $lessDirectory);
+            //echo "<pre>";print_r(array_values($dir_show));echo "</pre>";
+            //echo "<pre>";print_r(array_values($lessDirectory));echo "</pre>";
+            //echo "<pre>";print_r(array_keys($config));echo "</pre>";
+            $dirArr = array($dir1Arr, $dir2Arr, $dir3Arr, $dir4Arr, $dir5Arr, $dir6Arr,$dir7Arr);
+            $dirArr = array($dir1Arr);
+            //e.g Array([0] => directory_1)
+            //echo "<pre>";print_r($current_user);echo "</pre>";
+            //echo "<pre>";print_r($config);echo "</pre>";
+            //echo "<pre>";print_r($lessDirectory);echo "</pre>";
+            
 		$sections_count = 0;
 		$structure = array();
 		foreach($config as $k => $v){
@@ -893,13 +1459,20 @@ class WPAlchemy_MetaBox
 		unset($k, $v);
 
 		?>
+                <!--rasa-->
 		<div class="ait-custom-fields">
-
 		<?php if($no_sections == true or $structure[0] == ''): ?>
 		<div id="ait-custom-fields-0">
 			<table style="width:98%">
 		<?php endif; ?>
-
+                 <?php
+                // echo "<pre>";
+                //if(array_key_exists('directoryType', $config)){
+                //   print_r($config);
+                    //ait-_ait-dir-item-directoryType
+                //}
+               // echo "</pre>";//die;
+                ?>
 		<?php foreach($config as $key => $value):
 			if($structure[$cycles] != ''):
 				$sections++;
@@ -978,13 +1551,17 @@ class WPAlchemy_MetaBox
 
 		<?php if($value['type'] == 'dropdown-categories'): ?>
 		<td>
+                    <!-- //start of cat - rasa -->
 			<?php $this->categoriesDropdown($key, $value, $config); ?>
+                    <!-- //end of cat - rasa -->
 		</td>
 		<?php endif; ?>
 
 		<?php if($value['type'] == 'dropdown-categories-posts'): ?>
 		<td>
+                    <!-- //start of cat - rasa1 -->
 			<?php $this->categoriesDropdownPosts($key, $value, $config); ?>
+                    <!-- //end of cat - rasa1 -->
 		</td>
 		<?php endif; ?>
 
@@ -1064,6 +1641,7 @@ class WPAlchemy_MetaBox
 	</div>
 	<?php endif; ?>
 	</div> <!-- /.ait-custom-fields -->
+        <!--/rasa-->
 <?php
 	}
 
@@ -1101,6 +1679,16 @@ class WPAlchemy_MetaBox
 	 */
 	public function textControl($key, $value)
 	{
+            $fieldName = $this->get_the_name();
+            global $currentDirectory;
+            if($key == 'directoryType' || $fieldName == 'directoryType'){               
+                ob_start();
+                $this->the_field($key);
+                $val = $this->get_the_value();
+                $this->the_value($val);
+                $currentDirectory = ob_get_clean();
+                //id=publish of Submit for Review Button
+            }
 		$this->the_field($key);
 
 		$val = $this->get_the_value();
@@ -1136,7 +1724,7 @@ class WPAlchemy_MetaBox
 		?>
 		<script>
 			jQuery(function() {
-				jQuery('.datepicker').datepicker({ dateFormat: "yy-mm-dd" });
+				jQuery('.datepicker').datepicker({ dateFormat: "d M yy" });
 			});
 		</script>
 		<input type="text" id="ait-<?php echo $this->id . "-$key"; ?>" class="datepicker ait-<?php echo $key; ?>-option" name="<?php $this->the_name(); ?>" value="<?php $this->the_value($val); ?>">
@@ -1355,7 +1943,7 @@ class WPAlchemy_MetaBox
 		foreach($terms as $term){
 			$cats[$term->term_id] = $term->name;
 		}
-
+                //echo "<!-- rasa categories $key $value-->";
 		if(!empty($cats)){
 			echo('<ul class="cat-checklist '.$category.'-checklist" style="border-color: #DFDFDF; height: 8em">');
 	   		foreach($cats as $id => $cat){
@@ -1368,6 +1956,7 @@ class WPAlchemy_MetaBox
    		} else {
 			echo('<p>No categories found, please create some</p>');
 		}
+                echo "<!-- rasa categories-->";
 	}
 
 	/**
@@ -1454,6 +2043,7 @@ class WPAlchemy_MetaBox
 		$this->the_field($key);
 
 		$params = array(
+			'ep_integrate' => true, //elastic search
 			'post_type'			=> $config[$key]['default'],
 			'nopaging'			=>	true,
 			'post_status'		=> 'publish'

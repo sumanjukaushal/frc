@@ -7,6 +7,15 @@ featured:
 address:
 	label: Address
 	type: textarea
+wlm_city:
+	label: Suburb
+	type: text
+wlm_state:
+	label: State
+	type: text
+wlm_zip:
+	label: "Post Code"
+	type: text	
 gpsLatitude:
 	label: GPS Latitude
 	type: text
@@ -36,12 +45,41 @@ streetViewPitch:
 streetViewZoom:
 	label: StreetView Zoom
 	type: text
+property_type:
+	label: "Property Type"
+	type: text
 telephone:
 	label: Telephone
 	type: text
 email:
 	label: Email
 	type: text
+
+police_check_required:
+	label: "Police Check Required"
+	type: checkbox
+	default:
+		enable:
+			label: 'Yes'
+			
+pet_minding_required:
+	label: "Pet Minding Required"
+	type: checkbox
+	default:
+		enable:
+			label: 'Yes'
+pet_minding_addnl:
+	label: "Additional Information"
+	type: text
+	
+gardening:
+	label: "Gardening"
+	type: text
+	
+other:
+	label: "Other"
+	type: text
+
 emailContactOwner:
 	label: "Contact owner button (form)"
 	type: checkbox
@@ -51,6 +89,599 @@ emailContactOwner:
 web:
 	label: Web
 	type: text
+
+location:
+	label: "Location"
+	type: text
+	
+access:
+	label: "Access"
+	type: text
+	
+responsible_authority:
+	label: "Responsible Authority"
+	type: text
+	
+discount:
+	label: "Discount"
+	type: checkbox
+	default:
+		enable:
+			label: 'Yes'
+			
+discount_detail:
+	label: "Discount details"
+	type: text
+	
+offer:
+	label: "Offer"
+	type: checkbox
+	default:
+		enable:
+			label: 'Yes'
+			
+offer_detail:
+	label: "Offer details"
+	type: text
+	
+seasonalRatesApply:
+	label: "Seasonal Rates Apply"
+	type: checkbox
+	default:
+		enable:
+			label: 'Yes'
+			
+seasonalRatesApply_detail:
+	label: "Seasonal Rates details"
+	type: text
+
+limit_discount:
+	label: "Limit Discount/Other Usage"
+	type: checkbox
+	default:
+		enable:
+			label: 'Yes'
+			
+per_month_uses:
+	label: "Number of Uses per Month"
+	type: text
+			
+pricing_detail:
+	label: "Pricing details"
+	type: text
+	
+booking_link:
+	label: "Booking Link"
+	type: text
+	
+help_required:
+	label: "Help Required"
+	type: text
+	
+start_date:
+	label: "Start Date"
+	type: date
+end_date:
+	label: "End Date"
+	type: date
+	
+duration:
+	label: "Duration"
+	type: text
+
+"Features" : section
+toilets:
+	label: "Toilets Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'			
+toilets_addnl:
+	label: "Additional Information"
+	type: text
+			
+showers:
+	label: "Showers Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+showers_addnl:
+	label: "Additional Information"
+	type: text
+	
+poweredSites:
+	label: "Power Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+poweredSites_addnl:
+	label: "Additional Information"
+	type: text
+	
+drinkingWater:
+	label: "Drinking Water Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+drinkingWater_addnl:
+	label: "Additional Information"
+	type: text
+	
+waterFillingavailable:
+	label: "Water Filling Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+waterFillingavailable_addnl:
+	label: "Additional Information"
+	type: text
+	
+petsOk:
+	label: "Pets Permitted"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+petsOk_addnl:
+	label: "Additional Information"
+	type: text
+
+drinkingWaterNotSuitable:
+	label: "Water Not Suitable For Drinking"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+drinkingWaterNotSuitable_addnl:
+	label: "Additional Information"
+	type: text
+	
+petsNotOk:
+	label: "No Pets Permitted"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+petsNotOk_addnl:
+	label: "Additional Information"
+	type: text
+
+mobilePhoneReception:
+	label: "Mobile Phone Reception"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+mobilePhoneReception_addnl:
+	label: "Additional Information"
+	type: text
+
+emergencyPhone:
+	label: "Emergency Phone"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+emergencyPhone_addnl:
+	label: "Additional Information"
+	type: text
+	
+wasteFacilityAvailable:
+	label: "Rubbish Bins Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+wasteFacilityAvailable_addnl:
+	label: "Additional Information"
+	type: text
+	
+dumpPointAvailable:
+	label: "Dump Point Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+dumpPointAvailable_addnl:
+	label: "Additional Information"
+	type: text
+
+disableFacility:
+	label: "Disabled Facilities"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'			
+disableFacility_addnl:
+	label: "Additional Information"
+	type: text
+
+timeLimitApplies:
+	label: "Time Limit Applies"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+timeLimitApplies_addnl:
+	label: "Additional Information"
+	type: text
+
+caravans:
+	label: "Caravans"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'			
+caravans_addnl:
+	label: "Additional Information"
+	type: text
+	
+largeSizeMotohomeAccess:
+	label: "Camper Vans & Motor Homes"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+largeSizeMotohomeAccess_addnl:
+	label: "Additional Information"
+	type: text
+
+bigrig:
+	label: "Big Rig Access"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+bigrig_addnl:
+	label: "Additional Information"
+	type: text
+
+tentsOnly:
+	label: "Suitable for Tents"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+tentsOnly_addnl:
+	label: "Additional Information"
+	type: text
+
+noTents:
+	label: "Not Suitable for Tents"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+noTents_addnl:
+	label: "Additional Information"
+	type: text
+
+camperTrailers:
+	label: "Camper Trailers"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+camperTrailers_addnl:
+	label: "Additional Information"
+	type: text
+	
+noCamperTrailers:
+	label: "No Camper Trailers"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+noCamperTrailers_addnl:
+	label: "Additional Information"
+	type: text
+
+selfContainedVehicles:
+	label: "FSCV Only"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+selfContainedVehicles_addnl:
+	label: "Additional Information"
+	type: text
+
+generatorsPermitted:
+	label: "Generators Permitted"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+generatorsPermitted_addnl:
+	label: "Additional Information"
+	type: text
+	
+generatorsNotPermitted:
+	label: "Generators Not Permitted"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+generatorsNotPermitted_addnl:
+	label: "Additional Information"
+	type: text
+
+firePit:
+	label: "Fires Permitted"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+firePit_addnl:
+	label: "Additional Information"
+	type: text
+	
+noFirePit:
+	label: "No Fires Permitted"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+noFirePit_addnl:
+	label: "Additional Information"
+	type: text
+
+shadedSites:
+	label: "Some Shade Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+shadedSites_addnl:
+	label: "Additional Information"
+	type: text
+
+shelter:
+	label: "Shelter Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+shelter_addnl:
+	label: "Additional Information"
+	type: text
+
+bbq:
+	label: "BBQ Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+bbq_addnl:
+	label: "Additional Information"
+	type: text
+
+picnicTable:
+	label: "Picnic Table Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+picnicTable_addnl:
+	label: "Additional Information"
+	type: text
+
+campKitchen:	
+	label: "Camp Kitchen"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+campKitchen_addnl:
+	label: "Additional Information"
+	type: text
+
+laundry:	
+	label: "Laundry"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+laundry_addnl:
+	label: "Additional Information"
+	type: text
+
+ensuiteSites:	
+	label: "Ensuite Sites"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+ensuiteSites_addnl:
+	label: "Additional Information"
+	type: text
+
+restaurant:	
+	label: "Restaurant"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+restaurant_addnl:
+	label: "Additional Information"
+	type: text
+	
+kiosk:	
+	label: "Kiosk"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+kiosk_addnl:
+	label: "Additional Information"
+	type: text
+	
+internetAccess:	
+	label: "Internet Access"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+internetAccess_addnl:
+	label: "Additional Information"
+	type: text	
+
+swimmingPool:	
+	label: "Swimming"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+swimmingPool_addnl:
+	label: "Additional Information"
+	type: text
+	
+gamesRoom:
+	label: "Games Room"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+gamesRoom_addnl:
+	label: "Additional Information"
+	type: text
+
+childrenPlayground:
+	label: "Childrens Playground Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+childrenPlayground_addnl:
+	label: "Additional Information"
+	type: text
+
+views:
+	label: "Nice Views From Location"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+views_addnl:
+	label: "Additional Information"
+	type: text
+
+onSiteAccomodation:
+	label: "On Site Accommodation"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+onSiteAccomodation_addnl:
+	label: "Additional Information"
+	type: text
+
+fourWheelDrive:
+	label: "4WD Access Only"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+fourWheelDrive_addnl:
+	label: "Additional Information"
+	type: text
+	
+dryWeatherOnlyAccess:
+	label: "Access Dry Weather Only"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+dryWeatherOnlyAccess_addnl:
+	label: "Additional Information"
+	type: text
+
+rvTurnAroundArea:
+	label: "RV Turn Around Area"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+rvTurnAroundArea_addnl:
+	label: "Additional Information"
+	type: text
+	
+rvParkingAvailable:
+	label: "RV Parking Available"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+rvParkingAvailable_addnl:
+	label: "Additional Information"
+	type: text	
+	
+boatRamp:
+	label: "Boat Ramp Nearby"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+boatRamp_addnl:
+	label: "Additional Information"
+	type: text
+
+sharedWithTrucks:
+	label: "Shared with Trucks"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+sharedWithTrucks_addnl:
+	label: "Additional Information"
+	type: text
+
+showGrounds:
+	label: "Show Grounds"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+showGrounds_addnl:
+	label: "Additional Information"
+	type: text
+	
+nationalParknForestry:
+	label: "National Park and Forestry"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+nationalParknForestry_addnl:
+	label: "Additional Information"
+	type: text
+	
+pubs:
+	label: "Pubs"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+pubs_addnl:
+	label: "Additional Information"
+	type: text
+	
+parkFees:
+	label: "National Park Fees"
+	type: checkbox
+	default:
+		enable:
+			label: 'Tick If Yes'
+parkFees_addnl:
+	label: "Additional Information"
+	type: text
+
+"Business Features" : section
+
 "Opening Hours" : section
 hoursMonday:
 	label: Monday
@@ -73,7 +704,13 @@ hoursSaturday:
 hoursSunday:
 	label: Sunday
 	type: text
+
 "Alternative Content" : section
 alternativeContent:
 	label: Alternative Content
 	type: textarea
+
+"Hidden Flags" : section
+directoryType:
+	label: "Directory Type"
+	type: text

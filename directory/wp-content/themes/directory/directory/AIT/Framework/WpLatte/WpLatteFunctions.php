@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2011, Affinity Information Technology, s.r.o. (http://ait-themes.club)
  */
-
+defined('ABSPATH') || define('ABSPATH', '/home/freerang/public_html/directory/'); //frc - rasu
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 /**

@@ -6,11 +6,9 @@
 /* =================== */
  
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 750px) {
 
 	body 			{ min-width: 320px; max-width: 768px; }
-
-	#page.narrow 	{ width: auto; }
 
 	.defaultContentWidth,
 	#directory-search .defaultContentWidth 	{ max-width: 768px; width: auto; }
@@ -266,7 +264,7 @@ span.for-dir-searchinput-category { position: relative !important; left: auto; }
 #main,
 #wrapper-row,
 #primary,
-#secondary 		{ display: block; }
+#secondary 		{ display: block; b }
 
 #main 			{ border: 0; }
 #content,
@@ -386,3 +384,11 @@ input.dir-searchinput-text { width: 280px; }
 .rev_slider iframe { width: 150px !important; }
 
 }
+
+@media all and (max-width: 750px) {
+
+
+	#page.narrow 	{ width: auto; box-shadow:0; border:none; }
+	#content { width:auto!important; max-width:100%!important; }
+	
+	}

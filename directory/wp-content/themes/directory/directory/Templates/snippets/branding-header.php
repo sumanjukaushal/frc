@@ -65,6 +65,9 @@
 			{/if}
 		</div>
 
+<?php if( function_exists( 'ubermenu' ) ): ?>
+  <?php ubermenu( 'main' , array( 'theme_location' => 'primary-menu' ) ); ?>
+<?php else: ?>
 		<nav id="access" role="navigation">
 
 			{if !is_admin()}
@@ -100,6 +103,6 @@
 			{/if}
 
 		</nav><!-- #accs -->
-
+<?php endif; ?>
 	</div>
 </header><!-- #branding -->

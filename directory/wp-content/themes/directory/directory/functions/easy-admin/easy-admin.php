@@ -27,7 +27,7 @@ function aitEasyLoginTitle($title) {
  */
 add_filter('login_redirect', 'aitEasyAdminRedirect',10,3);
 function aitEasyAdminRedirect($redirectTo, $request, $user) {
-	if( isset( $user->roles ) && is_array( $user->roles ) && ( in_array('subscriber', $user->roles) || in_array('directory_1', $user->roles) || in_array('directory_2', $user->roles) || in_array('directory_3', $user->roles) || in_array('directory_4', $user->roles) || in_array('directory_5', $user->roles) ) ) {
+	if( isset( $user->roles ) && is_array( $user->roles ) && ( in_array('subscriber', $user->roles) || in_array('directory_1', $user->roles) || in_array('directory_2', $user->roles) || in_array('directory_3', $user->roles) || in_array('directory_4', $user->roles) || in_array('directory_5', $user->roles) || in_array('directory_6', $user->roles) || in_array('directory_7', $user->roles) ) ) {
 		if (in_array('subscriber', $user->roles)) {
 			return admin_url('profile.php');
 		} else {
@@ -38,8 +38,7 @@ function aitEasyAdminRedirect($redirectTo, $request, $user) {
 }
 
 global $current_user;
-if( isset( $current_user->roles ) && is_array( $current_user->roles ) && ( in_array('subscriber', $current_user->roles) || in_array('directory_1', $current_user->roles) || in_array('directory_2', $current_user->roles) || in_array('directory_3', $current_user->roles) || in_array('directory_4', $current_user->roles) || in_array('directory_5', $current_user->roles) ) ) {
-
+if( isset( $current_user->roles ) && is_array( $current_user->roles ) && ( in_array('subscriber', $current_user->roles) || in_array('directory_1', $current_user->roles) || in_array('directory_2', $current_user->roles) || in_array('directory_3', $current_user->roles) || in_array('directory_4', $current_user->roles) || in_array('directory_5', $current_user->roles) || in_array('directory_6', $current_user->roles) || in_array('directory_7', $current_user->roles) ) ) {
 	// hide from frontend
 	show_admin_bar( false );
 

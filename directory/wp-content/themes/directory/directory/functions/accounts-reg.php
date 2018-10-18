@@ -42,7 +42,7 @@ if(isset($_GET['dir-register']) && ($_GET['dir-register'] == 'register' || $_GET
 		// set role
 		if(isset($_POST['directory-role'])){
 			$role = $_POST['directory-role'];
-			if (($role == "directory_1") || ($role == "directory_2") || ($role == "directory_3") || ($role == "directory_4") || ($role == "directory_5")){
+			if (($role == "directory_1") || ($role == "directory_2") || ($role == "directory_3") || ($role == "directory_4") || ($role == "directory_5") || ($role == "directory_6") || ($role == "directory_7") ){
 				$roleNum = intval(substr($role, 10));
 				switch ($role) {
 					case "directory_1":
@@ -101,6 +101,32 @@ if(isset($_GET['dir-register']) && ($_GET['dir-register'] == 'register' || $_GET
 							$packageName = $wp_roles->role_names[$role];
 						}
 						break;
+						//------------------------------------rasa
+					case "directory_6":
+						if(isset($aitThemeOptions->members->role6Price) && trim($aitThemeOptions->members->role6Price) !== '0') {
+							$rolePrice = $aitThemeOptions->members->role6Price;
+							$free = false;
+							if($upgrade && $currentRolePriceName != 'none'){
+								$price = floatval(trim($aitThemeOptions->members->role6Price)) - floatval(trim($aitThemeOptions->members->$currentRolePriceName));
+							} else {
+								$price = trim($aitThemeOptions->members->role6Price);
+							}
+							$packageName = $wp_roles->role_names[$role];
+						}
+						break;
+					case "directory_7":
+						if(isset($aitThemeOptions->members->role7Price) && trim($aitThemeOptions->members->role7Price) !== '0') {
+							$rolePrice = $aitThemeOptions->members->role7Price;
+							$free = false;
+							if($upgrade && $currentRolePriceName != 'none'){
+								$price = floatval(trim($aitThemeOptions->members->role7Price)) - floatval(trim($aitThemeOptions->members->$currentRolePriceName));
+							} else {
+								$price = trim($aitThemeOptions->members->role7Price);
+							}
+							$packageName = $wp_roles->role_names[$role];
+						}
+						break;
+					//------------------------------------rasa
 					default:
 						break;
 				}
@@ -430,7 +456,25 @@ function aitCheckPayPalSubscription($profileId) {
 if ( !isset($GLOBALS['aitThemeOptions']->members->easyAdminEnable) ) {
 	add_action('admin_menu', 'aitDirUpgradeDirectoryAccount');
 	function aitDirUpgradeDirectoryAccount() {
-		add_users_page(__('Directory Account','ait'), __('Directory Account','ait'), 'directory_account_update', 'dir-account', 'aitRenderDirectoryAccountPage');
+		global $current_user;
+		$roleArr = array('directory_1', 'directory_2', 'directory_3', 'directory_4', 'directory_5', 'directory_6', 'directory_7'); 
+		get_currentuserinfo();
+		$userRolesArr = $current_user->roles;
+		
+		if(
+			in_array('directory_1',$userRolesArr) ||
+			in_array('directory_2',$userRolesArr) ||
+			in_array('directory_3',$userRolesArr) ||
+			in_array('directory_4',$userRolesArr) ||
+			in_array('directory_5',$userRolesArr) ||
+			in_array('directory_6',$userRolesArr) ||
+			in_array('directory_7',$userRolesArr)
+		){
+			return;//do not display Directory Account - RASA
+		}else{
+			add_users_page(__('Directory Account','ait'), __('Directory Account','ait'), 'directory_account_update', 'dir-account', 'aitRenderDirectoryAccountPage');
+			//add_users_page( $page_title, $menu_title, $capability, $menu_slug, $function);
+		}
 	}
 }
 function aitRenderDirectoryAccountPage() {
@@ -511,7 +555,7 @@ function aitRenderDirectoryAccountPage() {
 				$currency = (isset($aitThemeOptions->members->paypalCurrencyCode)) ? $aitThemeOptions->members->paypalCurrencyCode : 'USD';
 				$roleNumber++;
 				$upCount = 0;
-				for ($i=$roleNumber; $i <= 5; $i++) {
+				for ($i=$roleNumber; $i <= 7; $i++) { //rasa
 					$roleEnable = 'role'.$i.'Enable';
 					$roleName = 'role'.$i.'Name';
 					$rolePrice = 'role'.$i.'Price';
@@ -583,7 +627,8 @@ add_action('set_user_role', 'aitDirWriteActivationTime',1,2);
 function aitDirWriteActivationTime($id, $role) {
 
 	global $wpdb;
-	if($role == 'directory_1' || $role == 'directory_2' || $role == 'directory_3' || $role == 'directory_4' || $role == 'directory_5'){
+	//rasa
+	if($role == 'directory_1' || $role == 'directory_2' || $role == 'directory_3' || $role == 'directory_4' || $role == 'directory_5' || $role == 'directory_6' || $role == 'directory_7'){
 		update_user_meta( $id, 'dir_activation_time', array( 'role' => $role, 'time' => time()) );
 		// expired posts back to published
 		$wpdb->query($wpdb->prepare( "UPDATE $wpdb->posts SET post_status = 'publish' WHERE post_author = %d AND post_status = 'expired'", intval($id)) );
@@ -604,6 +649,11 @@ function aitDirCheckUsersExpirations() {
 			$users = $wpdb->get_results("SELECT user_id, meta_value FROM $wpdb->usermeta WHERE meta_key = 'dir_paypal_recurring_profile_id'");
 			foreach ($users as $user) {
 				if (!aitCheckPayPalSubscription($user->meta_value)) {
+					//Start: tracking code - rasu
+					$userId = get_current_user_id();
+					$headers = array('Content-Type: text/html; charset=UTF-8');
+					wp_mail('kalyanrajiv@gmail.com', "#655 Expiring user wrongly $userId" , 'Please update clients.', $headers);
+					//End: tracking code - rasu
 					aitDirExpireUser($user->user_id);
 				}
 			}
@@ -622,33 +672,82 @@ function aitDirCheckUsersExpirations() {
 			if($role == 'directory_1' && isset($aitThemeOptions->members->role1Time) && trim($aitThemeOptions->members->role1Time) != '0'){
 				$limit = floatval($aitThemeOptions->members->role1Time);
 				if($differenceInDays >= $limit){
+					//Start: tracking code - rasu
+					$userId = get_current_user_id();
+					$headers = array('Content-Type: text/html; charset=UTF-8');
+					wp_mail('kalyanrajiv@gmail.com', "#678 Expiring user wrongly $userId directory_1" , 'Please update clients.', $headers);
+					//End: tracking code - rasu
 					aitDirExpireUser($time->user_id);
 				}
 			}
 			if($role == 'directory_2' && isset($aitThemeOptions->members->role2Time) && trim($aitThemeOptions->members->role2Time) != '0'){
 				$limit = floatval($aitThemeOptions->members->role2Time);
 				if($differenceInDays >= $limit){
+					//Start: tracking code - rasu
+					$userId = get_current_user_id();
+					$headers = array('Content-Type: text/html; charset=UTF-8');
+					wp_mail('kalyanrajiv@gmail.com', "#689 Expiring user wrongly $userId directory_2" , 'Please update clients.', $headers);
+					//End: tracking code - rasu
 					aitDirExpireUser($time->user_id);
 				}
 			}
 			if($role == 'directory_3' && isset($aitThemeOptions->members->role3Time) && trim($aitThemeOptions->members->role3Time) != '0'){
 				$limit = floatval($aitThemeOptions->members->role3Time);
 				if($differenceInDays >= $limit){
+					//Start: tracking code - rasu
+					$userId = get_current_user_id();
+					$headers = array('Content-Type: text/html; charset=UTF-8');
+					wp_mail('kalyanrajiv@gmail.com', "#700 Expiring user wrongly $userId directory_3" , 'Please update clients.', $headers);
+					//End: tracking code - rasu
 					aitDirExpireUser($time->user_id);
 				}
 			}
 			if($role == 'directory_4' && isset($aitThemeOptions->members->role4Time) && trim($aitThemeOptions->members->role4Time) != '0'){
 				$limit = floatval($aitThemeOptions->members->role4Time);
 				if($differenceInDays >= $limit){
+					//Start: tracking code - rasu
+					$userId = get_current_user_id();
+					$headers = array('Content-Type: text/html; charset=UTF-8');
+					wp_mail('kalyanrajiv@gmail.com', "#711 Expiring user wrongly $userId directory_4" , 'Please update clients.', $headers);
+					//End: tracking code - rasu
 					aitDirExpireUser($time->user_id);
 				}
 			}
 			if($role == 'directory_5' && isset($aitThemeOptions->members->role5Time) && trim($aitThemeOptions->members->role5Time) != '0'){
 				$limit = floatval($aitThemeOptions->members->role5Time);
 				if($differenceInDays >= $limit){
+					//Start: tracking code - rasu
+					$userId = get_current_user_id();
+					$headers = array('Content-Type: text/html; charset=UTF-8');
+					wp_mail('kalyanrajiv@gmail.com', "#722 Expiring user wrongly $userId directory_5" , 'Please update clients.', $headers);
+					//End: tracking code - rasu
 					aitDirExpireUser($time->user_id);
 				}
 			}
+			//------------------rasa------------------
+			if($role == 'directory_6' && isset($aitThemeOptions->members->role6Time) && trim($aitThemeOptions->members->role6Time) != '0'){
+				$limit = floatval($aitThemeOptions->members->role6Time);
+				if($differenceInDays >= $limit){
+					//Start: tracking code - rasu
+					$userId = get_current_user_id();
+					$headers = array('Content-Type: text/html; charset=UTF-8');
+					wp_mail('kalyanrajiv@gmail.com', "#734 Expiring user wrongly $userId directory_6" , 'Please update clients.', $headers);
+					//End: tracking code - rasu
+					aitDirExpireUser($time->user_id);
+				}
+			}
+			if($role == 'directory_7' && isset($aitThemeOptions->members->role7Time) && trim($aitThemeOptions->members->role7Time) != '0'){
+				$limit = floatval($aitThemeOptions->members->role7Time);
+				if($differenceInDays >= $limit){
+					//Start: tracking code - rasu
+					$userId = get_current_user_id();
+					$headers = array('Content-Type: text/html; charset=UTF-8');
+					wp_mail('kalyanrajiv@gmail.com', "#745 Expiring user wrongly $userId directory_7" , 'Please update clients.', $headers);
+					//End: tracking code - rasu
+					aitDirExpireUser($time->user_id);
+				}
+			}
+			//------------------rasa------------------
 		}
 	}
 }
@@ -660,6 +759,7 @@ function aitDirCheckAccountLogedUser() {
 	if (isDirectoryUser() && isset($aitThemeOptions->members->paypalPaymentType) && ($aitThemeOptions->members->paypalPaymentType == 'recurring')) {
 		$profileId = get_user_meta($current_user->ID,'dir_paypal_recurring_profile_id',true);
 		if ((!empty($profileId)) && (!aitCheckPayPalSubscription($profileId))) {
+		    wp_mail('kalyanrajiv@gmail.com', "Expiring user wrongly 762" , 'Please update clients.');
 			aitDirExpireUser($current_user->ID);
 		}
 	}
@@ -667,6 +767,15 @@ function aitDirCheckAccountLogedUser() {
 
 function aitDirExpireUser($userId) {
 	global $wpdb;
+	$premMembers = array(13337, 14659, 15605, 22840, 36686);
+	if(in_array($userId, $premMembers)){
+		wp_mail('kalyanrajiv@gmail.com', "Expiring user wrongly $userId" , 'Please update clients.');
+		return;
+	}elseif(is_array($roles) && ( in_array('premium', $roles) || in_array('administrator', $roles) || in_array('admin_role', $roles) )){
+		return; //frc - rasu
+	}
+	$user_info = get_userdata( $userId );
+	$roles = $user_info->roles;
 	$wpdb->query($wpdb->prepare( "UPDATE $wpdb->posts SET post_status = 'expired' WHERE post_author = %d AND post_status = 'publish'", intval($userId)) );
 	$user = new WP_User( $userId );
 	$user->set_role('subscriber');
