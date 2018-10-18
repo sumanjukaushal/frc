@@ -29,6 +29,7 @@
 				$premiumUserData[$arrayKey]['city'] = $_billing_city;
 				$premiumUserData[$arrayKey]['state'] = $_billing_state;
 				$premiumUserData[$arrayKey]['postcode'] = $_billing_postcode;
+				$premiumUserData[$arrayKey]['country'] = $_billing_country;
 				$arrayKey++;
 			}
 		}
