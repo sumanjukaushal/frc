@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>jQuery UI Tooltip functionality</title>
+      <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+      <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <!-- Javascript -->
+      <script>
+         $(function() {
+            $('.tooltip-9').tooltip({
+               items: 'a.tooltip-9',
+               content: "<table><tr><td><a href='#-1' id='close_video'></a></td></tr><tr><td><iframe width='230' height='160' src='http://www.youtube.com/embed/3ZJ5K0zo7dc?autoplay=1&fs=0' frameborder='0' allowfullscreen></iframe></td></tr>",
+               show: "slideDown", // show immediately
+               open:function(event, ui){$('.tooltip-9').tooltip('open');}
+            });
+            $('#close_video').click(function(){
+                alert("close video");
+                $('#tooltip-9').tooltip("close");
+            });  
+         });
+         $(function() {
+            $('.tooltip-10').tooltip({
+               items: 'a.tooltip-10',
+               content: 'Welcome to TutorialsPoint…',
+               show: "fold", 
+               close: function(event, ui)
+               {
+                  ui.tooltip.hover(function()
+                  {
+                     $(this).stop(true).fadeTo(500, 1); 
+                  },
+                  function()
+                  {
+                     $(this).fadeOut('500', function()
+                     {
+                        $(this).remove();
+                     });
+                  });
+               }
+            });
+         });
+      </script>
+      <!-- Javascript -->
+      <script>
+        
+         $(function() {
+            $("#tooltip-8").tooltip({
+               //use 'of' to link the tooltip to your specified input
+               content: "<table><tr><td align='center'><a href='#-1' id='closeBtn'></a></td></tr><tr><td align='center'><iframe width='230' height='160' src='http://www.youtube.com/embed/os-gVlbRNhI?autoplay=1&fs=0' frameborder='0' allowfullscreen></iframe></td></tr></table>",
+            }).mouseout(function () {
+                $(this).tooltip("close");
+            },
+            $('#myBtn').mouseover(function () {
+               $('#tooltip-8').tooltip("open");
+            });
+         });
+            
+            $('#test').bind('mouseover click', function(event) {
+  
+   /*
+    var element = $(this);
+    var evtType = event.type;
+    
+    switch(evtType) {
+    
+      case 'mouseover':
+        element.fadeTo('slow', '0.5');
+        break;
+      case 'click':
+        element.fadeTo('slow', '1');
+        break;
+      default:
+        break;
+    
+    
+    
+    }
+  
+});*/
+      </script>
+   </head>
+   <body style="padding:100px;">
+      <!--<iframe width="250" height="200" src="http://www.youtube.com/embed/os-gVlbRNhI?autoplay=1&fs=0" frameborder="0"></iframe>-->
+      <!-- HTML --> 
+      <div id="target">
+         <a href="#" class="tooltip-9">Hover over me!</a>
+         <a href="#" class="tooltip-10">Hover over me too!</a>
+      </div>
+      
+      <!-- HTML --> 
+      <a id="tooltip-8" title="Message" href="#"></a>
+      <input id="myInput" type="text" name="myInput" value="0" size="7" />
+      <input id="myBtn" type="submit" name="myBtn" value="myBtn" class="myBtn" />
+      <input id="closeBtn" type="submit" name="closeBtn" value="closeBtn" class="closeBtn" />
+   </body>
+</html>
