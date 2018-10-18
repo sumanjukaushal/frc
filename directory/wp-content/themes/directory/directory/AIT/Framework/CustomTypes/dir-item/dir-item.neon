@@ -1,0 +1,79 @@
+featured:
+	label: Featured
+	type: checkbox
+	default:
+		enable:
+			label: 'Yes'
+address:
+	label: Address
+	type: textarea
+gpsLatitude:
+	label: GPS Latitude
+	type: text
+	default: 0
+gpsLongitude:
+	label: GPS Longitude
+	type: text
+	default: 0
+showStreetview:
+	label: Show Streetview instead of the map in detail
+	type: checkbox
+	default:
+		enable:
+			label: 'Show'
+streetViewLatitude:
+	label: StreetView Latitude
+	type: text
+streetViewLongitude:
+	label: StreetView Longitude
+	type: text
+streetViewHeading:
+	label: StreetView Heading
+	type: text
+streetViewPitch:
+	label: StreetView Pitch
+	type: text
+streetViewZoom:
+	label: StreetView Zoom
+	type: text
+telephone:
+	label: Telephone
+	type: text
+email:
+	label: Email
+	type: text
+emailContactOwner:
+	label: "Contact owner button (form)"
+	type: checkbox
+	default:
+		enable:
+			label: 'Show'
+web:
+	label: Web
+	type: text
+"Opening Hours" : section
+hoursMonday:
+	label: Monday
+	type: text
+hoursTuesday:
+	label: Tuesday
+	type: text
+hoursWednesday:
+	label: Wednesday
+	type: text
+hoursThursday:
+	label: Thursday
+	type: text
+hoursFriday:
+	label: Friday
+	type: text
+hoursSaturday:
+	label: Saturday
+	type: text
+hoursSunday:
+	label: Sunday
+	type: text
+"Alternative Content" : section
+alternativeContent:
+	label: Alternative Content
+	type: textarea

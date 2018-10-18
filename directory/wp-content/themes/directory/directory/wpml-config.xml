@@ -1,0 +1,12 @@
+<wpml-config>
+    <custom-types>
+        <custom-type translate="1">ait-dir-item</custom-type>
+        <custom-type translate="1">ait-grid-portfolio</custom-type>
+        <custom-type translate="0">ait-rating</custom-type>
+    </custom-types>
+    <taxonomies>
+        <taxonomy translate="1">ait-dir-item-category</taxonomy>
+        <taxonomy translate="1">ait-dir-item-location</taxonomy>
+        <taxonomy translate="1">ait-grid-portfolio-category</taxonomy>
+    </taxonomies>
+</wpml-config>

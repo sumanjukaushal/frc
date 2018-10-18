@@ -1,0 +1,68 @@
+/* screen options */
+
+html 									{ background: #fff; }
+
+#screen-meta,
+#screen-meta-links						{ display: none; }
+
+/* menu */
+#adminmenuwrap,
+#adminmenuback							{ display: none; }
+#wpcontent                              { max-width: 100%; margin: 0 !important; padding: 0; }
+#wpbody, .ait-easy-admin-wrap           { height: auto; max-width: 1000px; padding: 0 20px; margin: 0 auto 30px !important; }
+.ait-easy-admin-wrap                    { padding: 0; }
+
+/* footer */
+#wpfooter								{ display: none !important; }
+
+/* table nav */
+#posts-filter .tablenav .actions,
+#posts-filter .tablenav .view-switch	{ display: none; }
+#posts-filter .wp-list-table tfoot 		{ display: none; }
+#posts-filter .search-box 				{ display: none; }
+#icl_subsubsub 							{ display: none; }
+#posts-filter .row-actions .edit,
+#posts-filter .row-actions .inline 		{ display: none; }
+#content 								{ width: auto; }
+#rating-value 							{ min-width: 150px; }
+
+/* add new item */
+.add-new-h2 							{ display: none; }
+.ait-easy-admin-footer 					{ max-width: 1000px; margin: 0 auto; }
+.ait-easy-admin-footer .add-item 		{ font-size: 20px; height: 35px; padding: 5px; }
+
+#postexcerpt .inside p 					{ display: none; }
+
+/* buttons */
+.ait-easy-admin-header .buttons 		{ position: relative; margin: 10px auto; }
+.ait-easy-admin-header a.button,
+.ait-easy-admin-header a.button-primary { width: 250px; height: 50px; text-align: center; padding: 10px; font-size: 30px; margin-right: 15px; }
+
+/* body */
+#wpbody-content 						{ padding-bottom: 0px; }
+
+/* profile init form */
+.wp-admin.js.profile-php #wpbody-content { display: none; }
+
+
+.auto-fold #wpcontent 					{ padding-left: 0; }
+
+
+@media all and (max-width: 1024px) { 
+	body.wp-admin { min-width: 100%; }
+	.wp-core-ui #access a.button, 
+	.wp-core-ui #access a.menu-login { margin: 0 10px; }
+}
+
+@media all and (max-width: 1000px) { 
+	.wp-admin #logo { padding-left: 25px; }
+	.post-type-ait-rating #content { width: 15%; }
+}
+
+@media all and (max-width: 768px) {
+	.wp-admin #access { margin: 10px 0 20px 0; max-width: 100%; text-align: center; }
+}
+
+@media all and (max-width: 497px) {
+	.wp-admin #access 	{ background: none; border-top: 0 none; padding: 0; }
+}

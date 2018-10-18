@@ -1,0 +1,100 @@
+title: Grid Gallery Shortcodes
+type: button
+
+shortcodeName: ait-gridgallery
+
+popupOptions:
+	category:
+		label: Category
+		type: multiple-category
+		category: grid-portfolio
+		class: all
+	cols:
+		label: "Set Grid Portfolio"
+		type: select
+		class: all
+		default: {
+			5: {
+				label: "5 x infinity"
+				checked: true
+			},
+			4: {
+				label: "4 x infinity"
+			},
+			3: {
+				label: "3 x infinity"
+			},
+		}
+	count:
+		label: "Number of visible items"
+		type: text
+		default: 15
+		class: all
+	display:
+		label: "Item display"
+		type: select
+		class: all
+		default: {
+			'detail': {
+				label: 'Show detail cube'
+				checked: true
+			},
+			'direct': {
+				label: 'Show detail directly'
+			},
+			'fancybox': {
+				label: 'Show detail in fancybox'
+			}
+		}
+	showfilter:
+		label: "Show filter"
+		type: select
+		class: all
+		default: {
+			true: {
+				label: 'Yes'
+				checked: true
+			},
+			false: {
+				label: 'No'
+			}
+		}
+	order:
+		label: "Item order"
+		type: select
+		class: all
+		default: {
+			'chronological': {
+				label: 'Chronological'
+				checked: true
+			},
+			'newest': {
+				label: 'Newest first'
+			},
+			'random': {
+				label: 'Random order'
+			}
+		}
+	height:
+		label: "Manual height of item"
+		type: text
+		class: all
+		default: 'auto'
+	descheight:
+		label: 'Height of the description in pixels'
+		type: text
+		class: all
+		default: 50px
+	description:
+		label: "Show description"
+		type: select
+		class: all
+		default: {
+			'0': {
+				label: 'No'
+				checked: true
+			},
+			'1': {
+				label: 'Yes'
+			}
+		}

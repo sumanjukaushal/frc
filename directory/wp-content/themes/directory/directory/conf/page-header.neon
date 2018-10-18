@@ -1,0 +1,49 @@
+overrideGlobal:
+	label: Use these settings
+	type: checkbox
+	default:
+		'yes':
+			label: 'Yes'
+headerType:
+	label: Header style
+	type: radio
+	default:
+		nothing:
+			label: Nothing
+			checked: true
+		map:
+			label: Map with all items
+		image:
+			label: Single image
+		slider:
+			label: Revolution slider
+"Single image - local settings": section-title
+image:
+	label: Single image
+	type: image-url
+"Revolution slider - local settings": section-title
+slider:
+	label: Slider
+	type: dropdown-slider-aliases
+	default: slider
+"Directory Map - local settings": section-title
+#mapCategory:
+#	label: Show items from category
+#	type: dropdown-categories
+#	default: dir-item
+enableGeolocation:
+	label: Enable geolocation
+	type: checkbox
+	default:
+		enable:
+			label: 'Enable'
+geolocationRadius:
+	label: "Show items in radius (km) around client location on a map"
+	type: text
+	default: 100
+geolocationCircle:
+	label: "Show radius on map"
+	type: checkbox
+	default:
+		enable:
+			label: 'Show'

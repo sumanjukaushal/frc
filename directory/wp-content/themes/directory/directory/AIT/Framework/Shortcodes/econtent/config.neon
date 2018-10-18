@@ -1,0 +1,10 @@
+title: Example Content Shortcodes
+type: button
+
+shortcodeName: ait-econtent
+
+popupOptions:
+	type:
+		label: "Content type"
+		type: examples-select
+		class: all

@@ -1,0 +1,1667 @@
+generalOptions:
+	title: General Settings
+	menu-title: General Settings
+	tabs:
+		general:
+			title:     General Setting
+			tab-title: General
+			options:
+				Layout: section
+				#################k
+				layoutStyle:
+					label: Layout Style
+					type: select
+					default: {
+						wide: {
+							label: Wide
+							checked: true
+						},
+						narrow: {
+							label: Narrow
+						}
+					}
+				Header: section
+				#################
+				logo_img:
+					label: Logo image
+					type: image-url
+					default: 'design/img/logo.png'
+					skinable: false
+				easyadmin_logo_img:
+					label: Easy Admin Logo image
+					type: image-url
+					default: 'design/img/easy-logo.png'
+					skinable: false
+				logo_text:
+					label: Logo text
+					type: text
+					default: Directory
+				topBarContact:
+					label: Tagline
+					type: text
+					default: +999 99 999999 mail@mail.com
+				# loginMenuItem:
+				# 	label: Show LOGIN button in primary menu
+				# 	type: checkbox
+				# 	default:
+				# 		opened:
+				# 			label: "Yes"
+				# 			checked: true
+				Comments: section
+				#################
+				closeComments:
+					label: Closeable comments
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				defaultPosition:
+					label: "Comments position"
+					type: select
+					default:
+						opened:
+							lafbel: "Opened"
+							checked: true
+						closed:
+							label: "Closed"
+				Footer: section
+				#################
+				footer_text:
+					label: Footer text
+					type: wysiwyg
+					default: '<strong>&copy; 2012 Copyright by AIT.</strong> All rights reserved. Lorem ipsum dolor sit amet consecteur...'
+					help: 'This text will be displayed in the footer of page'
+				Google Codes: section
+				#################
+				ga_code:
+					label: Google Analytics Tracking Code
+					type: text
+		directory:
+			title: Directory
+			tab-title: Directory
+			options:
+				"Claim Listing": section-title
+				enableClaimListing:
+					label: "Enable"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+				claimListingRole:
+					label: Assign this account type to created user
+					type: select
+					default:
+						directory_1:
+							label: Account type 1
+							checked: true
+						directory_2:
+							label: Account type 2
+						directory_3:
+							label: Account type 3
+						directory_4:
+							label: Account type 4
+						directory_5:
+							label: Account type 5
+				claimAdminEmail:
+					label: "Send email to admin when someone claims the listing"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+				claimAdminEmailFrom:
+					label: "Admin email from"
+					type: text
+					default: "My Name <myname@example.com>"
+				claimAdminEmailSubject:
+					label: "Admin email subject"
+					type: text
+					default: "New claim"
+				claimAdminEmailBody:
+					label: "Admin email body"
+					type: textarea
+					default: "New claim was created for Item: [item] \n<br>\n<br>Contact name: [name]\n<br>User name: [username]\n<br>Email: [email]\n<br>Phone: [phone]\n<br>Message: [message]\n<br>\n<br>Manage claims: [link]"
+				"Defaults": section-title
+				defaultLocationIcon:
+					label: Default Location Icon
+					type: image-url
+					default: 'design/img/default-location-icon.png'
+				defaultCategoryIcon:
+					label: Default Category Icon
+					type: image-url
+					default: 'design/img/default-category-icon.png'
+				defaultItemImage:
+					label: Default Item Image
+					type: image-url
+					default: 'design/img/default-post-image.jpg'
+				"Directory Homepage Template": section-title
+				dirHomepageAltContent:
+					label: "Directory Homepage Alternative Content"
+					type: textarea
+				showTopCategories:
+					label: Show top level categories list
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				topCategoriesTitle:
+					label: Title for top level categories list
+					type: text
+					default: Categories
+				showTopLocations:
+					label: Show top level locations list
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				topLocationsTitle:
+					label: Title for top level locations list
+					type: text
+					default: Locations
+				"Directory Item Page": section-title
+				showDistanceInDetail:
+					label: "Show items from the same category in radius (km) around a item location on a item detail's map"
+					type: text
+					default: 100
+				setZoomIfOne:
+					label: "Set zoom number (0-21) if only one item appear on map"
+					type: text
+					default: 10
+				showShareButtons:
+					label: "Show share buttons"
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+							checked: true
+				shareText:
+					label: "Share default text"
+					type:  text
+					default: "Share text"
+				"Item Lists": section-title
+				showSortingControl:
+					label: "Show sorting control"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				defaultOrderby:
+					label: "Default order by"
+					type: radio
+					default: {
+						post_date: {
+							label: Date
+							checked: true
+						},
+						post_title: {
+							label: Title
+						},
+						rating: {
+							label: Rating
+						},
+						comment_count: {
+							label: Comment count
+						},
+						packages: {
+							label: Packages
+						}
+					}
+				defaultOrder:
+					label: "Default order"
+					type: radio
+					default: {
+						DESC: {
+							label: Descending
+							checked: true
+						},
+						ASC: {
+							label: Ascending
+						}
+					}
+				showFeaturedItemsFirst:
+					label: "Show featured items before normal items (top positions)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				categoryItemsPerPage:
+					label: "Category list - default number of items per page (pagination)"
+					type: text
+					default: 10
+				locationItemsPerPage:
+					label: "Location list - default number of items per page (pagination)"
+					type: text
+					default: 10
+		directoryMap:
+			title:     Map
+			tab-title: Map
+			options:
+				"Directory Map": section-title
+				defaultMapMarkerImage:
+					label: Default Map-Marker Image
+					type: image-url
+					default: 'design/img/map-icon/company.png'
+				mapMarkerImageShadow:
+					label: Map-Marker Image Shadow
+					type: image-url
+					default: 'design/img/map-icon/icon-shadow.png'
+				mapHeight:
+					label: "Map height (px)"
+					type: text
+					default: 500
+				draggable:
+					label: Draggable map for desktop
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+							checked: true
+				draggableForTouch:
+					label: Draggable map for touch devices
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+				draggableToggleButton:
+					label: "Show draggable toggle button for touch devices"
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+							checked: true
+				scrollwheel:
+					label: Mouse scrollwheel
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+				mapTypeId:
+					label: Map type
+					type: radio
+					default:
+						HYBRID:
+							label: Hybrid
+						ROADMAP:
+							label: Roadmap
+							checked: true
+						SATELLITE:
+							label: Satellite
+						TERRAIN:
+							label: Terrain
+				mapTypeControl:
+					label: Map type control
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+							checked: true
+				panControl:
+					label: Pan control
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+							checked: true
+				rotateControl:
+					label: Rotate control
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+				scaleControl:
+					label: Scale control
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+							checked: true
+				streetViewControl:
+					label: StreetView control
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+							checked: true
+				zoomControl:
+					label: Zoom control
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+							checked: true
+				"Geolocation global settings": section-title
+				enableGeolocation:
+					label: Enable geolocation on every page
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+				geolocationRadius:
+					label: "Show items in radius (km) around client location on a map"
+					type: text
+					default: 100
+				geolocationCircle:
+					label: "Show radius on map"
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+				"Cluster settings": section-title
+				clusterDisable:
+					label: "Disable cluster"
+					type: checkbox
+					default:
+						enable:
+							label: 'Disable'
+				clusterRadius:
+					label: "Cluster radius"
+					type: text
+					default: 20
+		search:
+			title:     Search settings
+			tab-title: Search
+			options:
+				"Directory Search": section-title
+				searchShowMap:
+					label: Show all found items on map
+					type: checkbox
+					default:
+						enable:
+							label: 'Show map'
+							checked: true
+				searchItemsPerPage:
+					label: "Show number of items per page (pagination)"
+					type: text
+					default: 10
+				"Search fields": section-title
+				searchCategoriesHierarchical:
+					label: "Sort categories in dropdown hierarcicaly"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				searchLocationsHierarchical:
+					label: "Sort locations in dropdown hierarcicaly"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				hierarchicalIndentation:
+					label: "Indentation"
+					type: radio
+					default:
+						dash:
+							label: 'Dash'
+							checked: true
+						space:
+							label: 'Non-breaking space'
+				"Advanced search": section-title
+				showAdvancedSearch:
+					label: "Show advanced search option (geolocation)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+							checked: true
+				showAdvancedSearchRadius:
+					label: "Show radius on map"
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+							checked: true
+				advancedSearchText:
+					label: "Advanced search text"
+					type: text
+					default: "Search around my position"
+				advancedSearchMinValue:
+					label: "UI Slider radius minimal value (km)"
+					type: text
+					default: 1
+				advancedSearchMaxValue:
+					label: "UI Slider radius maximal value (km)"
+					type: text
+					default: 300
+				advancedSearchStepValue:
+					label: "UI Slider radius step (km)"
+					type: text
+					default: 1
+				advancedSearchDefaultValue:
+					label: "UI Slider radius default value (km)"
+					type: text
+					default: 100
+				"Interactive Search": section-title
+				enableInteractiveSearch:
+					label: "Enable interactive search"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+				interactiveReplaceContent:
+					label: "Replace content with items list"
+					type: radio
+					default:
+						disabled:
+							label: 'Show interactive only items on map'
+							checked: true
+						enabled:
+							label: 'Show items list in content also'
+				interactiveContentMaxItems:
+					label: "Maximum number of items in list"
+					type: text
+					default: 30
+		header:
+			title:     Header
+			tab-title: Header
+			options:
+				"Header - global settings": section-title
+				headerType:
+					label: Default header style
+					type: radio
+					default:
+						nothing:
+							label: Nothing
+							checked: true
+						map:
+							label: Map with all items
+						image:
+							label: Single image
+						slider:
+							label: Revolution slider
+				"Single image - global settings": section-title
+				image:
+					label: Single image
+					type: image-url
+				"Revolution slider - global settings": section-title
+				slider:
+					label: Slider
+					type: dropdown-slider-aliases
+					default: slider
+		members:
+			title:     Accounts
+			tab-title: Accounts
+			options:
+				"Easy admin": section-title
+				easyAdminEnable:
+					label: Enable easy admin for registered clients
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				"PayPal system": section-title
+				enablePaypal:
+					label: "Enable paypal system to buy packages (accounts)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+				paypalType:
+					label: "PayPal API Enviroment"
+					type: radio
+					default:
+						sandbox:
+							label: "Use sandbox (virtual) enviroment to testing paypal functionality (developer.paypal.com)"
+							checked: true
+						live:
+							label: "Use live (real) enviroment"
+				paypalPaymentType:
+					label: "PayPal Payment Type"
+					type: radio
+					default:
+						single:
+							label: "Single payments"
+							checked: true
+						recurring:
+							label: "Recurring payments (Subscriptions)"
+				paypalUser:
+					label: "PayPal API Username"
+					type: text
+					default: ''
+				paypalPassword:
+					label: "PayPal API Password"
+					type: text
+					default: ''
+				paypalSignature:
+					label: "PayPal API Signatue"
+					type: text
+					default: ''
+				paypalCurrencyCode:
+					label: "PayPal Currency Code"
+					type: text
+					default: 'USD'
+				paypalPaymentName:
+					label: "PayPal Payment Name"
+					type: text
+					default: "Directory Package"
+				"Account type 1": section-title
+				role1Enable:
+					label: Active
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role1Approve:
+					label: "Admin must approve item before showing on frontend"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role1Name:
+					label: Name
+					type: text
+					default: Directory Basic
+				role1Price:
+					label: "Price (0 for free)"
+					type: text
+					default: 10
+				role1Items:
+					label: Max inserted items
+					type: text
+					default: 1
+				role1Time:
+					label: "Account expiration limit in days (0 for unlimited). Used for free and single paypal payments."
+					type: text
+					default: 0
+				role1Period:
+					label: "Billing period. Used for paypal recurring payments."
+					type: select
+					default:
+						Year:
+							label: Year
+							checked: true
+						Month:
+							label: Month
+						Week:
+							label: Week
+						Day:
+							label: Day
+				"Account type 1 Capabilities": section-title
+				role1Content:
+					label: "Content (editor)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1Image:
+					label: Image
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1Address:
+					label: Address
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1Streetview:
+					label: Streetview
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1Telephone:
+					label: Telephone
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1Email:
+					label: Email
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1SendEmail:
+					label: Contact owner button
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1Web:
+					label: Web
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1Hours:
+					label: Opening hours
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1AlternativeContent:
+					label: Alternative content
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1Excerpt:
+					label: Excerpt
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role1Reviews:
+					label: Comments
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				"Account type 2": section-title
+				role2Enable:
+					label: Active
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role2Approve:
+					label: "Admin must approve item before showing on frontend"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role2Name:
+					label: Name
+					type: text
+					default: Directory Standard
+				role2Price:
+					label: "Price (0 for free)"
+					type: text
+					default: 20
+				role2Items:
+					label: Max inserted items
+					type: text
+					default: 5
+				role2Time:
+					label: "Account expiration limit in days (0 for unlimited). Used for free and single paypal payments."
+					type: text
+					default: 0
+				role2Period:
+					label: "Billing period. Used for paypal recurring payments."
+					type: select
+					default:
+						Year:
+							label: Year
+							checked: true
+						Month:
+							label: Month
+						Week:
+							label: Week
+						Day:
+							label: Day
+				"Account type 2 Capabilities": section-title
+				role2Content:
+					label: "Content (editor)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2Image:
+					label: Image
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2Address:
+					label: Address
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2Streetview:
+					label: Streetview
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2Telephone:
+					label: Telephone
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2Email:
+					label: Email
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2SendEmail:
+					label: Contact owner button
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2Web:
+					label: Web
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2Hours:
+					label: Opening hours
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2AlternativeContent:
+					label: Alternative content
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2Excerpt:
+					label: Excerpt
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role2Reviews:
+					label: Comments
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				"Account type 3": section-title
+				role3Enable:
+					label: Active
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role3Approve:
+					label: "Admin must approve item before showing on frontend"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role3Name:
+					label: Name
+					type: text
+					default: Directory Premium 1
+				role3Price:
+					label: "Price (0 for free)"
+					type: text
+					default: 30
+				role3Items:
+					label: Max inserted items
+					type: text
+					default: 15
+				role3Time:
+					label: "Account expiration limit in days (0 for unlimited). Used for free and single paypal payments."
+					type: text
+					default: 0
+				role3Period:
+					label: "Billing period. Used for paypal recurring payments."
+					type: select
+					default:
+						Year:
+							label: Year
+							checked: true
+						Month:
+							label: Month
+						Week:
+							label: Week
+						Day:
+							label: Day
+				"Account type 3 Capabilities": section-title
+				role3Content:
+					label: "Content (editor)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3Image:
+					label: Image
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3Address:
+					label: Address
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3Streetview:
+					label: Streetview
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3Telephone:
+					label: Telephone
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3Email:
+					label: Email
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3SendEmail:
+					label: Contact owner button
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3Web:
+					label: Web
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3Hours:
+					label: Opening hours
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3AlternativeContent:
+					label: Alternative content
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3Excerpt:
+					label: Excerpt
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role3Reviews:
+					label: Comments
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				"Account type 4": section-title
+				role4Enable:
+					label: Active
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role4Approve:
+					label: "Admin must approve item before showing on frontend"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role4Name:
+					label: Name
+					type: text
+					default: Directory Premium 2
+				role4Price:
+					label: "Price (0 for free)"
+					type: text
+					default: 40
+				role4Items:
+					label: Max inserted items
+					type: text
+					default: 20
+				role4Time:
+					label: "Account expiration limit in days (0 for unlimited). Used for free and single paypal payments."
+					type: text
+					default: 0
+				role4Period:
+					label: "Billing period. Used for paypal recurring payments."
+					type: select
+					default:
+						Year:
+							label: Year
+							checked: true
+						Month:
+							label: Month
+						Week:
+							label: Week
+						Day:
+							label: Day
+				"Account type 4 Capabilities": section-title
+				role4Content:
+					label: "Content (editor)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4Image:
+					label: Image
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4Address:
+					label: Address
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4Streetview:
+					label: Streetview
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4Telephone:
+					label: Telephone
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4Email:
+					label: Email
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4SendEmail:
+					label: Contact owner button
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4Web:
+					label: Web
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4Hours:
+					label: Opening hours
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4AlternativeContent:
+					label: Alternative content
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4Excerpt:
+					label: Excerpt
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role4Reviews:
+					label: Comments
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				"Account type 5": section-title
+				role5Enable:
+					label: Active
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role5Approve:
+					label: "Admin must approve item before showing on frontend"
+					type: checkbox
+					default:
+						enable:
+							label: 'Yes'
+							checked: true
+				role5Name:
+					label: Name
+					type: text
+					default: Directory Extra
+				role5Price:
+					label: "Price (0 for free)"
+					type: text
+					default: 50
+				role5Items:
+					label: Max inserted items
+					type: text
+					default: 50
+				role5Time:
+					label: "Account expiration limit in days (0 for unlimited). Used for free and single paypal payments."
+					type: text
+					default: 0
+				role5Period:
+					label: "Billing period. Used for paypal recurring payments."
+					type: select
+					default:
+						Year:
+							label: Year
+							checked: true
+						Month:
+							label: Month
+						Week:
+							label: Week
+						Day:
+							label: Day
+				"Account type 5 Capabilities": section-title
+				role5Content:
+					label: "Content (editor)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5Image:
+					label: Image
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5Address:
+					label: Address
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5Streetview:
+					label: Streetview
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5Telephone:
+					label: Telephone
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5Email:
+					label: Email
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5SendEmail:
+					label: Contact owner button
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5Web:
+					label: Web
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5Hours:
+					label: Opening hours
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5AlternativeContent:
+					label: Alternative content
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5Excerpt:
+					label: Excerpt
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+				role5Reviews:
+					label: Comments
+					type: checkbox
+					default:
+						enable:
+							label: 'Allow'
+							checked: true
+		advertising:
+			title:     Advertising
+			tab-title: Advertising
+			options:
+				Advertising box above the topbar : section
+				box1Content:
+					label: Box content
+					type: wysiwyg
+				showBox1:
+					label: "Show advertising box above the topbar"
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+				Advertising box above the content : section
+				box2Content:
+					label: Box content
+					type: wysiwyg
+				showBox2:
+					label: "Show advertising box above the content"
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+				Advertising box above the comments : section
+				box3Content:
+					label: Box content
+					type: wysiwyg
+				showBox3:
+					label: "Show advertising box above the comments (only if comments is enabled)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+				Advertising box below the comments : section
+				box4Content:
+					label: Box content
+					type: wysiwyg
+				showBox4:
+					label: "Show advertising box below the comments"
+					type: checkbox
+					default:
+						enable:
+							label: 'Show'
+		rating:
+			title:     Multi-Rating
+			tab-title: Rating
+			options:
+				Rating system : section
+				enableRating:
+					label: "Enable multi-rating system for items"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+							checked: true
+				ratingMustApprove:
+					label: "Admin (directory subscriber) must approve rating"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+				disallowDirectoryUsers:
+					label: "Directory Users can't manage Ratings"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+				timeToCheck:
+					label: "How long a user (IP address) has to wait before rating again (minutes)"
+					type: text
+					default: 60
+				starsCount:
+					label: "Max number of stars (For correct rating values please remove all ratings before change this value)"
+					type: text
+					default: 5
+				Rating 1 : section
+				rating1Enable:
+					label: "Enable (For correct rating values please remove all ratings before change this value)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+							checked: true
+				rating1Title:
+					label: "Title"
+					type: text
+					default: "Price"
+				Rating 2 : section
+				rating2Enable:
+					label: "Enable (For correct rating values please remove all ratings before change this value)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+							checked: true
+				rating2Title:
+					label: "Title"
+					type: text
+					default: "Location"
+				Rating 3 : section
+				rating3Enable:
+					label: "Enable (For correct rating values please remove all ratings before change this value)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+							checked: true
+				rating3Title:
+					label: "Title"
+					type: text
+					default: "Staff"
+				Rating 4 : section
+				rating4Enable:
+					label: "Enable (For correct rating values please remove all ratings before change this value)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+							checked: true
+				rating4Title:
+					label: "Title"
+					type: text
+					default: "Services"
+				Rating 5 : section
+				rating5Enable:
+					label: "Enable (For correct rating values please remove all ratings before change this value)"
+					type: checkbox
+					default:
+						enable:
+							label: 'Enable'
+							checked: true
+				rating5Title:
+					label: "Title"
+					type: text
+					default: "Food"
+		footer:
+			title:     Footer Settings
+			tab-title: Footer Widgets
+			less: true
+			options:
+				Footer - Widgets : section
+				#################
+				widthFirst:
+					label: "First Widget Width"
+					type: text
+					skinable: true
+					default: 240px
+				widthSecond:
+					label: "Second Widget Width"
+					type: text
+					skinable: true
+					default: 230px
+				widthThird:
+					label: "Third Widget Width"
+					type: text
+					skinable: true
+					default: 220px
+				widthFourth:
+					label: "Fourth Widget Width"
+					type: text
+					skinable: true
+					default: 257px
+				widthFifth:
+					label: "Fifth Widget Width"
+					type: text
+					skinable: true
+					default: 202px
+				widthSixth:
+					label: "Sixth Widget Width"
+					type: text
+					skinable: true
+					default: 202px
+		socialIcons:
+			title: Social icons
+			tab-title: Social icons
+			options:
+				"Icons": section-title
+				displayIcons:
+					label: Display social icons
+					type: checkbox
+					default:
+						display:
+							label: "Yes"
+							checked: true
+				icons:
+					label-counter: 'Icon #'
+					type: clone
+					default: [
+						[
+							iconUrl: {
+								label: Icon URL,
+								type: image-url,
+								default: 'design/img/social-icons/facebook-ff.png'
+							},
+							title: {
+								label: Title,
+								type: text,
+								default: 'Facebook'
+							},
+							link: {
+								label: Link,
+								type: text,
+								default: 'http://www.facebook.com/AitThemes'
+							},
+						],
+						[
+							iconUrl: {
+								label: Icon URL,
+								type: image-url,
+								default: 'design/img/social-icons/youtube-ff.png'
+							},
+							title: {
+								label: Title,
+								type: text,
+								default: Whatch us on Youtube.
+							},
+							link: {
+								label: Link,
+								type: text,
+								default: 'http://www.youtube.com/user/AitThemes'
+							},
+						],
+						[
+							iconUrl: {
+								label: Icon URL,
+								type: image-url,
+								default: 'design/img/social-icons/twitter-ff.png'
+							},
+							title: {
+								label: Title,
+								type: text,
+								default: Follow us on Twitter
+							},
+							link: {
+								label: Link,
+								type: text,
+								default: 'http://www.twitter.com/AitThemes'
+							},
+						],
+						[
+							iconUrl: {
+								label: Icon URL,
+								type: image-url,
+								default: 'design/img/social-icons/dribbble-ff.png'
+							},
+							title: {
+								label: Title,
+								type: text,
+								default: Dribbble
+							},
+							link: {
+								label: Link,
+								type: text,
+								default: 'http://dribbble.com/aitthemes/'
+							},
+						]
+					]
+
+appearance:
+	title:     Appearance Settings
+	menu-title: Appearance
+	tabs:
+		colors:
+			title:     Colors & Backgrounds
+			tab-title: Colors & Backgrounds
+			less: true
+			options:
+				Background: section
+				#################
+				htmlBgColor:
+					label: Site Background Color
+					type: colorpicker
+					default: '#ffffff'
+				htmlBg:
+					label: Image
+					type: image-url
+				htmlBgY:
+					label: Vertical Position
+					type: select
+					default: {
+						top: {
+							label: Top
+							checked: true
+						},
+						center: {
+							label: Center
+						},
+						bottom: {
+							label: Bottom
+						}
+					}
+				htmlBgX:
+					label: Horizontal Position
+					type: select
+					default: {
+						left: {
+							label: Left
+							checked: true
+						},
+						center: {
+							label: Center
+						},
+						right: {
+							label: Right
+						}
+					}
+				htmlBgRepeat:
+					label: Repeat
+					type: select
+					default: {
+						no-repeat: {
+							label: No Repeat
+						},
+						repeat: {
+							label: Repeat
+							checked: true
+						},
+						repeat-x: {
+							label: Repeat X
+						},
+						repeat-y: {
+							label: Repeat Y
+						}
+					}
+				htmlBgAttach:
+					label: Scroll the background?
+					type: radio
+					default:
+						scroll:
+							label: 'Yes'
+							checked: true
+						fixed:
+							label: 'No'
+				contentBgColor:
+					label: Content Background Color
+					type: colorpicker
+					default: '#FFFFFF'
+				Theme Colors: section
+				#################
+				firstThemeColor:
+					label: First Theme Color
+					type: colorpicker
+					default: '#2877ae'
+				secondThemeColor:
+					label: Second Theme Color
+					type: colorpicker
+					default: '#73ac4b'
+				Header: section
+				#################
+				headerBgColor:
+					label: Header Background Color
+					type: colorpicker
+					default: '#ffffff'
+				easyadminheaderBgColor:
+					label: Easy Admin Header Background Color
+					type: colorpicker
+					default: '#222222'
+				Footer: section
+				#################
+				footerWidgetBgColor:
+					label: Footer Widget Area Background Color
+					type: colorpicker
+					default: '#f9f9f9'
+				footerBgColor:
+					label: Footer Background Color
+					type: colorpicker
+					default: '#f9f9f9'
+				Elements: section
+				#################
+				boxBackgroundColor:
+					label: Box Background Color
+					type: colorpicker
+					default: '#FCFCFC'
+				bordersColor:
+					label: Borders Color
+					type: colorpicker
+					default: '#CFCFCF'
+				sidebarBackgroundColor:
+					label: Sidebar Background Color
+					type: colorpicker
+					default: '#f7f7f7'
+				topHeaderBgColor:
+					label: Top Header Section Background Color
+					type: colorpicker
+					default: '#f6f6f6'
+		fonts:
+			title:     Fonts
+			tab-title: Fonts
+			less: true
+			options:
+				Font family for titles and menu: section
+				####################
+				fancyFont:
+					label: Titles and Menu Font
+					type: font
+					default: 'Oswald'
+				Font colors: section
+				#################
+				generalFontColor:
+					label:  General Text Color
+					type: colorpicker
+					default: '#777777'
+				mainTitleFontColor:
+					label:  Main Title Color
+					type: colorpicker
+					default: '#0090ff'
+				titlesFontColor:
+					label:  Titles Font Color
+					type: colorpicker
+					default: '#222222'
+				menusFontColor:
+					label: Menu Font Color
+					type: colorpicker
+					default: '#333333'
+				menusActiveFontColor:
+					label: Menu Active Font Color
+					type: colorpicker
+					default: '#0090ff'
+				linksFontColor:
+					label: Links Font Color
+					type: colorpicker
+					default: '#0090ff'
+				Sidebar Widget colors: section
+				#################
+				sidebarWidgetTitle:
+					label:  Sidebar Widget Title Color
+					type: colorpicker
+					default: '#222222'
+				sidebarWidgetText:
+					label:  Sidebar Widget Text Color
+					type: colorpicker
+					default: '#222222'
+				widgetsSidebarLinks:
+					label:  Sidebar Link Color
+					type: colorpicker
+					default: '#2877AE'
+				widgetsSidebarHoverLinks:
+					label:  Sidebar Hover Link Color
+					type: colorpicker
+					default: '#222222'
+				Footer Widget colors: section
+				#################
+				footerTitlesFontColor:
+					label:  Footer Titles Colors
+					type: colorpicker
+					default: '#222222'
+				footerTextFontColor:
+					label:  Footer Text Color
+					type: colorpicker
+					default: '#777777'
+				footerLinksFontColor:
+					label:  Footer Links Color
+					type: colorpicker
+					default: '#2877AE'
+		customCss:
+			title: Custom CSS
+			tab-title: Custom CSS
+			options:
+				Your custom CSS: section
+				########################
+				customCss:
+					type: custom-css
+					default: '/* your custom CSS in LESS syntax */'
+				LESS variables for images: section
+				########################
+				customImages:
+					type: custom-css-vars
+					default: [
+						[
+							variable: {
+								label: Image name
+								type: text
+							},
+							value: {
+								label: Image
+								type: image-url
+							}
+						]
+					]
