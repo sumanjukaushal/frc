@@ -72,7 +72,26 @@ function aitDirMainQuery($query) {
 	$ipAddress = $_SERVER['REMOTE_ADDR'];
 	global $aitThemeOptions;
 	// only main query
-	global $isMyIP;
+	global $isMyIP, $wpdb;
+	
+	$searchURL = $_SERVER['SCRIPT_URI']."?".$_SERVER['QUERY_STRING'];
+	$currUserID = get_current_user_id();
+	
+	if($currUserID){
+	    $userMetaQry = "SELECT `id` FROM `frc_user_metas` WHERE `user_id` = $currUserID AND `meta_key` = 'search_url' LIMIT 1";
+	    $metaRes = $wpdb->get_results( $userMetaQry );
+	    if(count($metaRes)){
+	        //update record
+	        if(strpos($searchURL, 'dir-search')){
+	            $wpdb->update( 'frc_user_metas', array('meta_value' => $searchURL), array('user_id' => $currUserID, 'meta_key' => 'search_url'));
+	        }
+	    }else{
+	        ;//insert record
+	        if(strpos($searchURL, 'dir-search')){
+	            $wpdb->insert( 'frc_user_metas', array('user_id' => $currUserID, 'meta_key' => 'search_url', 'meta_value' => $searchURL) );
+	        }
+	    }
+	}
 	
 	if($query->is_main_query() && !$query->is_admin){
 		// empty search fix

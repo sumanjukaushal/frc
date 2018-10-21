@@ -18,18 +18,31 @@
             return false;
         }
     }
-    $isMyIP = isRemoteAddress(array('124.253.55.126', '149.135.34.230'));
+    $isMyIP = isRemoteAddress(array('112.196.125.178', '149.135.34.230'));
 	$backToSearchDiv = "";
 	$siteURL = site_url();
 	$frcReferrer = $_SERVER['HTTP_REFERER'];	//$pos = strpos($frcReferrer, $siteURL);
 	$pos = !empty($frcReferrer) && strpos($frcReferrer, "iframe");
-	if ($pos !== false) {
+	$currUserID = get_current_user_id();
+	if ($pos !== false || !empty($frcReferrer)) {
 		if(get_current_user_id()){
 			
 			$backToSearchDiv = "<div style='float: right;' class='clearfix'><a href='$frcReferrer' id='frc_bk_2_search' class='contact-owner button' style='text-decoration: none;'>Back to Search Results</a></div>";
 		}
+	}else{
+	    if($currUserID){
+	        global $wpdb;
+            $userMetaQry = "SELECT `id`, `meta_value` FROM `frc_user_metas` WHERE `user_id` = $currUserID AND `meta_key` = 'search_url' LIMIT 1";
+    	    $metaRes = $wpdb->get_results( $userMetaQry );
+    	    if(count($metaRes)){
+    	        $frcReferrer = $metaRes[0]->meta_value;
+    	        $backToSearchDiv = "<div style='float: right;' class='clearfix'><a href='$frcReferrer' id='frc_bk_2_search' style='text-decoration: none;'>Back to Search Results</a></div>";
+    	    }
+	    }
 	}
-	//$backToSearchDiv = "<div style='float: right;' class='clearfix'><a href='$frcReferrer' style='text-decoration: none;'>Back to Search Results</a></div>";
+	if($isMyIP){
+	    //echo "<pre>";print_r($_SERVER);echo "</pre>";
+	}
 ?>
 
 <style type="text/css">
