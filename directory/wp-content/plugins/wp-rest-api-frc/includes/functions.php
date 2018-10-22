@@ -43,7 +43,7 @@
 		  }//headers_list another function for gettting headers
 		  
 		  if(!$tokenPresent){
-			   echo json_encode(array('message' => "Securtiy token is missing123",'status_code' => 404  ));die;
+			   echo json_encode(array('message' => "Securtiy token is missing",'status_code' => 404  ));die;
 		  }else{
 			   if (!$json_api->query->cookie) {
 					echo json_encode(array('message' => "You must include a 'token' in request header.",'status_code' => 404  ));die;

@@ -1,8 +1,13 @@
 <?php
 	//Get list of premium users
 	function frc_premium_users($response){
+		$user_id = check_if_bookmark_plugin_active();
 		global $wpdb;
 		global $json_api;
+		$current_user = get_userdata($user_id);
+		if($current_user->user_login != 'frcpremuser'){
+			echo json_encode(array('message' => "You have not any privilege to get premium user api results",'status_code' => 400  ));
+		}
 		$total = $wpdb->get_var("SELECT COUNT(*) FROM `frc_premium_users` ORDER BY `id` DESC");
 		$post_per_page = 50;
 		$page = isset( $_REQUEST['cpage'] ) ? abs( (int) $_REQUEST['cpage'] ) : 1;

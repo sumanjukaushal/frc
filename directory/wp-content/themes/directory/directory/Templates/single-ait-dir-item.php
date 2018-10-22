@@ -36,7 +36,7 @@
     	    $metaRes = $wpdb->get_results( $userMetaQry );
     	    if(count($metaRes)){
     	        $frcReferrer = $metaRes[0]->meta_value;
-    	        $backToSearchDiv = "<div style='float: right;' class='clearfix'><a href='$frcReferrer' id='frc_bk_2_search' style='text-decoration: none;'>Back to Search Results</a></div>";
+    	        $backToSearchDiv = "<div style='float: right;' class='clearfix'><a href='$frcReferrer' id='frc_bk_2_search' class='contact-owner button' style='text-decoration: none;'>Back to Search Results</a></div>";
     	    }
 	    }
 	}

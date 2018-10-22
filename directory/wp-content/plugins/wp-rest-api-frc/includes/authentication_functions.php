@@ -58,7 +58,7 @@
 		  }
 		  list($premiumMembership, $expired) = $retunArr;
 		  list($foundationMembership, $foundationExpired) = $foundationArr;
-		  if($foundationMembership){
+		  if($foundationMembership || $json_api->query->username == 'frcpremuser'){
 			   ;//do nothing, all good
 		  }elseif(!$premiumMembership){
 			   echo json_encode(array('message' => "Only Premium Members are allowed to use Mobile App",'status_code' => 400  ));
